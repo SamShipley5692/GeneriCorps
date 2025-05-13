@@ -13,7 +13,7 @@ public class projectileTrap : MonoBehaviour
     void Update()
     {
         shootTimer += Time.deltaTime;
-
+        //shoot();
         if (playerInRange && shootTimer >= shootRate)
         {
             shoot();
