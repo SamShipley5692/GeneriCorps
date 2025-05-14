@@ -1,10 +1,10 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
-//using UnityEditor.Build.Content;
 
 
-public class enemyAI : MonoBehaviour //,//IDamage
+
+public class enemyAI : MonoBehaviour, IDamage
 {
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent navAgent;
@@ -75,8 +75,8 @@ public class enemyAI : MonoBehaviour //,//IDamage
     }
 
     private void OnTriggerExit(Collider other)
-    {
-        void OnTriggerExit(Collider other)
+    {   //OnTriggerExit is declared but never used warning, will check on it later today
+        //void OnTriggerExit(Collider other)  
         {
             if (other.CompareTag("Player"))
             {
@@ -111,7 +111,7 @@ public class enemyAI : MonoBehaviour //,//IDamage
 
     IEnumerator hitFlash()
     {
-        model.material.color = colorOrig;
+        model.material.color = Color.red;
         yield return new WaitForSeconds(0.05f);
         model.material.color = colorOrig;
     }
