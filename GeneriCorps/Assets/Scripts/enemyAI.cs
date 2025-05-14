@@ -63,15 +63,26 @@ public class enemyAI : MonoBehaviour //,//IDamage
         }
     }
 
-    //Gio or Cade will do the OnTrigger collider code 
+    //Collider code done. Awaiting gameManager
     private void OnTriggerEnter(Collider other)
     {
-        
+       {
+        if (other.CompareTag("Player"))
+        {
+            isPlayerNearby = true;
+        }
+       }
     }
 
     private void OnTriggerExit(Collider other)
     {
-
+       void OnTriggerExit(Collider other)
+        {
+        if (other.CompareTag("Player"))
+        {
+            isPlayerNearby = false;
+        }
+        }
     }
 
     public void takeDamage(int damage)
@@ -115,8 +126,24 @@ public class enemyAI : MonoBehaviour //,//IDamage
 
     void fire()
     {
-        fireCooldown = 0f;
-        //projectile code cade or gio
+        //Fire cooldown for ranged enemy. Awaiting GameManger
+    { /* if (fireCooldown <= 0f)
+        {
+            fireCooldown = 1f / fireRate;
+            if (projectilePrefab != null && firePoint != null)
+            {
+                GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+                Rigidbody rb = projectile.GetComponent<Rigidbody>();
+                if (rb != null)
+                {
+                    rb.velocity = firePoint.forward * projectileSpeed;
+                }
+            }
+            else
+            {
+                Debug.LogError("Projectile Prefab or Fire is not assigned");
+            }
+        } */
     }
 }
 
