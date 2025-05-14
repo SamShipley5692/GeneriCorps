@@ -8,13 +8,13 @@ public class buttonFunctions : MonoBehaviour
         gameManager.instance.stateUnpause();
     }
 
-    public void restart ()
+    public void restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         gameManager.instance.stateUnpause();
     }
 
-    public void OnApplicationQuit()
+    public void quit()
     {
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
