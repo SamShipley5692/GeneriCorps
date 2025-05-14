@@ -16,6 +16,7 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] float fireDelay;
 
     [SerializeField] GameObject projectile;
+    [SerializeField] Transform firePoint;
 
 
     Color colorOrig;
@@ -32,11 +33,6 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         colorOrig = model.material.color;
         fireCooldown = 0f;
-        // waiting on gamemanager script from Theo
-        //if (gamemanager.instance != null)
-        //{
-        //gamemanager.instance.updateGameGoal(1);
-        //}
 
     }
 
@@ -44,26 +40,26 @@ public class enemyAI : MonoBehaviour, IDamage
     void Update()
     {
         fireCooldown += Time.deltaTime;
-        //if (!isPlayerNearby || gamemanager.instance == null || gamemanager.instance.player == null)
+        if (!isPlayerNearby || gameManager.instance == null || gameManager.instance.player == null)
         return;
 
-        //Vector3 targetPos = gamemanager.instance.player.transform.position;
-        //lookDirection = targetPos - transform.position;
+        Vector3 targetPos = gameManager.instance.player.transform.position;
+        lookDirection = targetPos - transform.position;
 
-        //navAgent.SetDestination(targetPos);
+        navAgent.SetDestination(targetPos);
 
-        //if (navAgent.remainingDistance <= navAgent.stoppingDistance)
-        //{
-        //turnToFace();
-        //}
-
-        //if (fireCooldown >= fireDelay)
+        if (navAgent.remainingDistance <= navAgent.stoppingDistance)
         {
-            //fire();
+        turnToFace();
+        }
+
+        if (fireCooldown >= fireDelay)
+        {
+            shoot();
         }
     }
 
-    //Gio: Collider code done. Awaiting gameManager
+    
     private void OnTriggerEnter(Collider other)
     {
         {
@@ -75,8 +71,8 @@ public class enemyAI : MonoBehaviour, IDamage
     }
 
     private void OnTriggerExit(Collider other)
-    {   //OnTriggerExit is declared but never used warning, will check on it later today
-        //void OnTriggerExit(Collider other)  
+    {   //OnTrigger is not an error unity is just notifying that it isnt triggered yet
+        void OnTriggerExit(Collider other)  
         {
             if (other.CompareTag("Player"))
             {
@@ -87,23 +83,18 @@ public class enemyAI : MonoBehaviour, IDamage
 
     public void takeDamage(int damage)
     {
-        //HP -= damage;
+        HP -= damage;
 
-        //if (gamemanager.instance != null && gamemanager.instance.player != null)
+        if (gameManager.instance != null && gameManager.instance.player != null)
         {
-            //navAgent.SetDestination(gamemanager.instance.player.transform.position);
+            navAgent.SetDestination(gameManager.instance.player.transform.position);
         }
 
-        //if (HP <= 0)
+        if (HP <= 0)
         {
-            //if (gamemanager.instance != null)
-            {
-                //gamemanager.instance.updateGameGoal(-1);
-            }
-
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
-        //else
+        else
         {
             StartCoroutine(hitFlash());
         }
@@ -124,27 +115,19 @@ public class enemyAI : MonoBehaviour, IDamage
         transform.rotation = Quaternion.Lerp(transform.rotation, faceRot, Time.deltaTime * rotationSpeed);
     }
 
-    void fire()
+    void shoot()
     {
-        //Fire cooldown for ranged enemy. Awaiting GameManger
-        { /* if (fireCooldown <= 0f)
+        fireCooldown = 0f;
+
+        if (projectile != null && firePoint != null) 
         {
-            fireCooldown = 1f / fireRate;
-            if (projectilePrefab != null && firePoint != null)
-            {
-                GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-                Rigidbody rb = projectile.GetComponent<Rigidbody>();
-                if (rb != null)
-                {
-                    rb.velocity = firePoint.forward * projectileSpeed;
-                }
-            }
-            else
-            {
-                Debug.LogError("Projectile Prefab or Fire is not assigned");
-            }
-        } */
+            Instantiate(projectile, firePoint.position, firePoint.rotation);
         }
+                
+
+        
     }
+        
+ 
 }
 
