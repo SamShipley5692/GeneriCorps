@@ -14,7 +14,7 @@ public class buttonFunctions : MonoBehaviour
         gameManager.instance.stateUnpause();
     }
 
-    public void OnApplicationQuit()
+    public void quit()
     {
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
@@ -23,6 +23,4 @@ public class buttonFunctions : MonoBehaviour
 #endif
 
     }
-
-
 }
