@@ -101,23 +101,23 @@ public class playercontroller : MonoBehaviour
             Debug.Log(hit.transform.name);
             IDamage dmg = hit.collider.GetComponent<IDamage>();
 
-            if (dmg != null)
+            if (dmg != null) 
             {
-                dmg.TakeDamage(shootDamage);
+                //dmg.TakeDamage(shootDamage);
             }
         }
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(int amount) 
     {
-        HP -= amount;
+        //HP -= amount;
 
         // check for death
 
-        if (HP <= 0)
-        {
-            gamemanager.instance.youLose();
-        }
+        //if (HP <= 0)
+        //{
+        //    gamemanager.instance.youLose();
+        //}
     }
 
 }
