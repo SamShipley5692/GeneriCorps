@@ -21,12 +21,10 @@ public class spikeTrap : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        shoot();
-        // use this when palyer is created
-        //if (playerInRange)
-        //{
-        //    shoot();
-        //}
+        if (playerInRange)
+        {
+            shoot();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
