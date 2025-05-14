@@ -25,7 +25,7 @@ public class enemyAI : MonoBehaviour //,//IDamage
     float fireCooldown;
 
     bool isPlayerNearby;
-   
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -35,7 +35,7 @@ public class enemyAI : MonoBehaviour //,//IDamage
         // waiting on gamemanager script from Theo
         //if (gamemanager.instance != null)
         //{
-            //gamemanager.instance.updateGameGoal(1);
+        //gamemanager.instance.updateGameGoal(1);
         //}
 
     }
@@ -45,7 +45,7 @@ public class enemyAI : MonoBehaviour //,//IDamage
     {
         fireCooldown += Time.deltaTime;
         //if (!isPlayerNearby || gamemanager.instance == null || gamemanager.instance.player == null)
-            return;
+        return;
 
         //Vector3 targetPos = gamemanager.instance.player.transform.position;
         //lookDirection = targetPos - transform.position;
@@ -54,7 +54,7 @@ public class enemyAI : MonoBehaviour //,//IDamage
 
         //if (navAgent.remainingDistance <= navAgent.stoppingDistance)
         //{
-            //turnToFace();
+        //turnToFace();
         //}
 
         //if (fireCooldown >= fireDelay)
@@ -63,15 +63,26 @@ public class enemyAI : MonoBehaviour //,//IDamage
         }
     }
 
-    //Gio or Cade will do the OnTrigger collider code 
+    //Gio: Collider code done. Awaiting gameManager
     private void OnTriggerEnter(Collider other)
     {
-        
+        {
+            if (other.CompareTag("Player"))
+            {
+                isPlayerNearby = true;
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-
+        void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                isPlayerNearby = false;
+            }
+        }
     }
 
     public void takeDamage(int damage)
@@ -115,8 +126,25 @@ public class enemyAI : MonoBehaviour //,//IDamage
 
     void fire()
     {
-        fireCooldown = 0f;
-        //projectile code cade or gio
+        //Fire cooldown for ranged enemy. Awaiting GameManger
+        { /* if (fireCooldown <= 0f)
+        {
+            fireCooldown = 1f / fireRate;
+            if (projectilePrefab != null && firePoint != null)
+            {
+                GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+                Rigidbody rb = projectile.GetComponent<Rigidbody>();
+                if (rb != null)
+                {
+                    rb.velocity = firePoint.forward * projectileSpeed;
+                }
+            }
+            else
+            {
+                Debug.LogError("Projectile Prefab or Fire is not assigned");
+            }
+        } */
+        }
     }
 }
 
