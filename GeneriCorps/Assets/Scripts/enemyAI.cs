@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.AI;
 
 
-public class enemyAI : MonoBehaviour
+public class enemyAI : MonoBehaviour //,//IDamage
 {
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
@@ -18,7 +18,7 @@ public class enemyAI : MonoBehaviour
 
     Vector3 playerDirection;
 
-    float shootTimer;
+    float fireCooldown;
 
     bool playerInRange;
    
@@ -27,7 +27,7 @@ public class enemyAI : MonoBehaviour
     void Start()
     {
         colorOrig = model.material.color;
-        shootTimer = 0f;
+        fireCooldown = 0f;
         // waiting on gamemanager script from Theo
         //if (gamemanager.instance != null)
         //{
@@ -39,7 +39,7 @@ public class enemyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        shootTimer += Time.deltaTime;
+        fireCooldown += Time.deltaTime;
         //waiting on gamemanagerscript
     }
 }
