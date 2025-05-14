@@ -37,14 +37,17 @@ public class playercontroller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDist, Color.red);
 
+        movement();
+        Sprint();
     }
 
     void movement()
     {
         shootTimer += Time.deltaTime;
 
-        if (controller.isGrounded && jumpCount != 0)
+        if (controller.isGrounded)
         {
             jumpCount = 0;
             playerVel = Vector3.zero;
@@ -99,11 +102,12 @@ public class playercontroller : MonoBehaviour
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer))
         {
             Debug.Log(hit.transform.name);
+
             IDamage dmg = hit.collider.GetComponent<IDamage>();
 
             if (dmg != null) 
             {
-                //dmg.TakeDamage(shootDamage);
+                dmg.takeDamage(shootDamage);
             }
         }
     }
