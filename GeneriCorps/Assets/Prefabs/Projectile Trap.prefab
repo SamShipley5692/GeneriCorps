@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1212189573844027583}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.5}
+  m_LocalPosition: {x: 0, y: 0, z: -0.559}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -43,7 +43,6 @@ GameObject:
   - component: {fileID: 3864294738952800937}
   - component: {fileID: 7589829633508679931}
   - component: {fileID: 4333648960647405640}
-  - component: {fileID: 3085329991332541854}
   - component: {fileID: 6463696580371902933}
   m_Layer: 0
   m_Name: Projectile Trap
@@ -81,7 +80,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootPos: {fileID: 8205226644824285726}
-  projectile: {fileID: 121802, guid: 8f18e1d8c46c51f429429815455062fc, type: 3}
+  projectile: {fileID: 740778723254687471, guid: 4b7fa74cb737bb24fa2649895435674d, type: 3}
   shootRate: 2
 --- !u!33 &7589829633508679931
 MeshFilter:
@@ -114,7 +113,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 2a45119b6529db041a79e08b385c40de, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -136,27 +135,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &3085329991332541854
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4578495338928867877}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6463696580371902933
 BoxCollider:
   m_ObjectHideFlags: 0
