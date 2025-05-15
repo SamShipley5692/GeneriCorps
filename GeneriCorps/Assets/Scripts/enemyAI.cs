@@ -13,17 +13,17 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] int HP;
     [SerializeField] int rotationSpeed;
 
-    [SerializeField] float fireDelay;
+    [SerializeField] float shootRate;
 
     [SerializeField] GameObject projectile;
-    [SerializeField] Transform firePoint;
+    [SerializeField] Transform shootPos;
 
 
     Color colorOrig;
 
     Vector3 lookDirection;
 
-    float fireCooldown;
+    float shootTimer;
 
     bool isPlayerNearby;
 
@@ -33,14 +33,13 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         colorOrig = model.material.color;
         gameManager.instance.updateGameGoal(1);
-        fireCooldown = 0f;
-
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-        fireCooldown += Time.deltaTime;
+        shootTimer += Time.deltaTime;
         if (!isPlayerNearby || gameManager.instance == null || gameManager.instance.player == null)
         return;
 
@@ -54,11 +53,13 @@ public class enemyAI : MonoBehaviour, IDamage
         turnToFace();
         }
 
-        if (fireCooldown >= fireDelay)
+        if (shootTimer >= shootRate)
         {
             shoot();
         }
-    }
+
+       
+}
 
     
     private void OnTriggerEnter(Collider other)
@@ -119,15 +120,11 @@ public class enemyAI : MonoBehaviour, IDamage
 
     void shoot()
     {
-        fireCooldown = 0f;
+        shootTimer = 0;
 
-        if (projectile != null && firePoint != null) 
-        {
-            Instantiate(projectile, firePoint.position, firePoint.rotation);
-        }
-                
-
+            Instantiate(projectile, shootPos.position, transform.rotation);
         
+             
     }
         
  
