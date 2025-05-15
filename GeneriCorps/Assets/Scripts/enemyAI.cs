@@ -32,6 +32,7 @@ public class enemyAI : MonoBehaviour, IDamage
     void Start()
     {
         colorOrig = model.material.color;
+        gameManager.instance.updateGameGoal(1);
         fireCooldown = 0f;
 
     }
@@ -92,6 +93,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
         if (HP <= 0)
         {
+            gameManager.instance.updateGameGoal(-1);
             Destroy(gameObject);
         }
         else
