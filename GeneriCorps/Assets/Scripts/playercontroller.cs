@@ -103,11 +103,11 @@ public class playercontroller : MonoBehaviour
         {
             Debug.Log(hit.transform.name);
 
-            IDamage dmg = hit.collider.GetComponent<IDamage>();
+            //IDamage dmg = hit.collider.GetComponent<IDamage>();
 
-            if (dmg != null) 
+            //if (dmg != null) 
             {
-                dmg.takeDamage(shootDamage);
+                //dmg.takeDamage(shootDamage);
             }
         }
     }
