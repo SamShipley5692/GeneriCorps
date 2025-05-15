@@ -68,17 +68,19 @@ public class enemyAI : MonoBehaviour, IDamage
             if (other.CompareTag("Player"))
             {
                 isPlayerNearby = true;
+                Debug.Log("Orc: Player ENTERED trigger. isPlayerNearby = " + isPlayerNearby);
             }
         }
     }
 
     private void OnTriggerExit(Collider other)
-    {   //OnTrigger is not an error unity is just notifying that it isnt triggered yet
-        void OnTriggerExit(Collider other)  
+    {
+        void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("Player"))
             {
                 isPlayerNearby = false;
+                Debug.Log("Orc: Player EXITED trigger. isPlayerNearby = " + isPlayerNearby);
             }
         }
     }
@@ -120,6 +122,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
     void shoot()
     {
+        Debug.Log("Orc: SHOOT function CALLED!");
         shootTimer = 0;
 
             Instantiate(projectile, shootPos.position, transform.rotation);
