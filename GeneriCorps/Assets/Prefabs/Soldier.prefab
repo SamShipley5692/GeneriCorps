@@ -148,7 +148,7 @@ MonoBehaviour:
   model: {fileID: 8734354349474998783}
   navAgent: {fileID: 1913761562459862609}
   HP: 3
-  rotationSpeed: 8
+  rotationSpeed: 20
   shootRate: 1
   projectile: {fileID: 1561389747906430572, guid: e33d1fd456a014944a569e9acdcb182a, type: 3}
   shootPos: {fileID: 9112685060277392489}

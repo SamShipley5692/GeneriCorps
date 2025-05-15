@@ -11,7 +11,7 @@ AnimatorController:
   m_AnimatorParameters: []
   m_AnimatorLayers:
   - serializedVersion: 5
-    m_Name: Soldier
+    m_Name: Base
     m_StateMachine: {fileID: 3220348479400253636}
     m_Mask: {fileID: 0}
     m_Motions: []
@@ -29,11 +29,11 @@ AnimatorStateMachine:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Soldier
+  m_Name: Base
   m_ChildStates:
   - serializedVersion: 1
-    m_State: {fileID: 4125582910163353112}
-    m_Position: {x: 354.90045, y: 143.18204, z: 0}
+    m_State: {fileID: 4866540402075780528}
+    m_Position: {x: 351.66455, y: 133.9598, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -43,15 +43,15 @@ AnimatorStateMachine:
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: 4125582910163353112}
---- !u!1102 &4125582910163353112
+  m_DefaultState: {fileID: 4866540402075780528}
+--- !u!1102 &4866540402075780528
 AnimatorState:
   serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: infantry_combat_idle
+  m_Name: idle1
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -64,7 +64,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: e9fa0cd70df4a414ea410a82fba042e6, type: 3}
+  m_Motion: {fileID: 7400000, guid: c0ddf13242263074597669d22d2384a1, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

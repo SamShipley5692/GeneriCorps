@@ -164,8 +164,8 @@ MonoBehaviour:
     m_Bits: 8
   gravity: 30
   hp: 100
-  speed: 5
-  sprintMod: 3
+  speed: 10
+  sprintMod: 2
   jumpMax: 2
   jumpForce: 15
   shootDamage: 1
