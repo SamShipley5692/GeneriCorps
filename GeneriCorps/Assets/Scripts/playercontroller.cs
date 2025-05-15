@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class playercontroller : MonoBehaviour
+public class playercontroller : MonoBehaviour, IDamage
 {
     [SerializeField] CharacterController controller;
     [SerializeField] LayerMask ignoreLayer;
@@ -114,7 +114,7 @@ public class playercontroller : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int amount) 
+    public void takeDamage(int amount) 
     {
         hp -= amount;
         updatePlayerUI();
@@ -126,9 +126,9 @@ public class playercontroller : MonoBehaviour
             gameManager.instance.youLose();
         }
     }
+
     public void updatePlayerUI()
     {
         gameManager.instance.playerHPBar.fillAmount = (float)hp / HPOriginal;
     }
-   
 }

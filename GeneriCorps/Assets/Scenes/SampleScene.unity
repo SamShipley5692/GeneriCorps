@@ -29465,6 +29465,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 147476876}
     m_Modifications:
+    - target: {fileID: 1740359439537291166, guid: a6c48a324ba082b438288c065953eda2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4653005749841449128, guid: a6c48a324ba082b438288c065953eda2, type: 3}
       propertyPath: m_LocalScale.x
       value: 50
@@ -29521,6 +29525,14 @@ PrefabInstance:
       propertyPath: rb
       value: 
       objectReference: {fileID: 258063528}
+    - target: {fileID: 5296594665263217702, guid: a6c48a324ba082b438288c065953eda2, type: 3}
+      propertyPath: damageAmount
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7770195291900554191, guid: a6c48a324ba082b438288c065953eda2, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9030758007936294354, guid: a6c48a324ba082b438288c065953eda2, type: 3}
       propertyPath: m_Name
       value: Lava
