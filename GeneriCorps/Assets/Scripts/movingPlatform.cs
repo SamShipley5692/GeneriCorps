@@ -20,7 +20,7 @@ public class movingPlatform : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         elapsedTime += Time.deltaTime;
 
@@ -45,5 +45,15 @@ public class movingPlatform : MonoBehaviour
 
         float distanceToWaypoint = Vector3.Distance(previousWaypoint.position, _targetWaypoint.position);
         timeToWaypoint = distanceToWaypoint / speed;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        other.transform.SetParent(transform);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        other.transform.SetParent(null);
     }
 }
