@@ -1,6 +1,8 @@
+using System.Collections;
+using UnityEditor.Build.Content;
 using UnityEngine;
 
-public class playercontroller : MonoBehaviour
+public class playercontroller : MonoBehaviour , IDamage
 {
     [SerializeField] CharacterController controller;
     [SerializeField] LayerMask ignoreLayer;
@@ -14,7 +16,9 @@ public class playercontroller : MonoBehaviour
 
     bool isSprinting;
     int jumpCount;
+    int HPOrig;
 
+    [SerializeField] int HP;
     [SerializeField] int speed;
     [SerializeField] int sprintMod;
 
@@ -31,13 +35,16 @@ public class playercontroller : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        HPOrig = HP;
+        UpdatePlayerUI();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        movement();
+        Sprint();
+        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDist, Color.green);
     }
 
     void movement()
@@ -119,5 +126,14 @@ public class playercontroller : MonoBehaviour
             gamemanager.instance.youLose();
         }
     }
-
+    public void UpdatePlayerUI()
+    {
+        GameManager.instance.playerHPBar.fillAmount = (float)HP / HPOrig;
+    }
+    IEnumerator FlashDamageScreen()
+    {
+        GameManager.instance.playerDamageScreen.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        GameManager.instance.playerDamageScreen.SetActive(false);
+    }
 }
