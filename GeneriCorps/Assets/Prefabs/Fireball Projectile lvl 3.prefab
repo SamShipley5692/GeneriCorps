@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 604568267115831930}
   - component: {fileID: 1696513181223676342}
   - component: {fileID: 7328063222886827538}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: FireballTail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4656,7 +4656,8 @@ GameObject:
   - component: {fileID: 5428279439605435621}
   - component: {fileID: 4467522159390505539}
   - component: {fileID: 5375316289787650267}
-  m_Layer: 7
+  - component: {fileID: 8809201894574485851}
+  m_Layer: 10
   m_Name: Fireball Projectile lvl 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4697,9 +4698,9 @@ MonoBehaviour:
   type: 0
   rb: {fileID: 5375316289787650267}
   damageAmount: 4
-  damageRate: 2
+  damageRate: 0
   speed: 3
-  destroyTime: 1
+  destroyTime: 3
 --- !u!82 &5344008109514330638
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5027,6 +5028,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!135 &8809201894574485851
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 740778723254687471}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &857247650432217487
 GameObject:
   m_ObjectHideFlags: 0
@@ -5038,7 +5060,7 @@ GameObject:
   - component: {fileID: 8875925461926860842}
   - component: {fileID: 8452509215625502710}
   - component: {fileID: 4418560602487275901}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: FireballProjectiles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9845,7 +9867,7 @@ GameObject:
   - component: {fileID: 5639948073897437091}
   - component: {fileID: 3946503986720341991}
   - component: {fileID: 1149682451913519995}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: FireballExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14672,7 +14694,7 @@ GameObject:
   - component: {fileID: 4109490381601003029}
   - component: {fileID: 1219075528568969315}
   - component: {fileID: 9008389518701845954}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: FireballCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

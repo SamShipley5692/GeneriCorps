@@ -33,56 +33,69 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         colorOrig = model.material.color;
         gameManager.instance.updateGameGoal(1);
-       
+
     }
 
     // Update is called once per frame
     void Update()
     {
         shootTimer += Time.deltaTime;
-        if (!isPlayerNearby || gameManager.instance == null || gameManager.instance.player == null)
-        return;
+        //if (!isPlayerNearby || gameManager.instance == null || gameManager.instance.player == null)
+        //    return;
 
-        Vector3 targetPos = gameManager.instance.player.transform.position;
-        lookDirection = targetPos - transform.position;
+        //Vector3 targetPos = gameManager.instance.player.transform.position;
+        //lookDirection = targetPos - transform.position;
 
-        navAgent.SetDestination(targetPos);
+        //navAgent.SetDestination(targetPos);
 
-        if (navAgent.remainingDistance <= navAgent.stoppingDistance)
+        //if (navAgent.remainingDistance <= navAgent.stoppingDistance)
+        //{
+        //    turnToFace();
+        //}
+
+        //if (shootTimer >= shootRate)
+        //{
+        //    shoot();
+        //}
+        if (isPlayerNearby)
         {
-        turnToFace();
-        }
+            lookDirection = (gameManager.instance.player.transform.position - transform.position);
 
-        if (shootTimer >= shootRate)
-        {
-            shoot();
-        }
+            navAgent.SetDestination(gameManager.instance.player.transform.position);
 
-       
-}
-
-    
-    private void OnTriggerEnter(Collider other)
-    {
-        {
-            if (other.CompareTag("Player"))
+            if (shootTimer >= shootRate)
             {
-                isPlayerNearby = true;
-                Debug.Log("Orc: Player ENTERED trigger. isPlayerNearby = " + isPlayerNearby);
+                shoot();
+            }
+
+            if (navAgent.remainingDistance <= navAgent.stoppingDistance)
+            {
+                turnToFace();
             }
         }
+
+
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isPlayerNearby = true;
+            Debug.Log("Orc: Player ENTERED trigger. isPlayerNearby = " + isPlayerNearby);
+        }
+
     }
 
     private void OnTriggerExit(Collider other)
     {
-        void OnTriggerExit(Collider other)
+        if (other.CompareTag("Player"))
         {
-            if (other.CompareTag("Player"))
-            {
-                isPlayerNearby = false;
-                Debug.Log("Orc: Player EXITED trigger. isPlayerNearby = " + isPlayerNearby);
-            }
+            isPlayerNearby = false;
+            Debug.Log("Orc: Player EXITED trigger. isPlayerNearby = " + isPlayerNearby);
         }
+
     }
 
     public void takeDamage(int damage)
@@ -125,11 +138,10 @@ public class enemyAI : MonoBehaviour, IDamage
         Debug.Log("Orc: SHOOT function CALLED!");
         shootTimer = 0;
 
-            Instantiate(projectile, shootPos.position, transform.rotation);
-        
-             
+        Instantiate(projectile, shootPos.position, transform.rotation);
+
     }
-        
- 
+
+
 }
 

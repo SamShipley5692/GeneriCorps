@@ -29,6 +29,7 @@ public class playercontroller : MonoBehaviour, IDamage
     [SerializeField] float shootRate;
     [SerializeField] int shootDist;
 
+
     float shootTimer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -69,7 +70,10 @@ public class playercontroller : MonoBehaviour, IDamage
         playerVel.y -= gravity * Time.deltaTime;
 
         if (Input.GetButtonDown("Fire1") && shootTimer > shootRate)
+        {
             Shoot();
+        }
+  
     }
 
     void Sprint()
@@ -117,9 +121,9 @@ public class playercontroller : MonoBehaviour, IDamage
     public void takeDamage(int amount) 
     {
         hp -= amount;
-        updatePlayerUI();
+        StartCoroutine(flashDamageScreen());
 
-         //check for death
+        //check for death
 
         if (hp <= 0)
         {
@@ -130,5 +134,12 @@ public class playercontroller : MonoBehaviour, IDamage
     public void updatePlayerUI()
     {
         gameManager.instance.playerHPBar.fillAmount = (float)hp / HPOriginal;
+    }
+
+    IEnumerator flashDamageScreen()
+    {
+        gameManager.instance.playerDamageScreen.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        gameManager.instance.playerDamageScreen.SetActive(false);
     }
 }
