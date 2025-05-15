@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class playercontroller : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class playercontroller : MonoBehaviour
 
     bool isSprinting;
     int jumpCount;
+    int HPOrig;
 
     [SerializeField] int speed;
     [SerializeField] int sprintMod;
@@ -123,5 +125,9 @@ public class playercontroller : MonoBehaviour
         //    gamemanager.instance.youLose();
         //}
     }
-
+    public void UpdatePlayerUI()
+    {
+        //GameManger.instance.playerHPBar.fillAmount = (float)HP / HPOrig;
+    }
+   
 }
