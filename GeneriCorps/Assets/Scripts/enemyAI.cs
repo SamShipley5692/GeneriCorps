@@ -40,40 +40,23 @@ public class enemyAI : MonoBehaviour, IDamage
     void Update()
     {
         shootTimer += Time.deltaTime;
-        //if (!isPlayerNearby || gameManager.instance == null || gameManager.instance.player == null)
-        //    return;
+        if (!isPlayerNearby || gameManager.instance == null || gameManager.instance.player == null)
+            return;
 
-        //Vector3 targetPos = gameManager.instance.player.transform.position;
-        //lookDirection = targetPos - transform.position;
+        Vector3 targetPos = gameManager.instance.player.transform.position;
+        lookDirection = targetPos - transform.position;
 
-        //navAgent.SetDestination(targetPos);
+        navAgent.SetDestination(targetPos);
 
-        //if (navAgent.remainingDistance <= navAgent.stoppingDistance)
-        //{
-        //    turnToFace();
-        //}
-
-        //if (shootTimer >= shootRate)
-        //{
-        //    shoot();
-        //}
-        if (isPlayerNearby)
+        if (navAgent.remainingDistance <= navAgent.stoppingDistance)
         {
-            lookDirection = (gameManager.instance.player.transform.position - transform.position);
-
-            navAgent.SetDestination(gameManager.instance.player.transform.position);
-
-            if (shootTimer >= shootRate)
-            {
-                shoot();
-            }
-
-            if (navAgent.remainingDistance <= navAgent.stoppingDistance)
-            {
-                turnToFace();
-            }
+            turnToFace();
         }
 
+        if (shootTimer >= shootRate)
+        {
+            shoot();
+        }
 
     }
 
