@@ -80,8 +80,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootPos: {fileID: 8205226644824285726}
-  projectile: {fileID: 740778723254687471, guid: 4b7fa74cb737bb24fa2649895435674d, type: 3}
-  shootRate: 2
+  projectile: {fileID: 5238053110174458814, guid: 60d0121ad0e0203488bdfa45db4cd720, type: 3}
+  shootRate: 1.5
 --- !u!33 &7589829633508679931
 MeshFilter:
   m_ObjectHideFlags: 0
