@@ -121,7 +121,7 @@ public class enemyAI : MonoBehaviour, IDamage
         Debug.Log("Orc: SHOOT function CALLED!");
         shootTimer = 0;
 
-        Instantiate(projectile, shootPos.position, transform.rotation);
+        //Instantiate(projectile, shootPos.position, transform.rotation);
 
     }
 

@@ -121,7 +121,8 @@ public class playercontroller : MonoBehaviour, IDamage
     public void takeDamage(int amount) 
     {
         hp -= amount;
-        StartCoroutine(flashDamageScreen());
+        //StartCoroutine(flashDamageScreen());
+        updatePlayerUI();
 
         //check for death
 
@@ -136,10 +137,10 @@ public class playercontroller : MonoBehaviour, IDamage
         gameManager.instance.playerHPBar.fillAmount = (float)hp / HPOriginal;
     }
 
-    IEnumerator flashDamageScreen()
-    {
-        gameManager.instance.playerDamageScreen.SetActive(true);
-        yield return new WaitForSeconds(0.1f);
-        gameManager.instance.playerDamageScreen.SetActive(false);
-    }
+    //IEnumerator flashDamageScreen()
+    //{
+    //    gameManager.instance.playerDamageScreen.SetActive(true);
+    //    yield return new WaitForSeconds(0.1f);
+    //    gameManager.instance.playerDamageScreen.SetActive(false);
+    //}
 }
