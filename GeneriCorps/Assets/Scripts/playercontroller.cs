@@ -15,8 +15,9 @@ public class playercontroller : MonoBehaviour
 
     bool isSprinting;
     int jumpCount;
-    int HPOrig;
+    int HPOriginal;
 
+    [SerializeField] int hp;
     [SerializeField] int speed;
     [SerializeField] int sprintMod;
 
@@ -33,7 +34,8 @@ public class playercontroller : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        HPOriginal = hp;
+        updatePlayerUI();
     }
 
     // Update is called once per frame
@@ -56,7 +58,9 @@ public class playercontroller : MonoBehaviour
         }
 
         moveDir = (Input.GetAxis("Horizontal") * transform.right) + (Input.GetAxis("Vertical") * transform.forward);
+
         //transform.position += moveDir * speed * Time.deltaTime;
+
         controller.Move(moveDir * speed * Time.deltaTime);
 
         Jump();
@@ -66,8 +70,6 @@ public class playercontroller : MonoBehaviour
 
         if (Input.GetButtonDown("Fire1") && shootTimer > shootRate)
             Shoot();
-
-
     }
 
     void Sprint()
@@ -82,7 +84,6 @@ public class playercontroller : MonoBehaviour
             speed /= sprintMod;
             isSprinting = false;
         }
-
     }
 
     void Jump()
@@ -90,7 +91,6 @@ public class playercontroller : MonoBehaviour
         if (Input.GetButtonDown("Jump") && jumpCount < jumpMax)
         {
             jumpCount++;
-
             playerVel.y = jumpForce;
         }
 
@@ -105,29 +105,30 @@ public class playercontroller : MonoBehaviour
         {
             Debug.Log(hit.transform.name);
 
-            //IDamage dmg = hit.collider.GetComponent<IDamage>();
+            IDamage dmg = hit.collider.GetComponent<IDamage>();
 
-            //if (dmg != null) 
+            if (dmg != null) 
             {
-                //dmg.takeDamage(shootDamage);
+                dmg.takeDamage(shootDamage);
             }
         }
     }
 
     public void TakeDamage(int amount) 
     {
-        //HP -= amount;
+        hp -= amount;
+        updatePlayerUI();
 
-        // check for death
+         //check for death
 
-        //if (HP <= 0)
-        //{
-        //    gamemanager.instance.youLose();
-        //}
+        if (hp <= 0)
+        {
+            gameManager.instance.youLose();
+        }
     }
-    public void UpdatePlayerUI()
+    public void updatePlayerUI()
     {
-        //GameManger.instance.playerHPBar.fillAmount = (float)HP / HPOrig;
+        gameManager.instance.playerHPBar.fillAmount = (float)hp / HPOriginal;
     }
    
 }
