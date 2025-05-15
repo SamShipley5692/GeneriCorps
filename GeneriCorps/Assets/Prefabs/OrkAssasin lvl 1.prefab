@@ -3819,7 +3819,7 @@ Transform:
   m_GameObject: {fileID: 4494676871541986510}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.15, z: 0.324}
+  m_LocalPosition: {x: 0, y: 0.044, z: 0.083}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5391,7 +5391,7 @@ MonoBehaviour:
   HP: 3
   rotationSpeed: 8
   shootRate: 1
-  projectile: {fileID: 740778723254687471, guid: b264750f6f099af47bccaed6b9ad85e0, type: 3}
+  projectile: {fileID: 1561389747906430572, guid: e33d1fd456a014944a569e9acdcb182a, type: 3}
   shootPos: {fileID: 8970426102730218749}
 --- !u!195 &6713069946669404679
 NavMeshAgent:
