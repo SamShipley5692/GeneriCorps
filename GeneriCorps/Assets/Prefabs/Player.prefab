@@ -140,7 +140,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.05, y: 2.37, z: 2.89}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8683427771453753426}
@@ -164,7 +164,7 @@ MonoBehaviour:
     m_Bits: 8
   gravity: 30
   hp: 100
-  speed: 10
+  speed: 12
   sprintMod: 2
   jumpMax: 2
   jumpForce: 15
