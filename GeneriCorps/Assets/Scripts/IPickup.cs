@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface IPickup
 {
-    //void getWeaponStats(weaponStats weapon);
+    void getWeaponStats(weaponStats weapon);
 }
