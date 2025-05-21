@@ -661,11 +661,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ebdedafe6c1e094b9fa360e65b500d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  navAgent: {fileID: 6461497835824363646}
+  model: {fileID: 0}
+  agent: {fileID: 0}
+  anim: {fileID: 0}
+  headPos: {fileID: 0}
+  weaponCol: {fileID: 0}
   HP: 3
-  attackCoolDown: 3
-  attackRange: 8
-  aggroRange: 12
+  faceTargetSpeed: 0
+  FOV: 0
+  roamDist: 0
+  roamPauseTime: 0
+  animTransSpeed: 0
+  attackRate: 0
 --- !u!95 &3179101149310689805
 Animator:
   serializedVersion: 7
