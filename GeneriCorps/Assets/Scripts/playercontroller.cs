@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class playercontroller : MonoBehaviour, IDamage, IPickup
 {
@@ -147,6 +148,11 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup
 
     public void getWeaponStats(weaponStats weapon)
     {
-        throw new System.NotImplementedException();
+        shootDamage = weapon.shootDamage;
+        shootDist = weapon.shootDistance;
+        shootRate = weapon.shootRate;
+
+        gunModel.GetComponent<MeshFilter>().sharedMesh = weapon.model.GetComponent<MeshFilter>().sharedMesh;
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = weapon.model.GetComponent<MeshRenderer>().sharedMaterial;
     }
 }
