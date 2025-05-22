@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class playercontroller : MonoBehaviour
+public class playercontroller : MonoBehaviour, IDamage, IPickup
 {
     [SerializeField] CharacterController controller;
     [SerializeField] LayerMask ignoreLayer;
@@ -35,16 +36,19 @@ public class playercontroller : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        HPOrig = hp;
+        updatePlayerUI();
     }
 
     // Update is called once per frame
     void Update()
     {
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDist, Color.red);
+        
         if(!gameManager.instance.isPaused)
-        movement();
-        Sprint();
+            movement();
+
+        sprint();
     }
 
     void movement()
@@ -66,16 +70,16 @@ public class playercontroller : MonoBehaviour
         Jump();
 
         controller.Move(playerVel * Time.deltaTime);
+        
         playerVel.y -= gravity * Time.deltaTime;
 
         if (Input.GetButtonDown("Fire1") && shootTimer > shootRate)
         {
             Shoot();
-
-
+        }
     }
 
-    void Sprint()
+    void sprint()
     {
         if (Input.GetButtonDown("Sprint"))
         {
@@ -96,7 +100,6 @@ public class playercontroller : MonoBehaviour
             jumpCount++;
             playerVel.y = jumpForce;
         }
-
     }
 
     void Shoot()
@@ -119,19 +122,31 @@ public class playercontroller : MonoBehaviour
 
     public void takeDamage(int amount) 
     {
-        //HP -= amount;
+        hp -= amount;
+        updatePlayerUI();
+        StartCoroutine(flashDamageScreen());
 
         // check for death
-
-        //if (HP <= 0)
-        //{
-        //    gamemanager.instance.youLose();
-        //}
+        if (hp <= 0)
+        {
+            gameManager.instance.youLose();
+        }
     }
 
     public void updatePlayerUI()
     {
-        //GameManger.instance.playerHPBar.fillAmount = (float)HP / HPOrig;
+        gameManager.instance.playerHPBar.fillAmount = (float)hp / HPOrig;
     }
-   
+
+    IEnumerator flashDamageScreen()
+    {
+        gameManager.instance.playerDamageScreen.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        gameManager.instance.playerDamageScreen.SetActive(false);
+    }
+
+    public void getWeaponStats(weaponStats weapon)
+    {
+        throw new System.NotImplementedException();
+    }
 }
