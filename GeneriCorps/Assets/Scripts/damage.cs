@@ -4,6 +4,7 @@ using System.Collections;
 public class damage : MonoBehaviour
 {
     enum damageType { moving, homing, stationary, DOT }
+
     [SerializeField] damageType type;
     [SerializeField] Rigidbody rb;
 

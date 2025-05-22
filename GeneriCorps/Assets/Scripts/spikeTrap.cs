@@ -52,7 +52,7 @@ public class spikeTrap : MonoBehaviour
     {
         if (movingToB)
         {
-            spikePrefab.transform.position = Vector3.MoveTowards(spikePrefab.transform.position, pointB.position, speed * Time.deltaTime);
+            spikePrefab.transform.position = Vector3.MoveTowards(spikePrefab.transform.position, pointB.position, speed); // * Time.deltaTime
             if (spikePrefab.transform.position == pointB.position)
             {
                 movingToB = false;
@@ -61,7 +61,7 @@ public class spikeTrap : MonoBehaviour
         yield return new WaitForSeconds(2f);
         if (!movingToB)
         {
-            spikePrefab.transform.position = Vector3.MoveTowards(spikePrefab.transform.position, pointA.position, speed * Time.deltaTime);
+            spikePrefab.transform.position = Vector3.MoveTowards(spikePrefab.transform.position, pointA.position, speed); // * Time.deltaTime
             if (spikePrefab.transform.position == pointA.position)
             {
                 movingToB = true;

@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
+
 public class playercontroller : MonoBehaviour
 {
     [SerializeField] CharacterController controller;
@@ -15,9 +15,9 @@ public class playercontroller : MonoBehaviour
 
     bool isSprinting;
     int jumpCount;
-    [SerializeField] int HP;
     int HPOrig;
 
+    [SerializeField] int hp;
     [SerializeField] int speed;
     [SerializeField] int sprintMod;
 
@@ -30,17 +30,12 @@ public class playercontroller : MonoBehaviour
     [SerializeField] float shootRate;
     [SerializeField] int shootDist;
 
-    // Inventory
-    //[SerializeField] List<gunStats> gunList = new List<gunStats>();
-    int gunListPos;
-
     float shootTimer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        HPOrig = HP;
-        UpdatePlayerUI();
+
     }
 
     // Update is called once per frame
@@ -63,7 +58,9 @@ public class playercontroller : MonoBehaviour
         }
 
         moveDir = (Input.GetAxis("Horizontal") * transform.right) + (Input.GetAxis("Vertical") * transform.forward);
+
         //transform.position += moveDir * speed * Time.deltaTime;
+
         controller.Move(moveDir * speed * Time.deltaTime);
 
         Jump();
@@ -72,9 +69,10 @@ public class playercontroller : MonoBehaviour
         playerVel.y -= gravity * Time.deltaTime;
 
         if (Input.GetButtonDown("Fire1") && shootTimer > shootRate)
+        {
             Shoot();
 
-        selectGun();
+
     }
 
     void Sprint()
@@ -89,7 +87,6 @@ public class playercontroller : MonoBehaviour
             speed /= sprintMod;
             isSprinting = false;
         }
-
     }
 
     void Jump()
@@ -97,7 +94,6 @@ public class playercontroller : MonoBehaviour
         if (Input.GetButtonDown("Jump") && jumpCount < jumpMax)
         {
             jumpCount++;
-
             playerVel.y = jumpForce;
         }
 
@@ -112,57 +108,30 @@ public class playercontroller : MonoBehaviour
         {
             Debug.Log(hit.transform.name);
 
-            //IDamage dmg = hit.collider.GetComponent<IDamage>();
+            IDamage dmg = hit.collider.GetComponent<IDamage>();
 
-            //if (dmg != null) 
+            if (dmg != null) 
             {
-                //dmg.takeDamage(shootDamage);
+                dmg.takeDamage(shootDamage);
             }
         }
     }
 
-    public void TakeDamage(int amount) 
+    public void takeDamage(int amount) 
     {
-        HP -= amount;
+        //HP -= amount;
 
-         //check for death
+        // check for death
 
-        if (HP <= 0)
-        {
-            //gameManager.instance.youLose();
-        }
-    }
-    public void UpdatePlayerUI()
-    {
-        //gameManager.instance.playerHPBar.fillAmount = (float)HP / HPOrig;
-    }
-   IEnumerator flashDamageScreen()
-    {
-        //gameManager.instance.playerDMGScreen.SetActive(true);
-        yield return new WaitForSeconds(0.1f);
-       // gameManager.instance.playerDMGScreen.SetActive(false);
+        //if (HP <= 0)
+        //{
+        //    gamemanager.instance.youLose();
+        //}
     }
 
-    void selectGun()
+    public void updatePlayerUI()
     {
-        //if(Input.GetAxis("Mouse ScrollWheel") > 0 && gunListPos < gunListPos.Count - 1)
-        {
-            gunListPos++;
-            changeGun();
-        }
-        // else  if(Input.GetAxis("Mouse ScrollWheel") > 0 && gunListPos > 0){
-        gunListPos--;
-        changeGun();
+        //GameManger.instance.playerHPBar.fillAmount = (float)HP / HPOrig;
     }
-
-    void changeGun()
-    {
-        //shootDamage = gunListPos[gunListPos].shootDamage;
-    }
-
-    //public void getGunStats(gunStats gun) will add changes later;;
-    
-
-
-
+   
 }

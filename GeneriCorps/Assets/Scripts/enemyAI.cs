@@ -13,17 +13,17 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] int HP;
     [SerializeField] int rotationSpeed;
 
-    [SerializeField] float fireDelay;
+    [SerializeField] float shootRate;
 
     [SerializeField] GameObject projectile;
-    [SerializeField] Transform firePoint;
+    [SerializeField] Transform shootPos;
 
 
     Color colorOrig;
 
     Vector3 lookDirection;
 
-    float fireCooldown;
+    float shootTimer;
 
     bool isPlayerNearby;
 
@@ -32,16 +32,16 @@ public class enemyAI : MonoBehaviour, IDamage
     void Start()
     {
         colorOrig = model.material.color;
-        fireCooldown = 0f;
+        gameManager.instance.updateGameGoal(1);
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        fireCooldown += Time.deltaTime;
+        shootTimer += Time.deltaTime;
         if (!isPlayerNearby || gameManager.instance == null || gameManager.instance.player == null)
-        return;
+            return;
 
         Vector3 targetPos = gameManager.instance.player.transform.position;
         lookDirection = targetPos - transform.position;
@@ -50,35 +50,35 @@ public class enemyAI : MonoBehaviour, IDamage
 
         if (navAgent.remainingDistance <= navAgent.stoppingDistance)
         {
-        turnToFace();
+            turnToFace();
         }
 
-        if (fireCooldown >= fireDelay)
+        if (shootTimer >= shootRate)
         {
             shoot();
         }
+
     }
 
-    
+
     private void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag("Player"))
         {
-            if (other.CompareTag("Player"))
-            {
-                isPlayerNearby = true;
-            }
+            isPlayerNearby = true;
+            Debug.Log("Orc: Player ENTERED trigger. isPlayerNearby = " + isPlayerNearby);
         }
+
     }
 
     private void OnTriggerExit(Collider other)
-    {   //OnTrigger is not an error unity is just notifying that it isnt triggered yet
-        void OnTriggerExit(Collider other)  
+    {
+        if (other.CompareTag("Player"))
         {
-            if (other.CompareTag("Player"))
-            {
-                isPlayerNearby = false;
-            }
+            isPlayerNearby = false;
+            Debug.Log("Orc: Player EXITED trigger. isPlayerNearby = " + isPlayerNearby);
         }
+
     }
 
     public void takeDamage(int damage)
@@ -92,6 +92,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
         if (HP <= 0)
         {
+            gameManager.instance.updateGameGoal(-1);
             Destroy(gameObject);
         }
         else
@@ -117,17 +118,13 @@ public class enemyAI : MonoBehaviour, IDamage
 
     void shoot()
     {
-        fireCooldown = 0f;
+        Debug.Log("Orc: SHOOT function CALLED!");
+        shootTimer = 0;
 
-        if (projectile != null && firePoint != null) 
-        {
-            Instantiate(projectile, firePoint.position, firePoint.rotation);
-        }
-                
+        Instantiate(projectile, shootPos.position, transform.rotation);
 
-        
     }
-        
- 
+
+
 }
 
