@@ -34,6 +34,9 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup
 
     float shootTimer;
 
+    int weaponInvPos;
+    [SerializeField] List<weaponStats> weaponInv = new List<weaponStats>();
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -78,6 +81,8 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup
         {
             Shoot();
         }
+
+        selectWeapon();
     }
 
     void sprint()
@@ -148,11 +153,32 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup
 
     public void getWeaponStats(weaponStats weapon)
     {
-        shootDamage = weapon.shootDamage;
-        shootDist = weapon.shootDistance;
-        shootRate = weapon.shootRate;
-
-        gunModel.GetComponent<MeshFilter>().sharedMesh = weapon.model.GetComponent<MeshFilter>().sharedMesh;
-        gunModel.GetComponent<MeshRenderer>().sharedMaterial = weapon.model.GetComponent<MeshRenderer>().sharedMaterial;
+        weaponInv.Add(weapon);
+        weaponInvPos = weaponInv.Count - 1;
+        changeWeapon();
     }
+
+    void selectWeapon()
+    {
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && weaponInvPos < weaponInv.Count - 1)
+        {
+            weaponInvPos++;
+            changeWeapon();
+        }
+        else if(Input.GetAxis("Mouse ScrollWheel") < 0 && weaponInvPos > 0)
+        {
+            weaponInvPos--;
+            changeWeapon();
+        }
+    }
+    void changeWeapon()
+    {
+        shootDamage = weaponInv[weaponInvPos].shootDamage;
+        shootDist = weaponInv[weaponInvPos].shootDistance;
+        shootRate = weaponInv[weaponInvPos].shootRate;
+
+        gunModel.GetComponent<MeshFilter>().sharedMesh = weaponInv[weaponInvPos].model.GetComponent<MeshFilter>().sharedMesh;
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = weaponInv[weaponInvPos].model.GetComponent<MeshRenderer>().sharedMaterial;
+    }
+
 }
