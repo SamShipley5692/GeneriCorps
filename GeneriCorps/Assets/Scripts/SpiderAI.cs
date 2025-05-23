@@ -10,22 +10,30 @@ public class SpiderAI : MonoBehaviour, IDamage
 {
     [SerializeField] Renderer Model;
     [SerializeField] NavMeshAgent agent;
+    //[SerializeField] Animation anim;
     [SerializeField] Transform headPOS;
 
 
     [SerializeField] Collider leftLeg;
     [SerializeField] Collider rightLeg;
 
-    [SerializeField] int HP = 3;
+    [SerializeField] int HP;
+    //[SerializeField] int animTransSpeed;
+
     [SerializeField] float faceTargetSpeed;
     [SerializeField] float FOV;
     [SerializeField] float roamDist;
     [SerializeField] float roamPause;
     //[SerializeField] float attackRate
+
+   
     Vector3 startingPOS;
+    Vector3 playerDir;
+
     //float attackTimer;
     float roamTimer;
     float stoppingDistOrig;
+
     bool playerInRange;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
