@@ -4,6 +4,7 @@ using System.Collections;
 public class damage : MonoBehaviour
 {
     enum damageType { moving, homing, stationary, DOT }
+
     [SerializeField] damageType type;
     [SerializeField] Rigidbody rb;
 
@@ -34,9 +35,7 @@ public class damage : MonoBehaviour
     {
         if (type == damageType.homing)
         {
-            // waiting on Theo to make the gameManager script for this line of code to work
-            // need Tymel J to add the player and playerController before Theo can make the gameManager script
-            //rb.linearVelocity = (gameManager.instance.player.transform.position - transform.position).normalized * speed * Time.deltaTime;
+            rb.linearVelocity = (gameManager.instance.player.transform.position - transform.position).normalized * speed * Time.deltaTime;
         }
     }
 
@@ -45,12 +44,12 @@ public class damage : MonoBehaviour
         if (other.isTrigger)
             return;
 
-        //IDamage dmg = other.GetComponent<IDamage>();
+        IDamage dmg = other.GetComponent<IDamage>();
 
-        //if (dmg != null && (type == damageType.moving || type == damageType.stationary || type == damageType.homing))
-        //{
-        //    dmg.takeDamage(damageAmount);
-        //}
+        if (dmg != null && (type == damageType.moving || type == damageType.stationary || type == damageType.homing))
+        {
+            dmg.takeDamage(damageAmount);
+        }
 
         if (type == damageType.moving || type == damageType.homing)
         {
@@ -61,23 +60,24 @@ public class damage : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         if (other.isTrigger)
+        {
             return;
-        // need to make IDamage script before this code will work
-        //IDamage dmg = other.GetComponent<IDamage>();
+        }
+        
+        IDamage dmg = other.GetComponent<IDamage>();
 
-        //if (dmg != null && type == damageType.DOT)
-        //{
-        //    if (!isDamaging)
-        //        StartCoroutine(damageOther(dmg));
-        //}
+        if (dmg != null && type == damageType.DOT)
+        {
+                StartCoroutine(damageOther(dmg));
+        }
     }
 
-    //IEnumerator damageOther(IDamage d)
-    //{
-    //    isDamaging = true;
-    //    d.takeDamage(damageAmount);
-    //    yield return new WaitForSeconds(damageRate);
-    //    isDamaging = false;
-    //}
+    IEnumerator damageOther(IDamage d)
+    {
+        isDamaging = true;
+        d.takeDamage(damageAmount);
+        yield return new WaitForSeconds(damageRate);
+        isDamaging = false;
+    }
 
 }
