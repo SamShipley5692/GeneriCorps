@@ -1,7 +1,9 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 
-public class playercontroller : MonoBehaviour, IDamage
+public class playercontroller : MonoBehaviour, IDamage, IPickup
 {
     [SerializeField] CharacterController controller;
     [SerializeField] LayerMask ignoreLayer;
@@ -15,7 +17,7 @@ public class playercontroller : MonoBehaviour, IDamage
 
     bool isSprinting;
     int jumpCount;
-    int HPOriginal;
+    int HPOrig;
 
     [SerializeField] int hp;
     [SerializeField] int speed;
@@ -25,17 +27,20 @@ public class playercontroller : MonoBehaviour, IDamage
     [SerializeField] int jumpForce;
 
     // Weapon
+    [SerializeField] GameObject gunModel;
     [SerializeField] int shootDamage;
     [SerializeField] float shootRate;
     [SerializeField] int shootDist;
 
-
     float shootTimer;
+
+    int weaponInvPos;
+    [SerializeField] List<weaponStats> weaponInv = new List<weaponStats>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        HPOriginal = hp;
+        HPOrig = hp;
         updatePlayerUI();
     }
 
@@ -43,9 +48,11 @@ public class playercontroller : MonoBehaviour, IDamage
     void Update()
     {
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDist, Color.red);
+        
+        if(!gameManager.instance.isPaused)
+            movement();
 
-        movement();
-        Sprint();
+        sprint();
     }
 
     void movement()
@@ -67,16 +74,18 @@ public class playercontroller : MonoBehaviour, IDamage
         Jump();
 
         controller.Move(playerVel * Time.deltaTime);
+        
         playerVel.y -= gravity * Time.deltaTime;
 
         if (Input.GetButtonDown("Fire1") && shootTimer > shootRate)
         {
             Shoot();
         }
-  
+
+        selectWeapon();
     }
 
-    void Sprint()
+    void sprint()
     {
         if (Input.GetButtonDown("Sprint"))
         {
@@ -97,7 +106,6 @@ public class playercontroller : MonoBehaviour, IDamage
             jumpCount++;
             playerVel.y = jumpForce;
         }
-
     }
 
     void Shoot()
@@ -121,11 +129,10 @@ public class playercontroller : MonoBehaviour, IDamage
     public void takeDamage(int amount) 
     {
         hp -= amount;
-        StartCoroutine(flashDamageScreen());
         updatePlayerUI();
+        StartCoroutine(flashDamageScreen());
 
-        //check for death
-
+        // check for death
         if (hp <= 0)
         {
             gameManager.instance.youLose();
@@ -134,7 +141,7 @@ public class playercontroller : MonoBehaviour, IDamage
 
     public void updatePlayerUI()
     {
-        gameManager.instance.playerHPBar.fillAmount = (float)hp / HPOriginal;
+        gameManager.instance.playerHPBar.fillAmount = (float)hp / HPOrig;
     }
 
     IEnumerator flashDamageScreen()
@@ -143,4 +150,35 @@ public class playercontroller : MonoBehaviour, IDamage
         yield return new WaitForSeconds(0.1f);
         gameManager.instance.playerDamageScreen.SetActive(false);
     }
+
+    public void getWeaponStats(weaponStats weapon)
+    {
+        weaponInv.Add(weapon);
+        weaponInvPos = weaponInv.Count - 1;
+        changeWeapon();
+    }
+
+    void selectWeapon()
+    {
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && weaponInvPos < weaponInv.Count - 1)
+        {
+            weaponInvPos++;
+            changeWeapon();
+        }
+        else if(Input.GetAxis("Mouse ScrollWheel") < 0 && weaponInvPos > 0)
+        {
+            weaponInvPos--;
+            changeWeapon();
+        }
+    }
+    void changeWeapon()
+    {
+        shootDamage = weaponInv[weaponInvPos].shootDamage;
+        shootDist = weaponInv[weaponInvPos].shootDistance;
+        shootRate = weaponInv[weaponInvPos].shootRate;
+
+        gunModel.GetComponent<MeshFilter>().sharedMesh = weaponInv[weaponInvPos].model.GetComponent<MeshFilter>().sharedMesh;
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = weaponInv[weaponInvPos].model.GetComponent<MeshRenderer>().sharedMaterial;
+    }
+
 }
