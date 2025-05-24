@@ -764,6 +764,7 @@ GameObject:
   - component: {fileID: 6879471640829385187}
   - component: {fileID: 5336990808879304568}
   - component: {fileID: 3278464645530315572}
+  - component: {fileID: 1021855137204991303}
   m_Layer: 0
   m_Name: Spider
   m_TagString: Untagged
@@ -808,17 +809,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Model: {fileID: 9137125139629228676}
   agent: {fileID: 6879471640829385187}
-  anim: {fileID: 0}
+  anim: {fileID: 1021855137204991303}
   headPOS: {fileID: 6840207391929893590}
   leftLeg: {fileID: 1529890244243193381}
   rightLeg: {fileID: 7662432389015924089}
   HP: 3
-  animTransSpeed: 1
+  animTransSpeed: 5
   faceTargetSpeed: 8
-  FOV: 1
+  FOV: 60
   roamDist: 10
   roamPause: 1
-  attackRate: 0.1
+  attackRate: 0.5
 --- !u!195 &6879471640829385187
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -885,6 +886,28 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 15
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &1021855137204991303
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1762292635160931874}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: c702044e8b7b7de4d96c5af2d585d4d4, type: 3}
+  m_Controller: {fileID: 9100000, guid: 63902f4f56eac6046b2b7512b88004ca, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1795402369867214376
 GameObject:
   m_ObjectHideFlags: 0

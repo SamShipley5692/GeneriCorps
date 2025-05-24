@@ -1,9 +1,7 @@
-using System.Collections;
-using Unity.VisualScripting;
-using System.Xml.Serialization;
 using UnityEngine;
+using System.Collections;
 using UnityEngine.AI;
-using UnityEngine.Android;
+
 
 
 
@@ -11,7 +9,7 @@ public class SpiderAI : MonoBehaviour, IDamage
 {
     [SerializeField] Renderer Model;
     [SerializeField] NavMeshAgent agent;
-    [SerializeField] Animation anim;
+    [SerializeField] Animator anim;
     [SerializeField] Transform headPOS;
 
 
@@ -43,7 +41,7 @@ public class SpiderAI : MonoBehaviour, IDamage
     {
         colorOrig = Model.material.color;
         //COMMENTED CODE GIVING ERRORS 
-        //anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
         startingPOS = transform.position;
         stoppingDistOrig = agent.stoppingDistance;
 
@@ -55,7 +53,7 @@ public class SpiderAI : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-        //setAnimPara();
+        setAnimPara();
 
         attackTimer += Time.deltaTime;
         if (playerInRange && CanSeePlayer())
@@ -77,14 +75,14 @@ public class SpiderAI : MonoBehaviour, IDamage
         }
     }
 
-    //void setAnimPara()
-    //{
-        //float agentSpeedCurr = agent.velocity.normalized.magnitude;
+    void setAnimPara()
+    {
+        float agentSpeedCurr = agent.velocity.normalized.magnitude;
         //COMMENTED CODE GIVING ERRORS
-        //float animSpeedCurr = anim.GetFloat("Speed");
+        float animSpeedCurr = anim.GetFloat("speed");
         //INCOMPLETE CODE, DID NOT WORK WHEN COMPLETED
-        //anim.SetFloat()
-    //}
+        anim.SetFloat("speed", Mathf.Lerp(animSpeedCurr, agentSpeedCurr, Time.deltaTime * animTransSpeed));
+    }
 
     private void DoRoam()
     {
