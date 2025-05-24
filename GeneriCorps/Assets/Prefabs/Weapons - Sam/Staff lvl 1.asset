@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 129a7e52182b7e44c90cb4cde7dd5595, type: 3}
+  m_Name: Staff lvl 1
+  m_EditorClassIdentifier: 
+  model: {fileID: 6759754029706040241, guid: 0ac02a3480fd1e74399e4bce194de9f4, type: 3}
+  shootDamage: 1
+  shootRate: 1.5
+  shootDistance: 50
+  ammoCurrent: 0
+  ammoMax: 15
+  hitEffect: {fileID: 0}
+  shootSound: []
+  shootSoundVol: 0.5
