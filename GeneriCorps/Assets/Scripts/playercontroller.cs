@@ -1,8 +1,7 @@
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
-public class playercontroller : MonoBehaviour, IDamage
+public class playercontroller : MonoBehaviour
 {
     [SerializeField] CharacterController controller;
     [SerializeField] LayerMask ignoreLayer;
@@ -16,9 +15,7 @@ public class playercontroller : MonoBehaviour, IDamage
 
     bool isSprinting;
     int jumpCount;
-    [SerializeField] int HP;
     int HPOrig;
-    int HPOriginal;
 
     [SerializeField] int hp;
     [SerializeField] int speed;
@@ -33,19 +30,12 @@ public class playercontroller : MonoBehaviour, IDamage
     [SerializeField] float shootRate;
     [SerializeField] int shootDist;
 
-    // Inventory
-    //[SerializeField] List<gunStats> gunList = new List<gunStats>();
-    int gunListPos;
-
     float shootTimer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //HPOrig = HP;
-        //UpdatePlayerUI();
-       // HPOriginal = hp;
-        updatePlayerUI();
+
     }
 
     // Update is called once per frame
@@ -82,9 +72,7 @@ public class playercontroller : MonoBehaviour, IDamage
         {
             Shoot();
 
-        selectGun();
-        }
-  
+
     }
 
     void Sprint()
@@ -129,70 +117,21 @@ public class playercontroller : MonoBehaviour, IDamage
         }
     }
 
-    public void takeDamage(int amount)
+    public void takeDamage(int amount) 
     {
-        HP -= amount;
+        //HP -= amount;
 
-        //check for death
+        // check for death
 
-        if (HP > 0)
-        {
-            return;
-        }
-
-        HP -= amount;
-        StartCoroutine(flashDamageScreen());
-        updatePlayerUI();
-
-        //check for death
-
-        if (HP <= 0)
-        {
-            gameManager.instance.youLose();
-        }
+        //if (HP <= 0)
+        //{
+        //    gamemanager.instance.youLose();
+        //}
     }
-
 
     public void updatePlayerUI()
     {
-        //gameManager.instance.playerHPBar.fillAmount = (float)HP / HPOrig;
+        //GameManger.instance.playerHPBar.fillAmount = (float)HP / HPOrig;
     }
-   IEnumerator flashDamageScreen()
-    {
-        //gameManager.instance.playerDMGScreen.SetActive(true);
-        yield return new WaitForSeconds(0.1f);
-       // gameManager.instance.playerDMGScreen.SetActive(false);
-    }
-
-    void selectGun()
-    {
-        //if(Input.GetAxis("Mouse ScrollWheel") > 0 && gunListPos < gunListPos.Count - 1)
-        {
-            gunListPos++;
-            changeGun();
-        }
-        // else  if(Input.GetAxis("Mouse ScrollWheel") > 0 && gunListPos > 0){
-        gunListPos--;
-        changeGun();
-    }
-
-    void changeGun()
-    {
-        //shootDamage = gunListPos[gunListPos].shootDamage;
-    }
-
-    //public void getGunStats(gunStats gun) will add changes later;;
-    
-
-
-
-        //gameManager.instance.playerHPBar.fillAmount = (float)hp / HPOriginal;
-    }
-
-//IEnumerator flashDamageScreen()
-    //{
-     //gameManager.instance.playerDamageScreen.SetActive(true);
-   // yield return new WaitForSeconds(0.1f);
-        //gameManager.instance.playerDamageScreen.SetActive(false);
-   // }
-//}
+   
+}
