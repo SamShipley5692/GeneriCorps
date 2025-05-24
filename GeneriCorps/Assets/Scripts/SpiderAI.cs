@@ -1,8 +1,9 @@
 using System.Collections;
 using Unity.VisualScripting;
+using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.AI;
-
+using UnityEngine.Android;
 
 
 
@@ -10,27 +11,40 @@ public class SpiderAI : MonoBehaviour, IDamage
 {
     [SerializeField] Renderer Model;
     [SerializeField] NavMeshAgent agent;
+    [SerializeField] Animation anim;
     [SerializeField] Transform headPOS;
 
 
     [SerializeField] Collider leftLeg;
     [SerializeField] Collider rightLeg;
 
-    [SerializeField] int HP = 3;
-    [SerializeField] float faceTargetSpeed;
-    [SerializeField] float FOV;
-    [SerializeField] float roamDist;
-    [SerializeField] float roamPause;
-    //[SerializeField] float attackRate
+    [SerializeField][Range(1, 50)] int HP;
+    [SerializeField][Range(1, 30)]int animTransSpeed;
+
+    [SerializeField][Range(1, 50)] float faceTargetSpeed;
+    [SerializeField][Range(1, 90)] int FOV;
+    [SerializeField][Range(1, 20)] float roamDist;
+    [SerializeField][Range(1,5)] float roamPause;
+    [SerializeField][Range(0.1f, 2)] float attackRate;
+
+    Color colorOrig;
+   
     Vector3 startingPOS;
-    //float attackTimer;
+    Vector3 playerDir;
+
+    float attackTimer;
     float roamTimer;
     float stoppingDistOrig;
+    float angleToPlayer;
+
     bool playerInRange;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-      startingPOS = transform.position;
+        colorOrig = Model.material.color;
+        //COMMENTED CODE GIVING ERRORS 
+        //anim = GetComponent<Animator>();
+        startingPOS = transform.position;
         stoppingDistOrig = agent.stoppingDistance;
 
         if (leftLeg != null) leftLeg.enabled = false;
@@ -41,16 +55,18 @@ public class SpiderAI : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-        //attackTimer += Time.deltaTime;
+        //setAnimPara();
+
+        attackTimer += Time.deltaTime;
         if (playerInRange && CanSeePlayer())
         {
             agent.SetDestination(gameManager.instance.player.transform.position);
 
-            //if (attackTimer >= attackRate && agent.remainingDistance <= agent.stoppingDistance){
+            if (attackTimer >= attackRate && agent.remainingDistance <= agent.stoppingDistance){
 
-            //DoAttack():
+                DoAttack();
 
-            //}
+            }
 
             FaceTarget();
         
@@ -60,6 +76,15 @@ public class SpiderAI : MonoBehaviour, IDamage
             DoRoam();
         }
     }
+
+    //void setAnimPara()
+    //{
+        //float agentSpeedCurr = agent.velocity.normalized.magnitude;
+        //COMMENTED CODE GIVING ERRORS
+        //float animSpeedCurr = anim.GetFloat("Speed");
+        //INCOMPLETE CODE, DID NOT WORK WHEN COMPLETED
+        //anim.SetFloat()
+    //}
 
     private void DoRoam()
     {
@@ -95,19 +120,19 @@ public class SpiderAI : MonoBehaviour, IDamage
         return false;
     }
 
-    //private void DoAttack()
-    //{
-       // attackTimer = 0f;
+    private void DoAttack()
+    {
+       attackTimer = 0f;
 
        // ATTACK ANIMATIONS GO HERE
 
-       // EnableLegs();
+        EnableLegs();
 
        // TURN THEM OFF AFTER
 
-       //Invoke(nameof(DisabledLegs), 0.5f);
+       Invoke(nameof(DisableLegs), 0.5f);
 
-    //}
+    }
 
     private void EnableLegs()
     {

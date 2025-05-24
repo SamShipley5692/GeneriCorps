@@ -11,13 +11,16 @@ public class skeletonEnemy : MonoBehaviour, IDamage
     [SerializeField] Transform headPos;
     [SerializeField] Collider weaponCol;
 
-    [SerializeField] int HP;
-    [SerializeField] int faceTargetSpeed;
-    [SerializeField] int FOV;
-    [SerializeField] int roamDist;
-    [SerializeField] int roamPauseTime;
-    [SerializeField] int animTransSpeed;
-    [SerializeField] float attackRate;
+    [SerializeField][Range(1, 200)] int HP;
+    [SerializeField][Range(1, 50)] int faceTargetSpeed;
+    [SerializeField][Range(1, 80)] int FOV;
+    [SerializeField][Range(1, 15)] int roamDist;
+    [SerializeField][Range(1, 5)] int roamPauseTime;
+    [SerializeField][Range(1, 30)] int animTransSpeed;
+    [SerializeField][Range(0.1f, 2)] float attackRate;
+    [SerializeField][Range(0.1f, 5)] int enemyDestroyTime;
+
+    Color colorOrig;
 
     Vector3 playerDir;
     Vector3 startingPos;
@@ -32,10 +35,14 @@ public class skeletonEnemy : MonoBehaviour, IDamage
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        colorOrig = model.material.color;
         anim = GetComponent<Animator>();
         gameManager.instance.updateGameGoal(1);
         startingPos = transform.position;
         stoppingDistOrig = agent.stoppingDistance;
+
+        if (weaponCol)
+            weaponCol.enabled = false;
     }
 
     // Update is called once per frame
@@ -112,7 +119,7 @@ public class skeletonEnemy : MonoBehaviour, IDamage
                     faceTarget();
                 }
 
-                agent.stoppingDistance = stoppingDistOrig; 
+                agent.stoppingDistance = stoppingDistOrig;
                 return true;
             }
         }
@@ -141,17 +148,30 @@ public class skeletonEnemy : MonoBehaviour, IDamage
     public void takeDamage(int amount)
     {
         HP -= amount;
-        anim.SetTrigger("damage");
 
         agent.SetDestination(gameManager.instance.player.transform.position);
+
+        StartCoroutine(flashRed());
 
         if (HP <= 0)
         {
             gameManager.instance.updateGameGoal(-1);
+            playerInRange = false;
             anim.SetTrigger("die");
-            Destroy(gameObject);
+            Destroy(gameObject, enemyDestroyTime);
+        }
+        else
+        {
+            anim.SetTrigger("damage");
         }
 
+    }
+
+    IEnumerator flashRed()
+    {
+        model.material.color = Color.red;
+        yield return new WaitForSeconds(0.05f);
+        model.material.color = colorOrig;
     }
 
     void faceTarget()
@@ -178,88 +198,4 @@ public class skeletonEnemy : MonoBehaviour, IDamage
             weaponCol.enabled = false;
     }
 
-
-
-
-
-    //[SerializeField] NavMeshAgent navAgent;
-    //[SerializeField] int HP;
-    //[SerializeField] int rotationSpeed;
-    //[SerializeField] float attackCoolDown; // 3
-    //[SerializeField] float attackRange; // 1
-    //[SerializeField] float aggroRange; // 4
-
-    //GameObject player;
-    //Animator animator;
-    //Vector3 lookDirection;
-    //float attackTimer;
-    //float newDestCoolDown;
-    ////bool playerInRange;
-
-
-    //// Start is called once before the first execution of Update after the MonoBehaviour is created
-    //void Start()
-    //{
-    //    player = GameObject.FindWithTag("Player");
-    //    animator = GetComponent<Animator>();
-    //    gameManager.instance.updateGameGoal(1);
-
-    //}
-
-    //// Update is called once per frame
-    //void Update()
-    //{
-    //    animator.SetFloat("speed", navAgent.velocity.magnitude / navAgent.speed);
-
-    //    if (attackTimer >= attackCoolDown)
-    //    {
-    //        if (Vector3.Distance(player.transform.position, transform.position) <= attackRange)
-    //        {
-    //            animator.SetTrigger("attack");
-    //            attackTimer = 0;
-    //        }
-    //    }
-
-    //    attackTimer += Time.deltaTime;
-
-    //    if (newDestCoolDown <= 0 && Vector3.Distance(player.transform.position, transform.position) <= aggroRange)
-    //    {
-    //        newDestCoolDown = 1f;
-    //        navAgent.SetDestination(player.transform.position);
-    //    }
-    //    newDestCoolDown -= Time.deltaTime;
-    //    lookDirection = gameManager.instance.player.transform.position - transform.position;
-    //    Vector3 flat = new Vector3(lookDirection.x, 0f, lookDirection.z);
-    //    Quaternion faceRot = Quaternion.LookRotation(flat);
-    //    transform.rotation = Quaternion.Lerp(transform.rotation, faceRot, Time.deltaTime * rotationSpeed);
-
-    //}
-
-
-    //public void takeDamage(int damage)
-    //{
-    //    HP -= damage;
-    //    animator.SetTrigger("damage");
-
-    //    if (gameManager.instance != null && gameManager.instance.player != null)
-    //    {
-    //        navAgent.SetDestination(gameManager.instance.player.transform.position);
-    //    }
-
-    //    if (HP <= 0)
-    //    {
-    //        gameManager.instance.updateGameGoal(-1);
-    //        animator.SetTrigger("die");
-    //        Destroy(gameObject);
-    //    }
-
-    //}
-
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.red;
-    //    Gizmos.DrawWireSphere(transform.position, attackRange);
-    //    Gizmos.color = Color.yellow;
-    //    Gizmos.DrawWireSphere(transform.position, aggroRange);
-    //}
 }
