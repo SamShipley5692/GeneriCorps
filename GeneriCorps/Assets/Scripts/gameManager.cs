@@ -94,4 +94,9 @@ public class gameManager : MonoBehaviour
             menuActive.SetActive(true);
         }
     }
+
+    public int getGameGoalCount()
+    {
+        return gameGoalCount;
+    }
 }
