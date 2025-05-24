@@ -2,6 +2,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 public class skeletonEnemy : MonoBehaviour, IDamage
 {
@@ -10,6 +11,7 @@ public class skeletonEnemy : MonoBehaviour, IDamage
     [SerializeField] Animator anim;
     [SerializeField] Transform headPos;
     [SerializeField] Collider weaponCol;
+    [SerializeField] GameObject itemToDrop;
 
     [SerializeField][Range(1, 200)] int HP;
     [SerializeField][Range(1, 50)] int faceTargetSpeed;
@@ -19,6 +21,7 @@ public class skeletonEnemy : MonoBehaviour, IDamage
     [SerializeField][Range(1, 30)] int animTransSpeed;
     [SerializeField][Range(0.1f, 2)] float attackRate;
     [SerializeField][Range(0.1f, 5)] int enemyDestroyTime;
+    [SerializeField][Range(0, 10)] int minKillCount;
 
     Color colorOrig;
 
@@ -29,6 +32,9 @@ public class skeletonEnemy : MonoBehaviour, IDamage
     float angleToPlayer;
     float roamTimer;
     float stoppingDistOrig;
+    float dropTimer;
+
+    int goalCountOrig;
 
     bool playerInRange;
 
@@ -37,9 +43,10 @@ public class skeletonEnemy : MonoBehaviour, IDamage
     {
         colorOrig = model.material.color;
         anim = GetComponent<Animator>();
-        gameManager.instance.updateGameGoal(1);
+        //gameManager.instance.updateGameGoal(1);
         startingPos = transform.position;
         stoppingDistOrig = agent.stoppingDistance;
+        goalCountOrig = gameManager.instance.getGameGoalCount();
 
         if (weaponCol)
             weaponCol.enabled = false;
@@ -155,10 +162,14 @@ public class skeletonEnemy : MonoBehaviour, IDamage
 
         if (HP <= 0)
         {
+            dropTimer += Time.deltaTime;
             gameManager.instance.updateGameGoal(-1);
             playerInRange = false;
             anim.SetTrigger("die");
             Destroy(gameObject, enemyDestroyTime);
+
+            if (dropTimer > enemyDestroyTime)
+                OnDestroy();
         }
         else
         {
@@ -196,6 +207,16 @@ public class skeletonEnemy : MonoBehaviour, IDamage
     {
         if (weaponCol != null)
             weaponCol.enabled = false;
+    }
+
+    private void OnDestroy()
+    {
+        // if goalCountOrig = 5 and minKillCount = 3, then 5 - 3 = 2 so if current count is <= 2, drop item 
+
+        if (gameManager.instance.getGameGoalCount() <= (goalCountOrig - minKillCount))
+        {
+            Instantiate(itemToDrop, new Vector3(transform.position.x, transform.position.y + 4, transform.position.z), Quaternion.identity);
+        }
     }
 
 }

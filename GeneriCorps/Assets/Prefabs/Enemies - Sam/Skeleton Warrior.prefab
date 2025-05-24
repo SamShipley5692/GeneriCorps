@@ -214,7 +214,7 @@ GameObject:
   - component: {fileID: 5731005990308809505}
   m_Layer: 6
   m_Name: Skeleton Warrior
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -255,7 +255,8 @@ MonoBehaviour:
   anim: {fileID: 6561218963953672023}
   headPos: {fileID: 6139802943077427669}
   weaponCol: {fileID: 8135603278865050154}
-  HP: 3
+  itemToDrop: {fileID: 562593336710338663, guid: 2ae59224a4027114ea104860efbe725f, type: 3}
+  HP: 2
   faceTargetSpeed: 8
   FOV: 60
   roamDist: 15
@@ -263,6 +264,7 @@ MonoBehaviour:
   animTransSpeed: 12
   attackRate: 1.5
   enemyDestroyTime: 2
+  minKillCount: 1
 --- !u!95 &6561218963953672023
 Animator:
   serializedVersion: 7
@@ -3062,8 +3064,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.18, y: 1.06, z: 0.11}
-  m_Center: {x: -0.0000019625918, y: -0.59, z: -0.0000004912484}
+  m_Size: {x: 0.18, y: 1.2, z: 0.11}
+  m_Center: {x: -0.0000019625918, y: -0.76, z: -0.0000004912484}
 --- !u!1 &8227508138645658271
 GameObject:
   m_ObjectHideFlags: 0
