@@ -24,6 +24,7 @@ public class SpiderAI : MonoBehaviour, IDamage
     [SerializeField][Range(1, 20)] float roamDist;
     [SerializeField][Range(1,5)] float roamPause;
     [SerializeField][Range(0.1f, 2)] float attackRate;
+    [SerializeField][Range(0.1f, 5)] int enemyDestroyTime;
 
     Color colorOrig;
    
@@ -120,13 +121,13 @@ public class SpiderAI : MonoBehaviour, IDamage
 
     private void DoAttack()
     {
-       attackTimer = 0f;
 
-       // ATTACK ANIMATIONS GO HERE
+        anim.SetTrigger("attack");
+        attackTimer = 0f;
+
+      
 
         EnableLegs();
-
-       // TURN THEM OFF AFTER
 
        Invoke(nameof(DisableLegs), 0.5f);
 
@@ -172,9 +173,24 @@ public class SpiderAI : MonoBehaviour, IDamage
     public void takeDamage(int amount)
     {
         HP -= amount;
+        agent.SetDestination(gameManager.instance.player.transform.position);
+        StartCoroutine(flashRed());
         if (HP <= 0)
         {
-            Destroy(gameObject);
+            gameManager.instance.updateGameGoal(-1);
+            anim.SetTrigger("die");
+            Destroy(gameObject, enemyDestroyTime);
         }
+        else 
+        {
+            anim.SetTrigger("damage");
+        }
+    }
+
+    IEnumerator flashRed()
+    {
+        Model.material.color = Color.red;
+        yield return null;
+        Model.material.color = colorOrig;
     }
 }

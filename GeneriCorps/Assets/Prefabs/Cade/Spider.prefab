@@ -820,6 +820,7 @@ MonoBehaviour:
   roamDist: 10
   roamPause: 1
   attackRate: 0.5
+  enemyDestroyTime: 2
 --- !u!195 &6879471640829385187
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3065,7 +3066,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
