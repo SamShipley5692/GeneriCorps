@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 
-public class playercontroller : MonoBehaviour, IDamage, IPickup
+public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
 {
     [SerializeField] CharacterController controller;
     [SerializeField] LayerMask ignoreLayer;

@@ -13,8 +13,8 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuLose;
     [SerializeField] TMP_Text gameGoalText;
 
-    public GameObject textPopup;
-    public TMP_Text textPopupDescription;
+    public GameObject textPopUp;
+    public TMP_Text textPopUpDescription;
     public Image playerHPBar;
     public GameObject playerDamageScreen;
     public GameObject player;
