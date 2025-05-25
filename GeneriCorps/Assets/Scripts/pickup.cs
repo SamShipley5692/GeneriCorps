@@ -4,6 +4,7 @@ public class pickup : MonoBehaviour
 {
     [SerializeField] weaponStats weapon;
     [SerializeField] healthItems itemPickup; // added this
+    [SerializeField] speedItems speedPickup;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -28,6 +29,12 @@ public class pickup : MonoBehaviour
             if (itemPickup != null)
             {
                 pickupReceiver.getHealthItemStats(itemPickup);
+                Destroy(gameObject);
+            }
+
+            if (speedPickup != null)
+            {
+                pickupReceiver.getSpeedItemStats(speedPickup);
                 Destroy(gameObject);
             }
         }

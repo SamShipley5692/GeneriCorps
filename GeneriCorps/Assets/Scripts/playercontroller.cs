@@ -18,6 +18,7 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
     bool isSprinting;
     int jumpCount;
     int HPOrig;
+    int speedOrig; // added base speed
 
     [SerializeField] int hp;
     [SerializeField] int speed;
@@ -40,6 +41,7 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        speedOrig = speed;
         HPOrig = hp;
         updatePlayerUI();
     }
@@ -190,5 +192,18 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
             hp = HPOrig;
         }
         updatePlayerUI();
+    }
+
+    public void getSpeedItemStats(speedItems item) // Cade 
+    {
+       StartCoroutine(applySpeedBuff(item.speedAmount, item.buffDuration));
+        
+    }
+
+    private IEnumerator applySpeedBuff(int bonus, float duration)
+    {
+        speed += bonus;
+        yield return new WaitForSeconds(duration);
+        speed = speedOrig;
     }
 }
