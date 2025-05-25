@@ -3028,8 +3028,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6721267465337055485}
+  - component: {fileID: 7608563142559013823}
   - component: {fileID: 7662432389015924089}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R.LegCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3051,6 +3052,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8334888371422555539}
   m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
+--- !u!114 &7608563142559013823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6428214494895479424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c015c0c7798f4e46b8dda634f6e7587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
+  rb: {fileID: 0}
+  damageAmount: 2
+  damageRate: 0
+  speed: 0
+  destroyTime: 0
 --- !u!65 &7662432389015924089
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3347,8 +3366,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4871758198693834759}
+  - component: {fileID: 441822266852451042}
   - component: {fileID: 1529890244243193381}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L.LegCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3370,6 +3390,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7824786162396739778}
   m_LocalEulerAnglesHint: {x: 15, y: 0, z: 0}
+--- !u!114 &441822266852451042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7370826085301084971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c015c0c7798f4e46b8dda634f6e7587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
+  rb: {fileID: 0}
+  damageAmount: 2
+  damageRate: 0
+  speed: 0
+  destroyTime: 0
 --- !u!65 &1529890244243193381
 BoxCollider:
   m_ObjectHideFlags: 0
