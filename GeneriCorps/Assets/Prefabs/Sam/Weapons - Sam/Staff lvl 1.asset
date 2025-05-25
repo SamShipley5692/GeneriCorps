@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 129a7e52182b7e44c90cb4cde7dd5595, type: 3}
-  m_Name: Magic Wand lvl 3
+  m_Name: Staff lvl 1
   m_EditorClassIdentifier: 
-  model: {fileID: 4260819330917749670, guid: 3b4b27421c2a6de4f88b36cc36531976, type: 3}
-  shootDamage: 5
-  shootRate: 0.5
-  shootDistance: 200
+  model: {fileID: 5273214600628939280, guid: 7b6423b62540c724b8f786595b4148e1, type: 3}
+  shootDamage: 1
+  shootRate: 1.5
+  shootDistance: 50
   ammoCurrent: 0
-  ammoMax: 50
+  ammoMax: 15
   hitEffect: {fileID: 0}
   shootSound: []
   shootSoundVol: 0.5

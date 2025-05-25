@@ -181,4 +181,14 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = weaponInv[weaponInvPos].model.GetComponent<MeshRenderer>().sharedMaterial;
     }
 
+    public void getHealthItemStats(healthItems item) // added this method - Sam
+    {
+        int health = item.healthAmount;
+        hp += health;
+        if (hp > HPOrig)
+        {
+            hp = HPOrig;
+        }
+        updatePlayerUI();
+    }
 }

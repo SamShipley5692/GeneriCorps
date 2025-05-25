@@ -3,15 +3,34 @@ using UnityEngine;
 public class pickup : MonoBehaviour
 {
     [SerializeField] weaponStats weapon;
+    [SerializeField] healthItems itemPickup; // added this
 
     private void OnTriggerEnter(Collider other)
     {
         IPickup pickupReceiver = other.GetComponent<IPickup>();
 
-        if (pickupReceiver !=null)
+        //if (pickupReceiver !=null)
+        //{
+        //    pickupReceiver.getWeaponStats(weapon);
+        //    Destroy(gameObject);
+        //}
+
+        // added this below and commented out above - Sam
+
+        if (pickupReceiver != null)
         {
-            pickupReceiver.getWeaponStats(weapon);
-            Destroy(gameObject);
+            if (weapon != null)
+            {
+                pickupReceiver.getWeaponStats(weapon);
+                Destroy(gameObject);
+            }
+
+            if (itemPickup != null)
+            {
+                pickupReceiver.getHealthItemStats(itemPickup);
+                Destroy(gameObject);
+            }
         }
+        
     }
 }

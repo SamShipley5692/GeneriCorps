@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 129a7e52182b7e44c90cb4cde7dd5595, type: 3}
-  m_Name: Staff lvl 1
+  m_Name: Fire Staff lvl 2
   m_EditorClassIdentifier: 
-  model: {fileID: 6759754029706040241, guid: 0ac02a3480fd1e74399e4bce194de9f4, type: 3}
-  shootDamage: 1
-  shootRate: 1.5
-  shootDistance: 50
+  model: {fileID: 562593336710338663, guid: 2ae59224a4027114ea104860efbe725f, type: 3}
+  shootDamage: 3
+  shootRate: 1
+  shootDistance: 100
   ammoCurrent: 0
-  ammoMax: 15
+  ammoMax: 25
   hitEffect: {fileID: 0}
   shootSound: []
   shootSoundVol: 0.5
