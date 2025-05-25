@@ -10,13 +10,16 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] NavMeshAgent navAgent;
 
 
+    // enemy HP 
     [SerializeField] int HP;
+    int HPOriginal;
     [SerializeField] int rotationSpeed;
 
     [SerializeField] float shootRate;
 
     [SerializeField] GameObject projectile;
     [SerializeField] Transform shootPos;
+
 
 
     Color colorOrig;
@@ -33,6 +36,9 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         colorOrig = model.material.color;
         gameManager.instance.updateGameGoal(1);
+
+        HPOriginal = HP;
+        updateEnemyHP();
 
     }
 
@@ -84,6 +90,7 @@ public class enemyAI : MonoBehaviour, IDamage
     public void takeDamage(int damage)
     {
         HP -= damage;
+        updateEnemyHP();
 
         if (gameManager.instance != null && gameManager.instance.player != null)
         {
@@ -125,6 +132,10 @@ public class enemyAI : MonoBehaviour, IDamage
 
     }
 
+    public void updateEnemyHP()
+    {
+        gameManager.instance.enemyHPBar.fillAmount = (float)HP / HPOriginal;
+    }
 
 }
 
