@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0068505edc5ff44ba53c9f97dbfb655, type: 3}
-  m_Name: Small Speed Potion
+  m_Script: {fileID: 11500000, guid: 76ee9b731cf043348ad7fd7212e3d2d2, type: 3}
+  m_Name: Small Jump Potion
   m_EditorClassIdentifier: 
   itemModel: {fileID: 0}
-  speedAmount: 3
+  jumpForceAmount: 10
   pickupSound: []
   pickupSoundVol: 0
   buffDuration: 10

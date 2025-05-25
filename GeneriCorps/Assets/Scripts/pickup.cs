@@ -4,8 +4,8 @@ public class pickup : MonoBehaviour
 {
     [SerializeField] weaponStats weapon;
     [SerializeField] healthItems itemPickup; // added this
-    [SerializeField] speedItems speedPickup;
-
+    [SerializeField] speedItems speedPickup; // Cade
+    [SerializeField] jumpItems jumpPickup; // Cade
     private void OnTriggerEnter(Collider other)
     {
         IPickup pickupReceiver = other.GetComponent<IPickup>();
@@ -34,7 +34,13 @@ public class pickup : MonoBehaviour
 
             if (speedPickup != null)
             {
-                pickupReceiver.getSpeedItemStats(speedPickup);
+                pickupReceiver.getSpeedItemStats(speedPickup); // Cade
+                Destroy(gameObject);
+            }
+
+            if (jumpPickup != null)
+            {
+                pickupReceiver.getJumpItemStats(jumpPickup); // Cade
                 Destroy(gameObject);
             }
         }
