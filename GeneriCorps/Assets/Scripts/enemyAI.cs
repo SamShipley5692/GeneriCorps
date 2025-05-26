@@ -136,6 +136,5 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         gameManager.instance.enemyHPBar.fillAmount = (float)HP / HPOriginal;
     }
-
 }
 
