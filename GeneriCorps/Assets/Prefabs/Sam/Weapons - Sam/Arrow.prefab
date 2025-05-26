@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8143432544499019170}
   - component: {fileID: 6382571918658165599}
   - component: {fileID: 1598436433727173421}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: arrowhead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 3631063792477328180}
   - component: {fileID: 7404587968639810038}
   - component: {fileID: 2996400037979603584}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -306,7 +306,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5519241422947344047}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Arrowhead_place
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -339,7 +339,7 @@ GameObject:
   - component: {fileID: 7797865262028325716}
   - component: {fileID: 8775435848211989717}
   - component: {fileID: 3578588708248224314}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Arrow_stick
   m_TagString: Untagged
   m_Icon: {fileID: 0}

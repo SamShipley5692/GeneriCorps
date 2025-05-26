@@ -596,7 +596,7 @@ GameObject:
   - component: {fileID: 3472523693824132913}
   - component: {fileID: 7542641366421385712}
   m_Layer: 6
-  m_Name: Skeleton Archer (No Scripts)
+  m_Name: Skeleton Archer
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -637,16 +637,18 @@ MonoBehaviour:
   agent: {fileID: 5252185689415473054}
   anim: {fileID: 6954113118197165746}
   headPos: {fileID: 2198013151038987543}
+  shootPos: {fileID: 8134484964931779876}
+  arrow: {fileID: 6130596350099942233, guid: f5ea0431e74431e46bfced61c43ed600, type: 3}
+  itemToDrop: {fileID: 6669507856320324066, guid: 0d3cc3e39248b4c409b0b8b7693e02c0, type: 3}
   HP: 3
   faceTargetSpeed: 8
   FOV: 60
   roamDist: 15
   roamPauseTime: 3
   animTransSpeed: 12
-  shootPos: {fileID: 8134484964931779876}
-  bullet: {fileID: 6130596350099942233, guid: f5ea0431e74431e46bfced61c43ed600, type: 3}
   shootRate: 1
-  enemyDestroyTime: 0
+  enemyDestroyTime: 2
+  minKillCount: 1
 --- !u!95 &6954113118197165746
 Animator:
   serializedVersion: 7
@@ -706,7 +708,7 @@ NavMeshAgent:
   m_Acceleration: 32
   avoidancePriority: 50
   m_AngularSpeed: 600
-  m_StoppingDistance: 7
+  m_StoppingDistance: 15
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
@@ -778,7 +780,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 5
+  m_Radius: 6
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1029092333086546827
 GameObject:
@@ -1551,7 +1553,7 @@ Transform:
   m_GameObject: {fileID: 2545154828980802022}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0.21428716, y: -0.28571406, z: -0.00000040233135}
+  m_LocalPosition: {x: 0.2142872, y: -0.28571406, z: -0.00000040233135}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

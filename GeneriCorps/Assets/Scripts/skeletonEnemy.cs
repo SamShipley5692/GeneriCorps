@@ -34,6 +34,7 @@ public class skeletonEnemy : MonoBehaviour, IDamage
     float stoppingDistOrig;
     float dropTimer;
 
+    int HPOrig;
     int goalCountOrig;
 
     bool playerInRange;
@@ -175,7 +176,6 @@ public class skeletonEnemy : MonoBehaviour, IDamage
         {
             anim.SetTrigger("damage");
         }
-
     }
 
     IEnumerator flashRed()
@@ -187,7 +187,7 @@ public class skeletonEnemy : MonoBehaviour, IDamage
 
     void faceTarget()
     {
-        Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, transform.position.y, playerDir.z));
+        Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, transform.position.y, playerDir.z)); 
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceTargetSpeed);
     }
 
@@ -219,4 +219,8 @@ public class skeletonEnemy : MonoBehaviour, IDamage
         }
     }
 
+    public void updateEnemyHP()
+    {
+        gameManager.instance.enemyHPBar.fillAmount = (float)HP / HPOrig;
+    }
 }
