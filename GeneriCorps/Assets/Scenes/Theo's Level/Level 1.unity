@@ -16051,6 +16051,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 9947a6e7e8c8208469c1c86e15f5c089, type: 3}
   m_PrefabInstance: {fileID: 750713608}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &756120395 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7748573121622185997, guid: 237908e8f8a9ad64a85af55d208384eb, type: 3}
+  m_PrefabInstance: {fileID: 1054273591}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &765222847
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26372,6 +26377,30 @@ PrefabInstance:
     - target: {fileID: 5581844862069954799, guid: 237908e8f8a9ad64a85af55d208384eb, type: 3}
       propertyPath: HP
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5581844862069954799, guid: 237908e8f8a9ad64a85af55d208384eb, type: 3}
+      propertyPath: FOV
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5581844862069954799, guid: 237908e8f8a9ad64a85af55d208384eb, type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 756120395}
+    - target: {fileID: 5581844862069954799, guid: 237908e8f8a9ad64a85af55d208384eb, type: 3}
+      propertyPath: roamDist
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5581844862069954799, guid: 237908e8f8a9ad64a85af55d208384eb, type: 3}
+      propertyPath: attackRate
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5581844862069954799, guid: 237908e8f8a9ad64a85af55d208384eb, type: 3}
+      propertyPath: roamPauseTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5581844862069954799, guid: 237908e8f8a9ad64a85af55d208384eb, type: 3}
+      propertyPath: faceTargetSpeed
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6004332189930884938, guid: 237908e8f8a9ad64a85af55d208384eb, type: 3}
       propertyPath: m_Name
