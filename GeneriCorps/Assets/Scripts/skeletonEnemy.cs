@@ -34,7 +34,6 @@ public class skeletonEnemy : MonoBehaviour, IDamage
     float stoppingDistOrig;
     float dropTimer;
 
-    int HPOrig;
     int goalCountOrig;
 
     bool playerInRange;
@@ -219,8 +218,4 @@ public class skeletonEnemy : MonoBehaviour, IDamage
         }
     }
 
-    public void updateEnemyHP()
-    {
-        gameManager.instance.enemyHPBar.fillAmount = (float)HP / HPOrig;
-    }
 }

@@ -659,9 +659,9 @@ GameObject:
   - component: {fileID: 3996460451086288511}
   - component: {fileID: 4961820646528865599}
   - component: {fileID: 6251728878937040979}
-  m_Layer: 0
-  m_Name: Spider Blue
-  m_TagString: Untagged
+  m_Layer: 6
+  m_Name: Spider - Jump
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -696,7 +696,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 3996460451086288511}
   agent: {fileID: 3461423100503890448}
-  anim: {fileID: 0}
+  anim: {fileID: 4087787594720176451}
   headPos: {fileID: 7720642605784775686}
   weaponCol: {fileID: 4489238090939067194}
   itemToDrop: {fileID: 97115191286189501, guid: 5f0c5b5a893a3e74f90248bdb9812ada, type: 3}
@@ -708,7 +708,7 @@ MonoBehaviour:
   animTransSpeed: 12
   attackRate: 1
   enemyDestroyTime: 2
-  minKillCount: 1
+  minKillCount: 0
 --- !u!195 &3461423100503890448
 NavMeshAgent:
   m_ObjectHideFlags: 0

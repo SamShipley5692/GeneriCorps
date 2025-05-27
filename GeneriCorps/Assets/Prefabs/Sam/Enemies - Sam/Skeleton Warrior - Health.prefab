@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 4340685227506249288}
   - component: {fileID: 5731005990308809505}
   m_Layer: 6
-  m_Name: Skeleton Warrior
+  m_Name: Skeleton Warrior - Health
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -264,7 +264,7 @@ MonoBehaviour:
   animTransSpeed: 12
   attackRate: 1.5
   enemyDestroyTime: 2
-  minKillCount: 1
+  minKillCount: 0
 --- !u!95 &6561218963953672023
 Animator:
   serializedVersion: 7
