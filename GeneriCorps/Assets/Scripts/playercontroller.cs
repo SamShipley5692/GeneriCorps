@@ -7,6 +7,7 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup
 {
     [SerializeField] CharacterController controller;
     [SerializeField] LayerMask ignoreLayer;
+    [SerializeField] AudioSource aud;
 
     // World 
     [SerializeField] int gravity;
@@ -18,6 +19,8 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup
     bool isSprinting;
     int jumpCount;
     int HPOrig;
+    int gunListPos;
+    bool isPlayingStep;
 
     [SerializeField] int hp;
     [SerializeField] int speed;
@@ -31,6 +34,15 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup
     [SerializeField] int shootDamage;
     [SerializeField] float shootRate;
     [SerializeField] int shootDist;
+
+    //Audio
+    [SerializeField] AudioClip[] audJump;
+    [Range(0, 1)][SerializeField] float audJumpVol;
+    [SerializeField] AudioClip[] audHurt;
+    [Range(0,1)] [SerializeField] float audHurtVol;
+    [SerializeField] AudioClip[]  audSteps;
+    [Range(0, 1)][SerializeField] float audStepVol;
+
 
     float shootTimer;
 
@@ -61,6 +73,9 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup
 
         if (controller.isGrounded)
         {
+            if(moveDir.normalized.magnitude > 0.3f && !isPlayingStep){
+                StartCoroutine(PlayStep());
+            }
             jumpCount = 0;
             playerVel = Vector3.zero;
         }
@@ -84,6 +99,20 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup
 
         selectWeapon();
     }
+    IEnumerator PlayStep()
+    {
+        isPlayingStep = true;
+        aud.PlayOneShot(audSteps[Random.Range(0, audSteps.Length)], audStepVol);
+        if (isSprinting)
+        {
+            yield return new WaitForSeconds(0.3f);
+        }
+        else
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+        isPlayingStep = false;
+    }
 
     void sprint()
     {
@@ -105,6 +134,7 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup
         {
             jumpCount++;
             playerVel.y = jumpForce;
+            aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
         }
     }
 
