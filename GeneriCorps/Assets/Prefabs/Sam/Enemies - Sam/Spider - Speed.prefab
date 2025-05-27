@@ -708,7 +708,6 @@ MonoBehaviour:
   animTransSpeed: 12
   attackRate: 1
   enemyDestroyTime: 2
-  minKillCount: 0
 --- !u!195 &3461423100503890448
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1118,7 +1117,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 07d85dbf1dc3f154f9b69a9cb298a8ea, type: 2}
+  - {fileID: 2100000, guid: 44019c273a9905247adbc7797b7eb91d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

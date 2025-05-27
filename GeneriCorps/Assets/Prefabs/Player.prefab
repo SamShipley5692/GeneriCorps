@@ -172,7 +172,7 @@ MonoBehaviour:
   gunModel: {fileID: 3685088030770463326}
   shootDamage: 1
   shootRate: 0.5
-  shootDist: 50
+  shootDist: 100
   weaponInv: []
 --- !u!33 &3105657134156700726
 MeshFilter:
