@@ -5358,6 +5358,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 5269656211392559515}
   navAgent: {fileID: 6713069946669404679}
+  anim: {fileID: 0}
+  roamDist: 1
+  roamPauseTime: 1
+  FOV: 1
+  faceTargetSpeed: 1
+  attackRate: 0.1
+  enemyDestroyTime: 0
+  animTransSpeed: 0
   HP: 3
   rotationSpeed: 35
   shootRate: 1

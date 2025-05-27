@@ -1,9 +1,7 @@
-using System.Collections;
-using Unity.VisualScripting;
-using System.Xml.Serialization;
 using UnityEngine;
+using System.Collections;
 using UnityEngine.AI;
-using UnityEngine.Android;
+
 
 
 
@@ -11,7 +9,7 @@ public class SpiderAI : MonoBehaviour, IDamage
 {
     [SerializeField] Renderer Model;
     [SerializeField] NavMeshAgent agent;
-    [SerializeField] Animation anim;
+    [SerializeField] Animator anim;
     [SerializeField] Transform headPOS;
 
 
@@ -26,6 +24,7 @@ public class SpiderAI : MonoBehaviour, IDamage
     [SerializeField][Range(1, 20)] float roamDist;
     [SerializeField][Range(1,5)] float roamPause;
     [SerializeField][Range(0.1f, 2)] float attackRate;
+    [SerializeField][Range(0.1f, 5)] int enemyDestroyTime;
 
     Color colorOrig;
    
@@ -43,7 +42,7 @@ public class SpiderAI : MonoBehaviour, IDamage
     {
         colorOrig = Model.material.color;
         //COMMENTED CODE GIVING ERRORS 
-        //anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
         startingPOS = transform.position;
         stoppingDistOrig = agent.stoppingDistance;
 
@@ -55,7 +54,7 @@ public class SpiderAI : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-        //setAnimPara();
+        setAnimPara();
 
         attackTimer += Time.deltaTime;
         if (playerInRange && CanSeePlayer())
@@ -77,14 +76,14 @@ public class SpiderAI : MonoBehaviour, IDamage
         }
     }
 
-    //void setAnimPara()
-    //{
-        //float agentSpeedCurr = agent.velocity.normalized.magnitude;
+    void setAnimPara()
+    {
+        float agentSpeedCurr = agent.velocity.normalized.magnitude;
         //COMMENTED CODE GIVING ERRORS
-        //float animSpeedCurr = anim.GetFloat("Speed");
+        float animSpeedCurr = anim.GetFloat("speed");
         //INCOMPLETE CODE, DID NOT WORK WHEN COMPLETED
-        //anim.SetFloat()
-    //}
+        anim.SetFloat("speed", Mathf.Lerp(animSpeedCurr, agentSpeedCurr, Time.deltaTime * animTransSpeed));
+    }
 
     private void DoRoam()
     {
@@ -122,13 +121,13 @@ public class SpiderAI : MonoBehaviour, IDamage
 
     private void DoAttack()
     {
-       attackTimer = 0f;
 
-       // ATTACK ANIMATIONS GO HERE
+        anim.SetTrigger("attack");
+        attackTimer = 0f;
+
+      
 
         EnableLegs();
-
-       // TURN THEM OFF AFTER
 
        Invoke(nameof(DisableLegs), 0.5f);
 
@@ -174,9 +173,24 @@ public class SpiderAI : MonoBehaviour, IDamage
     public void takeDamage(int amount)
     {
         HP -= amount;
+        agent.SetDestination(gameManager.instance.player.transform.position);
+        StartCoroutine(flashRed());
         if (HP <= 0)
         {
-            Destroy(gameObject);
+            gameManager.instance.updateGameGoal(-1);
+            anim.SetTrigger("die");
+            Destroy(gameObject, enemyDestroyTime);
         }
+        else 
+        {
+            anim.SetTrigger("damage");
+        }
+    }
+
+    IEnumerator flashRed()
+    {
+        Model.material.color = Color.red;
+        yield return null;
+        Model.material.color = colorOrig;
     }
 }

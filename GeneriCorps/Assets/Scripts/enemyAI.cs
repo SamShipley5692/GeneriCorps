@@ -8,15 +8,28 @@ public class enemyAI : MonoBehaviour, IDamage
 {
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent navAgent;
+    
+    [SerializeField] Animator anim;
+    [SerializeField][Range(1, 30)] int roamDist;
+    [SerializeField][Range(1, 5)] int roamPauseTime;
+    [SerializeField][Range(1, 90)] int FOV;
+    [SerializeField][Range(1, 50)] float faceTargetSpeed;
+    [SerializeField][Range(0.1f, 2)] float attackRate;
+    [SerializeField][Range(0.1f, 5)] int enemyDestroyTime;
+    [SerializeField] int animTransSpeed;
 
 
+
+    // enemy HP 
     [SerializeField] int HP;
+    int HPOriginal;
     [SerializeField] int rotationSpeed;
 
     [SerializeField] float shootRate;
 
     [SerializeField] GameObject projectile;
     [SerializeField] Transform shootPos;
+
 
 
     Color colorOrig;
@@ -33,6 +46,9 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         colorOrig = model.material.color;
         gameManager.instance.updateGameGoal(1);
+
+        HPOriginal = HP;
+        updateEnemyHP();
 
     }
 
@@ -84,6 +100,7 @@ public class enemyAI : MonoBehaviour, IDamage
     public void takeDamage(int damage)
     {
         HP -= damage;
+        updateEnemyHP();
 
         if (gameManager.instance != null && gameManager.instance.player != null)
         {
@@ -125,6 +142,16 @@ public class enemyAI : MonoBehaviour, IDamage
 
     }
 
+
+    public void updateEnemyHP()
+    {
+        gameManager.instance.enemyHPBar.fillAmount = (float)HP / HPOriginal;
+    }
+
+    void setAnimParameter() 
+    {
+        anim.SetFloat("Speed", navAgent.velocity.normalized.magnitude);
+    }
 
 }
 

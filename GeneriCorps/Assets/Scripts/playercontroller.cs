@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 
-public class playercontroller : MonoBehaviour, IDamage, IPickup
+public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
 {
     [SerializeField] CharacterController controller;
     [SerializeField] LayerMask ignoreLayer;
@@ -19,8 +19,6 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup
     bool isSprinting;
     int jumpCount;
     int HPOrig;
-    int gunListPos;
-    bool isPlayingStep;
 
     [SerializeField] int hp;
     [SerializeField] int speed;
@@ -52,6 +50,8 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        jumpForceOrig = jumpForce;
+        speedOrig = speed;
         HPOrig = hp;
         updatePlayerUI();
     }
@@ -211,4 +211,40 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = weaponInv[weaponInvPos].model.GetComponent<MeshRenderer>().sharedMaterial;
     }
 
+    public void getHealthItemStats(healthItems item) // added this method - Sam
+    {
+        int health = item.healthAmount;
+        hp += health;
+        if (hp > HPOrig)
+        {
+            hp = HPOrig;
+        }
+        updatePlayerUI();
+    }
+
+    public void getSpeedItemStats(speedItems item) // Cade 
+    {
+       StartCoroutine(applySpeedBuff(item.speedAmount, item.buffDuration));
+        
+    }
+
+    private IEnumerator applySpeedBuff(int bonus, float duration) // Cade
+    {
+        speed += bonus;
+        yield return new WaitForSeconds(duration);
+        speed = speedOrig;
+    }
+
+    public void getJumpItemStats(jumpItems item) // Cade
+    {
+       StartCoroutine(applyJumpBuff(item.jumpForceAmount, item.buffDuration));
+
+    }
+
+    private IEnumerator applyJumpBuff(int bonus, float duration) // Cade
+    {
+        jumpForce += bonus;
+        yield return new WaitForSeconds(duration);
+        jumpForce = jumpForceOrig;
+    }
 }
