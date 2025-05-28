@@ -16,9 +16,12 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
     Vector3 moveDir;
     Vector3 playerVel;
 
+    bool isPlayingStep;
     bool isSprinting;
     int jumpCount;
     int HPOrig;
+    int jumpForceOrig;
+    int speedOrig;
 
     [SerializeField] int hp;
     [SerializeField] int speed;
