@@ -653,7 +653,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 872368786589281170}
-  - component: {fileID: 2254822267650463482}
+  - component: {fileID: 2934072640950401890}
   - component: {fileID: 3461423100503890448}
   - component: {fileID: 4087787594720176451}
   - component: {fileID: 3996460451086288511}
@@ -682,7 +682,7 @@ Transform:
   - {fileID: 3851804853941272470}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2254822267650463482
+--- !u!114 &2934072640950401890
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -691,24 +691,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 4338874726316726476}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ebdedafe6c1e094b9fa360e65b500d5, type: 3}
+  m_Script: {fileID: 11500000, guid: b5b964e3bf553a643b6cd602523fcebd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 3996460451086288511}
+  Model: {fileID: 5046336166180821806}
   agent: {fileID: 3461423100503890448}
   anim: {fileID: 4087787594720176451}
-  headPos: {fileID: 7720642605784775686}
-  weaponCol: {fileID: 4489238090939067194}
+  headPOS: {fileID: 7720642605784775686}
   itemToDrop: {fileID: 97115191286189501, guid: 5f0c5b5a893a3e74f90248bdb9812ada, type: 3}
+  weaponCol: {fileID: 4489238090939067194}
   HP: 2
+  animTransSpeed: 12
   faceTargetSpeed: 8
   FOV: 60
   roamDist: 15
-  roamPauseTime: 3
-  animTransSpeed: 12
+  roamPause: 3
   attackRate: 1
   enemyDestroyTime: 2
-  minKillCount: 0
 --- !u!195 &3461423100503890448
 NavMeshAgent:
   m_ObjectHideFlags: 0

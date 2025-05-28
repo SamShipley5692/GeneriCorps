@@ -5,32 +5,32 @@ using UnityEngine.AI;
 
 
 
-public class SpiderAI : MonoBehaviour, IDamage
+public class SpidershootingAI : MonoBehaviour, IDamage
 {
     [SerializeField] Renderer Model;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Animator anim;
     [SerializeField] Transform headPOS;
+    [SerializeField] Transform shootPOS;
+    [SerializeField] GameObject arrow;
     [SerializeField] GameObject itemToDrop;
 
-    [SerializeField] Collider weaponCol;
-
     [SerializeField][Range(1, 50)] int HP;
-    [SerializeField][Range(1, 30)]int animTransSpeed;
+    [SerializeField][Range(1, 30)] int animTransSpeed;
 
     [SerializeField][Range(1, 50)] float faceTargetSpeed;
     [SerializeField][Range(1, 90)] int FOV;
     [SerializeField][Range(1, 20)] float roamDist;
-    [SerializeField][Range(1,5)] float roamPause;
-    [SerializeField][Range(0.1f, 2)] float attackRate;
+    [SerializeField][Range(1, 5)] float roamPause;
+    [SerializeField][Range(0.1f, 2)] float shootRate;
     [SerializeField][Range(0.1f, 5)] int enemyDestroyTime;
 
     Color colorOrig;
-   
+
     Vector3 startingPOS;
     Vector3 playerDir;
 
-    float attackTimer;
+    float shootTimer;
     float roamTimer;
     float stoppingDistOrig;
     float angleToPlayer;
@@ -46,8 +46,8 @@ public class SpiderAI : MonoBehaviour, IDamage
         startingPOS = transform.position;
         stoppingDistOrig = agent.stoppingDistance;
 
-        if (weaponCol != null) weaponCol.enabled = false;
-      
+        
+
 
     }
 
@@ -56,19 +56,20 @@ public class SpiderAI : MonoBehaviour, IDamage
     {
         setAnimPara();
 
-        attackTimer += Time.deltaTime;
+        shootTimer += Time.deltaTime;
         if (playerInRange && CanSeePlayer())
         {
             agent.SetDestination(gameManager.instance.player.transform.position);
 
-            if (attackTimer >= attackRate && agent.remainingDistance <= agent.stoppingDistance){
+            if (shootTimer >= shootRate && agent.remainingDistance <= agent.stoppingDistance)
+            {
 
-                DoAttack();
+                shoot();
 
             }
 
             FaceTarget();
-        
+
         }
         else
         {
@@ -95,7 +96,7 @@ public class SpiderAI : MonoBehaviour, IDamage
                 Vector3 randomPOS = Random.insideUnitSphere * roamDist;
                 randomPOS += startingPOS;
                 NavMeshHit hit;
-                if(NavMesh.SamplePosition(randomPOS, out hit, roamDist, NavMesh.AllAreas))
+                if (NavMesh.SamplePosition(randomPOS, out hit, roamDist, NavMesh.AllAreas))
                 {
                     agent.stoppingDistance = 0f;
                     agent.SetDestination(hit.position);
@@ -119,30 +120,16 @@ public class SpiderAI : MonoBehaviour, IDamage
         return false;
     }
 
-    private void DoAttack()
+    private void shoot()
     {
-
         anim.SetTrigger("attack");
-        attackTimer = 0f;
-
-
-
-        weaponColOn();
-
-       Invoke(nameof(weaponColOff), 0.5f);
-
+        shootTimer = 0;
     }
 
-    private void weaponColOn()
+   private void createArrow()
     {
-        if (weaponCol != null) weaponCol.enabled = true;
-      
-    }
-
-    private void weaponColOff()
-    {
-        if (weaponCol != null) weaponCol.enabled = false;
-       
+       if (arrow != null) 
+            Instantiate(arrow, shootPOS.position, transform.rotation);
     }
 
     private void FaceTarget()
@@ -183,8 +170,9 @@ public class SpiderAI : MonoBehaviour, IDamage
             Destroy(gameObject, enemyDestroyTime);
             if (dropTimer > enemyDestroyTime)
                 OnDestroy();
+
         }
-        else 
+        else
         {
             anim.SetTrigger("damage");
         }
