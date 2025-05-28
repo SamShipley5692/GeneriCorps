@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0068505edc5ff44ba53c9f97dbfb655, type: 3}
   m_Name: Small Speed Potion
   m_EditorClassIdentifier: 
-  itemModel: {fileID: 0}
+  itemModel: {fileID: 6669507856320324066, guid: 0d3cc3e39248b4c409b0b8b7693e02c0, type: 3}
   speedAmount: 3
   pickupSound: []
   pickupSoundVol: 0

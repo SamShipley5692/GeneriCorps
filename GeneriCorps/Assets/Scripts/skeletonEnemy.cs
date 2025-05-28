@@ -166,10 +166,12 @@ public class skeletonEnemy : MonoBehaviour, IDamage
             gameManager.instance.updateGameGoal(-1);
             playerInRange = false;
             anim.SetTrigger("die");
+            gameObject.GetComponent<Collider>().enabled = false;
             Destroy(gameObject, enemyDestroyTime);
 
             if (dropTimer > enemyDestroyTime)
                 OnDestroy();
+
         }
         else
         {
