@@ -13,8 +13,7 @@ public class SpiderAI : MonoBehaviour, IDamage
     [SerializeField] Transform headPOS;
 
 
-    [SerializeField] Collider leftLeg;
-    [SerializeField] Collider rightLeg;
+    [SerializeField] Collider weaponCol;
 
     [SerializeField][Range(1, 50)] int HP;
     [SerializeField][Range(1, 30)]int animTransSpeed;
@@ -46,8 +45,8 @@ public class SpiderAI : MonoBehaviour, IDamage
         startingPOS = transform.position;
         stoppingDistOrig = agent.stoppingDistance;
 
-        if (leftLeg != null) leftLeg.enabled = false;
-        if (rightLeg != null) rightLeg.enabled = false;
+        if (weaponCol != null) weaponCol.enabled = false;
+      
 
     }
 
@@ -125,24 +124,24 @@ public class SpiderAI : MonoBehaviour, IDamage
         anim.SetTrigger("attack");
         attackTimer = 0f;
 
+
+
+        weaponColOn();
+
+       Invoke(nameof(weaponColOff), 0.5f);
+
+    }
+
+    private void weaponColOn()
+    {
+        if (weaponCol != null) weaponCol.enabled = true;
       
-
-        EnableLegs();
-
-       Invoke(nameof(DisableLegs), 0.5f);
-
     }
 
-    private void EnableLegs()
+    private void weaponColOff()
     {
-        if (leftLeg != null) leftLeg.enabled = true;
-        if (rightLeg != null) rightLeg.enabled = false;
-    }
-
-    private void DisableLegs()
-    {
-        if (leftLeg != null) leftLeg.enabled = false;
-        if (rightLeg != null) rightLeg.enabled = false;
+        if (weaponCol != null) weaponCol.enabled = false;
+       
     }
 
     private void FaceTarget()

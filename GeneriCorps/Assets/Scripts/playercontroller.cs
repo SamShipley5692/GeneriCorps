@@ -232,6 +232,7 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
     public void getSpeedItemStats(speedItems item) // Cade 
     {
        StartCoroutine(applySpeedBuff(item.speedAmount, item.buffDuration));
+
         
     }
 
