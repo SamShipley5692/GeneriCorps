@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76ee9b731cf043348ad7fd7212e3d2d2, type: 3}
   m_Name: Small Jump Potion
   m_EditorClassIdentifier: 
-  itemModel: {fileID: 0}
+  itemModel: {fileID: 97115191286189501, guid: 5f0c5b5a893a3e74f90248bdb9812ada, type: 3}
   jumpForceAmount: 10
   pickupSound: []
   pickupSoundVol: 0
