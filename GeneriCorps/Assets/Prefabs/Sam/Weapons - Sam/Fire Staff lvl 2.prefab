@@ -12,8 +12,6 @@ GameObject:
   - component: {fileID: 2799609046306784290}
   - component: {fileID: 7594218550386189538}
   - component: {fileID: 6102181238182451456}
-  - component: {fileID: 2984339306287965554}
-  - component: {fileID: 4533490564052618338}
   - component: {fileID: 2425234816624691858}
   m_Layer: 0
   m_Name: Fire Staff lvl 2
@@ -51,6 +49,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 11400000, guid: 22f2f32d62d2de5429452f3f427bb6aa, type: 2}
+  itemPickup: {fileID: 0}
+  speedPickup: {fileID: 0}
+  jumpPickup: {fileID: 0}
 --- !u!33 &7594218550386189538
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -104,45 +105,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!95 &2984339306287965554
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 562593336710338663}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 428371bf099b3b44fa70bdf35bb83e4f, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!111 &4533490564052618338
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 562593336710338663}
-  m_Enabled: 0
-  serializedVersion: 4
-  m_Animation: {fileID: 7400000, guid: a639881d6af908e44aab8fa64a87af17, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: a639881d6af908e44aab8fa64a87af17, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_UpdateMode: 0
-  m_CullingType: 0
 --- !u!65 &2425234816624691858
 BoxCollider:
   m_ObjectHideFlags: 0

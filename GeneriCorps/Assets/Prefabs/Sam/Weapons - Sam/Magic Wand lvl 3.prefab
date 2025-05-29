@@ -12,8 +12,6 @@ GameObject:
   - component: {fileID: 4468204429465586131}
   - component: {fileID: 7211957906637419075}
   - component: {fileID: 10496182340521633}
-  - component: {fileID: 4001911512628820617}
-  - component: {fileID: 9121916399413531991}
   - component: {fileID: 4023416520889669686}
   m_Layer: 0
   m_Name: Magic Wand lvl 3
@@ -51,6 +49,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 11400000, guid: df8985d033b3dd64289f699c81b54f18, type: 2}
+  itemPickup: {fileID: 0}
+  speedPickup: {fileID: 0}
+  jumpPickup: {fileID: 0}
 --- !u!33 &7211957906637419075
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -104,45 +105,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!95 &4001911512628820617
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3795510586921435264}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: aa814478e408c9a40bad972949273150, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!111 &9121916399413531991
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3795510586921435264}
-  m_Enabled: 0
-  serializedVersion: 4
-  m_Animation: {fileID: 7400000, guid: 5aaf80cbeceb4684a8ef6e07cbe90a4b, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 5aaf80cbeceb4684a8ef6e07cbe90a4b, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_UpdateMode: 0
-  m_CullingType: 0
 --- !u!65 &4023416520889669686
 BoxCollider:
   m_ObjectHideFlags: 0
