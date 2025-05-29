@@ -20,7 +20,7 @@ public class skeletonArcher : MonoBehaviour
     [SerializeField][Range(1, 30)] int animTransSpeed;
     [SerializeField][Range(0.1f, 2)] float shootRate;
     [SerializeField][Range(0.1f, 5)] int enemyDestroyTime;
-    [SerializeField][Range(0, 10)] int minKillCount;
+    //[SerializeField][Range(0, 10)] int minKillCount;
 
     Color colorOrig;
 
@@ -32,7 +32,7 @@ public class skeletonArcher : MonoBehaviour
     float roamTimer;
     float stoppingDistOrig;
     float dropTimer;
-    int goalCountOrig;
+    //int goalCountOrig;
 
     bool playerInRange;
 
@@ -44,7 +44,7 @@ public class skeletonArcher : MonoBehaviour
         //gameManager.instance.updateGameGoal(1);
         startingPos = transform.position;
         stoppingDistOrig = agent.stoppingDistance;
-        goalCountOrig = gameManager.instance.getGameGoalCount();
+        //goalCountOrig = gameManager.instance.getGameGoalCount();
     }
 
     // Update is called once per frame
@@ -203,10 +203,12 @@ public class skeletonArcher : MonoBehaviour
     {
         // if goalCountOrig = 5 and minKillCount = 3, then 5 - 3 = 2 so if current count is <= 2, drop item 
 
-        if (gameManager.instance.getGameGoalCount() <= (goalCountOrig - minKillCount))
-        {
+        //if (gameManager.instance.getGameGoalCount() <= (goalCountOrig - minKillCount))
+        //{
+        if (itemToDrop)
             Instantiate(itemToDrop, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
-        }
+
+        //}
     }
 
 }

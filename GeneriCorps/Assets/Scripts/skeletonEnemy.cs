@@ -21,7 +21,7 @@ public class skeletonEnemy : MonoBehaviour, IDamage
     [SerializeField][Range(1, 30)] int animTransSpeed;
     [SerializeField][Range(0.1f, 2)] float attackRate;
     [SerializeField][Range(0.1f, 5)] int enemyDestroyTime;
-    [SerializeField][Range(0, 10)] int minKillCount;
+    //[SerializeField][Range(0, 10)] int minKillCount;
 
     Color colorOrig;
 
@@ -34,7 +34,7 @@ public class skeletonEnemy : MonoBehaviour, IDamage
     float stoppingDistOrig;
     float dropTimer;
 
-    int goalCountOrig;
+    //int goalCountOrig;
 
     bool playerInRange;
 
@@ -46,7 +46,7 @@ public class skeletonEnemy : MonoBehaviour, IDamage
         //gameManager.instance.updateGameGoal(1);
         startingPos = transform.position;
         stoppingDistOrig = agent.stoppingDistance;
-        goalCountOrig = gameManager.instance.getGameGoalCount();
+        //goalCountOrig = gameManager.instance.getGameGoalCount();
 
         if (weaponCol)
             weaponCol.enabled = false;
@@ -166,10 +166,12 @@ public class skeletonEnemy : MonoBehaviour, IDamage
             gameManager.instance.updateGameGoal(-1);
             playerInRange = false;
             anim.SetTrigger("die");
+            gameObject.GetComponent<Collider>().enabled = false;
             Destroy(gameObject, enemyDestroyTime);
 
             if (dropTimer > enemyDestroyTime)
                 OnDestroy();
+
         }
         else
         {
@@ -186,7 +188,7 @@ public class skeletonEnemy : MonoBehaviour, IDamage
 
     void faceTarget()
     {
-        Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, transform.position.y, playerDir.z)); 
+        Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, transform.position.y, playerDir.z));
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceTargetSpeed);
     }
 
@@ -212,10 +214,11 @@ public class skeletonEnemy : MonoBehaviour, IDamage
     {
         // if goalCountOrig = 5 and minKillCount = 3, then 5 - 3 = 2 so if current count is <= 2, drop item 
 
-        if (gameManager.instance.getGameGoalCount() <= (goalCountOrig - minKillCount))
-        {
+        //if (gameManager.instance.getGameGoalCount() <= (goalCountOrig - minKillCount))
+        //{
+        if (itemToDrop)
             Instantiate(itemToDrop, new Vector3(transform.position.x, transform.position.y + 4, transform.position.z), Quaternion.identity);
-        }
+        //}
     }
 
 }

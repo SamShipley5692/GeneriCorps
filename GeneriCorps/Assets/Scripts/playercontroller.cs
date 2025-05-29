@@ -16,9 +16,12 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
     Vector3 moveDir;
     Vector3 playerVel;
 
+    bool isPlayingStep;
     bool isSprinting;
     int jumpCount;
     int HPOrig;
+    int jumpForceOrig;
+    int speedOrig;
 
     [SerializeField] int hp;
     [SerializeField] int speed;
@@ -73,9 +76,9 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
 
         if (controller.isGrounded)
         {
-            if(moveDir.normalized.magnitude > 0.3f && !isPlayingStep){
+            if(moveDir.normalized.magnitude > 0.3f && !isPlayingStep)
                 StartCoroutine(PlayStep());
-            }
+            
             jumpCount = 0;
             playerVel = Vector3.zero;
         }
@@ -92,7 +95,7 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
         
         playerVel.y -= gravity * Time.deltaTime;
 
-        if (Input.GetButtonDown("Fire1") && shootTimer > shootRate)
+        if (Input.GetButtonDown("Fire1") && weaponInv.Count > 0 && shootTimer > shootRate)
         {
             Shoot();
         }
@@ -142,10 +145,13 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
     {
         shootTimer = 0;
 
+        aud.PlayOneShot(weaponInv[weaponInvPos].shootSound[Random.Range(0, weaponInv[weaponInvPos].shootSound.Length)], weaponInv[weaponInvPos].shootSoundVol);
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer))
         {
-            Debug.Log(hit.transform.name);
+            //Debug.Log(hit.transform.name);
+
+            Instantiate(weaponInv[weaponInvPos].hitEffect, hit.point, Quaternion.identity);
 
             IDamage dmg = hit.collider.GetComponent<IDamage>();
 
@@ -158,6 +164,7 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
 
     public void takeDamage(int amount) 
     {
+        aud.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVol);
         hp -= amount;
         updatePlayerUI();
         StartCoroutine(flashDamageScreen());
@@ -225,6 +232,7 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
     public void getSpeedItemStats(speedItems item) // Cade 
     {
        StartCoroutine(applySpeedBuff(item.speedAmount, item.buffDuration));
+
         
     }
 
