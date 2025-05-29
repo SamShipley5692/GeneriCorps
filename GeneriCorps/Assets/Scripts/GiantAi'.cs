@@ -15,6 +15,7 @@ public class GiantAI : MonoBehaviour, IDamage
     [SerializeField] Collider weaponCol;
     [SerializeField] GameObject itemToDrop;
 
+
     [SerializeField][Range(1,100)] int HP;
     [SerializeField][Range(1,50)] int faceTargetSpeed;
     [SerializeField][Range(1,80)] int FOV;
