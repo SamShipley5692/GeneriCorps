@@ -973,10 +973,10 @@ MonoBehaviour:
   shootPOS: {fileID: 4810338440233526110}
   arrow: {fileID: 4735708736016794982, guid: cf79d11962c2cbd4098ef96ea69bb23d, type: 3}
   itemToDrop: {fileID: 4905224105322391774, guid: 06cf3c4f08d55674baec259928bdd00c, type: 3}
-  HP: 2
+  HP: 5
   animTransSpeed: 12
   faceTargetSpeed: 8
-  FOV: 60
+  FOV: 90
   roamDist: 5
   roamPause: 3
   shootRate: 1
@@ -1089,7 +1089,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 35
+  m_Radius: 40
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &8395884275098148516
 BoxCollider:

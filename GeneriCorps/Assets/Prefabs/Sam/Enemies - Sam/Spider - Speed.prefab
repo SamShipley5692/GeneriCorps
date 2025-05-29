@@ -281,7 +281,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   rb: {fileID: 0}
-  damageAmount: 5
+  damageAmount: 2
   damageRate: 0
   speed: 0
   destroyTime: 0
@@ -698,9 +698,9 @@ MonoBehaviour:
   agent: {fileID: 3461423100503890448}
   anim: {fileID: 4087787594720176451}
   headPOS: {fileID: 7720642605784775686}
-  itemToDrop: {fileID: 6669507856320324066, guid: 0d3cc3e39248b4c409b0b8b7693e02c0, type: 3}
+  itemToDrop: {fileID: 4905224105322391774, guid: 06cf3c4f08d55674baec259928bdd00c, type: 3}
   weaponCol: {fileID: 4489238090939067194}
-  HP: 2
+  HP: 3
   animTransSpeed: 12
   faceTargetSpeed: 8
   FOV: 60

@@ -48,7 +48,7 @@ public class GiantAI : MonoBehaviour, IDamage
     void Start()
     {
         anim = GetComponent<Animator>();
-        gameManager.instance.updateGameGoal(1);
+        //gameManager.instance.updateGameGoal(1);
         startingPos = transform.position;
         stoppingDistOrig = agent.stoppingDistance;
         goalCountOrig = gameManager.instance.getGameGoalCount();
@@ -189,7 +189,8 @@ public class GiantAI : MonoBehaviour, IDamage
     {
         if(gameManager.instance.getGameGoalCount() <= (goalCountOrig - miniKillCount))
         {
-            Instantiate(itemToDrop, new Vector3(transform.position.x, transform.position.y + 4, transform.position.z), Quaternion.identity);
+            if (itemToDrop)
+                Instantiate(itemToDrop, new Vector3(transform.position.x, transform.position.y + 4, transform.position.z), Quaternion.identity);
         }
     }
 

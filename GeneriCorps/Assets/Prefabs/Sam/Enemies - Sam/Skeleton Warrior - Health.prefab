@@ -256,7 +256,7 @@ MonoBehaviour:
   headPos: {fileID: 6139802943077427669}
   weaponCol: {fileID: 8135603278865050154}
   itemToDrop: {fileID: 4905224105322391774, guid: 06cf3c4f08d55674baec259928bdd00c, type: 3}
-  HP: 5
+  HP: 10
   faceTargetSpeed: 8
   FOV: 60
   roamDist: 15
@@ -264,7 +264,6 @@ MonoBehaviour:
   animTransSpeed: 12
   attackRate: 1.5
   enemyDestroyTime: 2
-  minKillCount: 0
 --- !u!95 &6561218963953672023
 Animator:
   serializedVersion: 7
