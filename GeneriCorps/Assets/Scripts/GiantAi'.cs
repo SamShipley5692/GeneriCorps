@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 public class GiantAI : MonoBehaviour, IDamage
 {
@@ -12,23 +13,32 @@ public class GiantAI : MonoBehaviour, IDamage
     [SerializeField] Animator anim;
     [SerializeField] Transform headPos;
     [SerializeField] Collider weaponCol;
+    [SerializeField] GameObject itemToDrop;
 
-    [SerializeField] int HP;
-    [SerializeField] int faceTargetSpeed;
-    [SerializeField] int FOV;
-    [SerializeField] int roamDist;
-    [SerializeField] int roamPauseTime;
-    [SerializeField] int animTransSpeed;
-    [SerializeField] float attackRate;
+    [SerializeField][Range(1,100)] int HP;
+    [SerializeField][Range(1,50)] int faceTargetSpeed;
+    [SerializeField][Range(1,80)] int FOV;
+    [SerializeField][Range(1,15)] int roamDist;
+    [SerializeField][Range(1,5)] int roamPauseTime;
+    [SerializeField][Range(1,30)] int animTransSpeed;
+    [SerializeField][Range(0.1f,2)] float attackRate;
+    [SerializeField][Range(0.1f, 5)] int enemyDestoryTime;
+    int miniKillCount;
+   
 
     Vector3 playerDir;
     Vector3 startingPos;
+
+    Color colorOrig;
 
 
     float attackTimer;
     float angleToPlayer;
     float roamTimer;
     float stoppingDistOrig;
+    float dropTimer;
+
+    int goalCountOrig;
 
     bool playerInRange;
 
@@ -40,6 +50,7 @@ public class GiantAI : MonoBehaviour, IDamage
         gameManager.instance.updateGameGoal(1);
         startingPos = transform.position;
         stoppingDistOrig = agent.stoppingDistance;
+        goalCountOrig = gameManager.instance.getGameGoalCount();
     }
 
     // Update is called once per frame
@@ -173,7 +184,13 @@ public class GiantAI : MonoBehaviour, IDamage
             weaponCol.enabled = false;
     }
 
-
+    private void OnDestroy()
+    {
+        if(gameManager.instance.getGameGoalCount() <= (goalCountOrig - miniKillCount))
+        {
+            Instantiate(itemToDrop, new Vector3(transform.position.x, transform.position.y + 4, transform.position.z), Quaternion.identity);
+        }
+    }
 
 
 
