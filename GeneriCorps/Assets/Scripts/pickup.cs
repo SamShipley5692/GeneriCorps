@@ -1,11 +1,12 @@
 using UnityEngine;
-
+using Holistic3D.Inventory;
 public class pickup : MonoBehaviour
 {
     [SerializeField] weaponStats weapon;
     [SerializeField] healthItems itemPickup; // added this
     [SerializeField] speedItems speedPickup; // Cade
     [SerializeField] jumpItems jumpPickup; // Cade
+
     private void OnTriggerEnter(Collider other)
     {
         IPickup pickupReceiver = other.GetComponent<IPickup>();
@@ -17,6 +18,7 @@ public class pickup : MonoBehaviour
         //}
 
         // added this below and commented out above - Sam
+        
 
         if (pickupReceiver != null)
         {

@@ -21,3 +21,6 @@ MonoBehaviour:
   hitEffect: {fileID: 0}
   shootSound: []
   shootSoundVol: 0.5
+  itemType: 0
+  isStackable: 0
+  maxStackSize: 1

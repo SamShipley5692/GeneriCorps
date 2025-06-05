@@ -22,3 +22,6 @@ MonoBehaviour:
   shootSound:
   - {fileID: 8300000, guid: b7f8695cf65a4f24eb37544298821146, type: 3}
   shootSoundVol: 0.5
+  itemType: 0
+  isStackable: 0
+  maxStackSize: 1

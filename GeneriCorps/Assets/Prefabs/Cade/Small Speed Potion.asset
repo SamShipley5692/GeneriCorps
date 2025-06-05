@@ -17,3 +17,6 @@ MonoBehaviour:
   pickupSound: []
   pickupSoundVol: 0
   buffDuration: 10
+  itemType: 1
+  isStackable: 1
+  maxStackSize: 5

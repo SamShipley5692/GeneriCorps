@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-
+using Holistic3D.Inventory;
 public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
 {
     [SerializeField] CharacterController controller;
