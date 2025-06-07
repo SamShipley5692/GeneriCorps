@@ -111,7 +111,7 @@ public class skeletonEnemy : MonoBehaviour, IDamage
         RaycastHit hit;
         if (Physics.Raycast(headPos.position, playerDir, out hit))
         {
-            if (angleToPlayer <= FOV && hit.collider.CompareTag("Player"))
+            if (angleToPlayer <= FOV && hit.collider.CompareTag("Player") && HP > 0)
             {
                 agent.SetDestination(gameManager.instance.player.transform.position);
 

@@ -120,6 +120,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6006302518709592859}
   - component: {fileID: 996291585746901860}
+  - component: {fileID: 5781111141251098943}
   - component: {fileID: 3105657134156700726}
   - component: {fileID: 1340948429784827122}
   - component: {fileID: 7249214319221793354}
@@ -200,6 +201,19 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ba27b57e6eff6f2478ce3a6b91bd961b, type: 3}
   audStepVol: 0.1
   weaponInv: []
+--- !u!114 &5781111141251098943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2452439792792328178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40b5b7f9a5e14ca4ab8c08cbdc475409, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventorySystem: {fileID: 0}
 --- !u!33 &3105657134156700726
 MeshFilter:
   m_ObjectHideFlags: 0
