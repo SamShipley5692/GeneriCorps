@@ -5,72 +5,72 @@ namespace Holistic3D.Inventory
     [System.Serializable]
     public class inventorySlot
     {
-        public speedItems speedItems;
-        public weaponStats weaponStats;
-        public jumpItems jumpItems;
-        public healthItems healthItems;
+        public speedItems _speedItems;
+        public weaponStats _weaponStats;
+        public jumpItems _jumpItems;
+        public healthItems _healthItems;
         
         public int quantity;
         
 
         public inventorySlot(weaponStats weapon, int q)
         {
-            weaponStats = weapon;
+            _weaponStats = weapon;
             quantity = q;
         }
 
         public inventorySlot(healthItems pickup, int q)
         {
-            healthItems = pickup;
+            _healthItems = pickup;
             quantity = q;
         }
 
         public inventorySlot(speedItems pickup, int q)
         {
-            speedItems = pickup;
+            _speedItems = pickup;
             quantity = q;
         }
 
         public inventorySlot(jumpItems pickup, int q)
         {
-           jumpItems = pickup;
+           _jumpItems = pickup;
             quantity = q;
         }
         public bool IsEmpty()
         {
-            return speedItems == null && weaponStats == null && jumpItems == null && healthItems == null || quantity <= 0;
+            return _speedItems == null && _weaponStats == null && _jumpItems == null && _healthItems == null || quantity <= 0;
         }
 
         public void ClearSlot()
         {
-            speedItems = null;
-            weaponStats = null;
-            jumpItems = null;
-            healthItems = null;
+            _speedItems = null;
+            _weaponStats = null;
+            _jumpItems = null;
+            _healthItems = null;
             quantity = 0;
         }
 
         public void SetItem(speedItems newItem, int newQuantity)
         {
-            speedItems = newItem;
+            _speedItems = newItem;
             quantity = newQuantity;
         }
 
         public void SetItem(weaponStats newItem, int newQuantity)
         {
-            weaponStats = newItem;
+            _weaponStats = newItem;
             quantity = newQuantity;
         }
 
         public void SetItem(jumpItems newItem, int newQuantity)
         {
-            jumpItems = newItem;
+            _jumpItems = newItem;
             quantity= newQuantity;
         }
 
         public void SetItem(healthItems newItem, int newQuantity)
         {
-            healthItems = newItem;
+            _healthItems = newItem;
             quantity = newQuantity;
         }
     }
