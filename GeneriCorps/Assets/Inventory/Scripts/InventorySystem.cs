@@ -171,6 +171,82 @@ namespace Holistic3D.Inventory
             return remainingItems;
         }
 
+        public void RemoveItem(weaponStats weapon, int quantity)
+        {
+            inventorySlot slot = slots.Find(s  => s._weaponStats == weapon);
+            if (slot != null)
+            {
+                if(slot.quantity >= quantity)
+                {
+                    slot.quantity -= quantity;
+
+                    if(slot.quantity <= 0)
+                    {
+                        slot.ClearSlot();
+                        slots.Remove(slot);
+                    }
+                }
+            }
+        }
+
+        public void RemoveItem(jumpItems pickup, int quantity)
+        {
+            inventorySlot slot = slots.Find(s => s._jumpItems == pickup);
+            if (slot != null)
+            {
+                if (slot.quantity >= quantity)
+                {
+                    slot.quantity -= quantity;
+
+                    if (slot.quantity <= 0)
+                    {
+                        slot.ClearSlot();
+                        slots.Remove(slot);
+                    }
+                }
+            }
+        }
+
+        public void RemoveItem(speedItems pickup, int quantity)
+        {
+            inventorySlot slot = slots.Find(s => s._speedItems == pickup);
+            if (slot != null)
+            {
+                if (slot.quantity >= quantity)
+                {
+                    slot.quantity -= quantity;
+
+                    if (slot.quantity <= 0)
+                    {
+                        slot.ClearSlot();
+                        slots.Remove(slot);
+                    }
+                }
+            }
+        }
+
+        public void RemoveItem(healthItems pickup, int quantity)
+        {
+            inventorySlot slot = slots.Find(s => s._healthItems == pickup);
+            if (slot != null)
+            {
+                if (slot.quantity >= quantity)
+                {
+                    slot.quantity -= quantity;
+
+                    if (slot.quantity <= 0)
+                    {
+                        slot.ClearSlot();
+                        slots.Remove(slot);
+                    }
+                }
+            }
+        }
+
+        public void RemoveItemsFromSlot(int slotNumber)
+        {
+            slots.RemoveAt(slotNumber);
+        }
 
         public bool IsFull()
         {

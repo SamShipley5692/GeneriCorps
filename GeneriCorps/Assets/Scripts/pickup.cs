@@ -27,7 +27,7 @@ public class pickup : MonoBehaviour
             if (weapon != null)
             {
                 pickupReceiver.getWeaponStats(weapon);
-                playerInventorySystem playerInventory = other.GetComponent<playerInventorySystem>();
+                playerInventorySystem playerInventory = other.GetComponent<playerInventorySystem>();//Tenia
                 if (playerInventory != null)
                 {
                     quantity = playerInventory.PickupItem(weapon, quantity);
@@ -42,7 +42,7 @@ public class pickup : MonoBehaviour
             if (itemPickup != null)
             {
                 pickupReceiver.getHealthItemStats(itemPickup);
-                playerInventorySystem playerInventory = other.GetComponent<playerInventorySystem>();
+                playerInventorySystem playerInventory = other.GetComponent<playerInventorySystem>();//Tenia
                 if (playerInventory != null)
                 {
                     quantity = playerInventory.PickupItem(itemPickup, quantity);
@@ -57,7 +57,7 @@ public class pickup : MonoBehaviour
             if (speedPickup != null)
             {
                 pickupReceiver.getSpeedItemStats(speedPickup); // Cade
-                playerInventorySystem playerInventory = other.GetComponent<playerInventorySystem>();
+                playerInventorySystem playerInventory = other.GetComponent<playerInventorySystem>();//Tenia
                 if (playerInventory != null)
                 {
                     quantity = playerInventory.PickupItem(speedPickup, quantity);
@@ -72,7 +72,7 @@ public class pickup : MonoBehaviour
             if (jumpPickup != null)
             {
                 pickupReceiver.getJumpItemStats(jumpPickup); // Cade
-                playerInventorySystem playerInventory = other.GetComponent<playerInventorySystem>();
+                playerInventorySystem playerInventory = other.GetComponent<playerInventorySystem>(); //Tenia
                 if (playerInventory != null)
                 {
                     quantity = playerInventory.PickupItem(jumpPickup, quantity);
