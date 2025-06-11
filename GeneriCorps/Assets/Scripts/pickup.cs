@@ -6,6 +6,7 @@ public class pickup : MonoBehaviour
     [SerializeField] healthItems itemPickup; // added this
     [SerializeField] speedItems speedPickup; // Cade
     [SerializeField] jumpItems jumpPickup; // Cade
+    [SerializeField] InvincibleItems invinciblePickup;
 
     public int quantity = 1; //Tenia
 
@@ -84,6 +85,21 @@ public class pickup : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-        
+
+        if (invinciblePickup != null)
+        {
+            pickupReceiver.getInvincibleStats(invinciblePickup);
+            playerInventorySystem playerInventory = other.GetComponent<playerInventorySystem>();
+            if (playerInventory != null)
+            {
+                quantity = playerInventory.PickupItem(jumpPickup, quantity);
+                if (quantity <= 0)
+                {
+                    Destroy(gameObject);
+                }
+            }
+            Destroy(gameObject);
+        }
+
     }
 }

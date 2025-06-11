@@ -396,10 +396,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 31611156}
-  serializedVersion: 5
+  serializedVersion: 4
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_Drag: 0
+  m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -1375,10 +1375,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 70566421}
-  serializedVersion: 5
+  serializedVersion: 4
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_Drag: 0
+  m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -5770,10 +5770,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 258063527}
-  serializedVersion: 5
+  serializedVersion: 4
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_Drag: 0
+  m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -6813,10 +6813,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 331280398}
-  serializedVersion: 5
+  serializedVersion: 4
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_Drag: 0
+  m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -7842,10 +7842,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 385697245}
-  serializedVersion: 5
+  serializedVersion: 4
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_Drag: 0
+  m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -9286,10 +9286,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 445095482}
-  serializedVersion: 5
+  serializedVersion: 4
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_Drag: 0
+  m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -10238,10 +10238,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 488161587}
-  serializedVersion: 5
+  serializedVersion: 4
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_Drag: 0
+  m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -10615,10 +10615,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 510409974}
-  serializedVersion: 5
+  serializedVersion: 4
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_Drag: 0
+  m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -11157,10 +11157,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 531658002}
-  serializedVersion: 5
+  serializedVersion: 4
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_Drag: 0
+  m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -11347,10 +11347,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534989348}
-  serializedVersion: 5
+  serializedVersion: 4
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_Drag: 0
+  m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -21115,10 +21115,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 765222849}
-  serializedVersion: 5
+  serializedVersion: 4
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_Drag: 0
+  m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -24138,10 +24138,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 924607640}
-  serializedVersion: 5
+  serializedVersion: 4
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_Drag: 0
+  m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -26230,10 +26230,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1001128523}
-  serializedVersion: 5
+  serializedVersion: 4
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_Drag: 0
+  m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -31336,10 +31336,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1227332988}
-  serializedVersion: 5
+  serializedVersion: 4
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_Drag: 0
+  m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -41586,10 +41586,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1544561765}
-  serializedVersion: 5
+  serializedVersion: 4
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_Drag: 0
+  m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -44819,10 +44819,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1706620852}
-  serializedVersion: 5
+  serializedVersion: 4
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_Drag: 0
+  m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -50758,10 +50758,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1779034067}
-  serializedVersion: 5
+  serializedVersion: 4
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_Drag: 0
+  m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -52995,10 +52995,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1934544062}
-  serializedVersion: 5
+  serializedVersion: 4
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_Drag: 0
+  m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -59914,10 +59914,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2023663671}
-  serializedVersion: 5
+  serializedVersion: 4
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_Drag: 0
+  m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -61976,10 +61976,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2123780522}
-  serializedVersion: 5
+  serializedVersion: 4
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_Drag: 0
+  m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}

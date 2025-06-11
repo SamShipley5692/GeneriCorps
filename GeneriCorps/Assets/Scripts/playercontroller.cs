@@ -279,4 +279,19 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
                 Debug.Log("Character has died.");
             }
         }
+
+    public void getInvincibleStats(InvincibleItems item)
+    {
+        StartCoroutine(applyInvincibilityBuff(item.buffDuration));
     }
+
+    private IEnumerator applyInvincibilityBuff(float duration)
+    {
+        controller.detectCollisions = false;
+
+        yield return new WaitForSeconds(duration);
+
+        controller.detectCollisions = true;
+    }
+
+}

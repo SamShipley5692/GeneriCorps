@@ -9,4 +9,6 @@ public interface IPickup
     public void getSpeedItemStats(speedItems item); // added - Cade
 
     public void getJumpItemStats(jumpItems item); // Cade
+
+    public void getInvincibleStats(InvincibleItems item); // Cade 
 }
