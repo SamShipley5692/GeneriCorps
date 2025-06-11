@@ -764,6 +764,7 @@ GameObject:
   - component: {fileID: 6879471640829385187}
   - component: {fileID: 5336990808879304568}
   - component: {fileID: 3278464645530315572}
+  - component: {fileID: 1021855137204991303}
   m_Layer: 0
   m_Name: Spider
   m_TagString: Untagged
@@ -808,17 +809,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Model: {fileID: 9137125139629228676}
   agent: {fileID: 6879471640829385187}
-  anim: {fileID: 0}
+  anim: {fileID: 1021855137204991303}
   headPOS: {fileID: 6840207391929893590}
   leftLeg: {fileID: 1529890244243193381}
   rightLeg: {fileID: 7662432389015924089}
   HP: 3
-  animTransSpeed: 1
+  animTransSpeed: 5
   faceTargetSpeed: 8
-  FOV: 1
+  FOV: 60
   roamDist: 10
   roamPause: 1
-  attackRate: 0.1
+  attackRate: 0.5
+  enemyDestroyTime: 2
 --- !u!195 &6879471640829385187
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -885,6 +887,28 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 15
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &1021855137204991303
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1762292635160931874}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: c702044e8b7b7de4d96c5af2d585d4d4, type: 3}
+  m_Controller: {fileID: 9100000, guid: 63902f4f56eac6046b2b7512b88004ca, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1795402369867214376
 GameObject:
   m_ObjectHideFlags: 0
@@ -3004,8 +3028,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6721267465337055485}
+  - component: {fileID: 7608563142559013823}
   - component: {fileID: 7662432389015924089}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R.LegCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3027,6 +3052,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8334888371422555539}
   m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
+--- !u!114 &7608563142559013823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6428214494895479424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c015c0c7798f4e46b8dda634f6e7587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
+  rb: {fileID: 0}
+  damageAmount: 2
+  damageRate: 0
+  speed: 0
+  destroyTime: 0
 --- !u!65 &7662432389015924089
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3042,7 +3085,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -3323,8 +3366,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4871758198693834759}
+  - component: {fileID: 441822266852451042}
   - component: {fileID: 1529890244243193381}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L.LegCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3346,6 +3390,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7824786162396739778}
   m_LocalEulerAnglesHint: {x: 15, y: 0, z: 0}
+--- !u!114 &441822266852451042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7370826085301084971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c015c0c7798f4e46b8dda634f6e7587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
+  rb: {fileID: 0}
+  damageAmount: 2
+  damageRate: 0
+  speed: 0
+  destroyTime: 0
 --- !u!65 &1529890244243193381
 BoxCollider:
   m_ObjectHideFlags: 0

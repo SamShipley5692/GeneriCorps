@@ -2,11 +2,12 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-
+using Holistic3D.Inventory;
 public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
 {
     [SerializeField] CharacterController controller;
     [SerializeField] LayerMask ignoreLayer;
+    [SerializeField] AudioSource aud;
 
     // World 
     [SerializeField] int gravity;
@@ -15,9 +16,12 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
     Vector3 moveDir;
     Vector3 playerVel;
 
+    bool isPlayingStep;
     bool isSprinting;
     int jumpCount;
     int HPOrig;
+    int jumpForceOrig;
+    int speedOrig;
 
     [SerializeField] int hp;
     [SerializeField] int speed;
@@ -32,6 +36,15 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
     [SerializeField] float shootRate;
     [SerializeField] int shootDist;
 
+    //Audio
+    [SerializeField] AudioClip[] audJump;
+    [Range(0, 1)][SerializeField] float audJumpVol;
+    [SerializeField] AudioClip[] audHurt;
+    [Range(0,1)] [SerializeField] float audHurtVol;
+    [SerializeField] AudioClip[]  audSteps;
+    [Range(0, 1)][SerializeField] float audStepVol;
+
+
     float shootTimer;
 
     int weaponInvPos;
@@ -40,6 +53,8 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        jumpForceOrig = jumpForce;
+        speedOrig = speed;
         HPOrig = hp;
         updatePlayerUI();
     }
@@ -61,6 +76,9 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
 
         if (controller.isGrounded)
         {
+            if(moveDir.normalized.magnitude > 0.3f && !isPlayingStep)
+                StartCoroutine(PlayStep());
+            
             jumpCount = 0;
             playerVel = Vector3.zero;
         }
@@ -77,12 +95,26 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
         
         playerVel.y -= gravity * Time.deltaTime;
 
-        if (Input.GetButtonDown("Fire1") && shootTimer > shootRate)
+        if (Input.GetButtonDown("Fire1") && weaponInv.Count > 0 && shootTimer > shootRate)
         {
             Shoot();
         }
 
         selectWeapon();
+    }
+    IEnumerator PlayStep()
+    {
+        isPlayingStep = true;
+        aud.PlayOneShot(audSteps[Random.Range(0, audSteps.Length)], audStepVol);
+        if (isSprinting)
+        {
+            yield return new WaitForSeconds(0.3f);
+        }
+        else
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+        isPlayingStep = false;
     }
 
     void sprint()
@@ -105,6 +137,7 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
         {
             jumpCount++;
             playerVel.y = jumpForce;
+            aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
         }
     }
 
@@ -112,10 +145,13 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
     {
         shootTimer = 0;
 
+        aud.PlayOneShot(weaponInv[weaponInvPos].shootSound[Random.Range(0, weaponInv[weaponInvPos].shootSound.Length)], weaponInv[weaponInvPos].shootSoundVol);
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer))
         {
-            Debug.Log(hit.transform.name);
+            //Debug.Log(hit.transform.name);
+
+            Instantiate(weaponInv[weaponInvPos].hitEffect, hit.point, Quaternion.identity);
 
             IDamage dmg = hit.collider.GetComponent<IDamage>();
 
@@ -128,6 +164,7 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
 
     public void takeDamage(int amount) 
     {
+        aud.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVol);
         hp -= amount;
         updatePlayerUI();
         StartCoroutine(flashDamageScreen());
@@ -181,4 +218,54 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = weaponInv[weaponInvPos].model.GetComponent<MeshRenderer>().sharedMaterial;
     }
 
-}
+    public void getHealthItemStats(healthItems item) // added this method - Sam
+    {
+        int health = item.healthAmount;
+        hp += health;
+        if (hp > HPOrig)
+        {
+            hp = HPOrig;
+        }
+        updatePlayerUI();
+    }
+
+    public void getSpeedItemStats(speedItems item) // Cade 
+    {
+       StartCoroutine(applySpeedBuff(item.speedAmount, item.buffDuration));
+
+        
+    }
+
+    private IEnumerator applySpeedBuff(int bonus, float duration) // Cade
+    {
+        speed += bonus;
+        yield return new WaitForSeconds(duration);
+        speed = speedOrig;
+    }
+
+    public void getJumpItemStats(jumpItems item) // Cade
+    {
+       StartCoroutine(applyJumpBuff(item.jumpForceAmount, item.buffDuration));
+
+    }
+
+    private IEnumerator applyJumpBuff(int bonus, float duration) // Cade
+    {
+        jumpForce += bonus;
+        yield return new WaitForSeconds(duration);
+        jumpForce = jumpForceOrig;
+    }
+
+        // updated for status effect poison
+        public int health = 100;
+
+        public void TakeDamage(int amount)
+        {
+            health -= amount;
+            if (health <= 0)
+            {
+                
+                Debug.Log("Character has died.");
+            }
+        }
+    }

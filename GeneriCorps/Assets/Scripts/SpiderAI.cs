@@ -1,9 +1,7 @@
-using System.Collections;
-using Unity.VisualScripting;
-using System.Xml.Serialization;
 using UnityEngine;
+using System.Collections;
 using UnityEngine.AI;
-using UnityEngine.Android;
+
 
 
 
@@ -11,12 +9,11 @@ public class SpiderAI : MonoBehaviour, IDamage
 {
     [SerializeField] Renderer Model;
     [SerializeField] NavMeshAgent agent;
-    [SerializeField] Animation anim;
+    [SerializeField] Animator anim;
     [SerializeField] Transform headPOS;
+    [SerializeField] GameObject itemToDrop;
 
-
-    [SerializeField] Collider leftLeg;
-    [SerializeField] Collider rightLeg;
+    [SerializeField] Collider weaponCol;
 
     [SerializeField][Range(1, 50)] int HP;
     [SerializeField][Range(1, 30)]int animTransSpeed;
@@ -26,6 +23,7 @@ public class SpiderAI : MonoBehaviour, IDamage
     [SerializeField][Range(1, 20)] float roamDist;
     [SerializeField][Range(1,5)] float roamPause;
     [SerializeField][Range(0.1f, 2)] float attackRate;
+    [SerializeField][Range(0.1f, 5)] int enemyDestroyTime;
 
     Color colorOrig;
    
@@ -36,6 +34,7 @@ public class SpiderAI : MonoBehaviour, IDamage
     float roamTimer;
     float stoppingDistOrig;
     float angleToPlayer;
+    float dropTimer;
 
     bool playerInRange;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -43,19 +42,19 @@ public class SpiderAI : MonoBehaviour, IDamage
     {
         colorOrig = Model.material.color;
         //COMMENTED CODE GIVING ERRORS 
-        //anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
         startingPOS = transform.position;
         stoppingDistOrig = agent.stoppingDistance;
 
-        if (leftLeg != null) leftLeg.enabled = false;
-        if (rightLeg != null) rightLeg.enabled = false;
+        if (weaponCol != null) weaponCol.enabled = false;
+      
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        //setAnimPara();
+        setAnimPara();
 
         attackTimer += Time.deltaTime;
         if (playerInRange && CanSeePlayer())
@@ -77,14 +76,14 @@ public class SpiderAI : MonoBehaviour, IDamage
         }
     }
 
-    //void setAnimPara()
-    //{
-        //float agentSpeedCurr = agent.velocity.normalized.magnitude;
+    void setAnimPara()
+    {
+        float agentSpeedCurr = agent.velocity.normalized.magnitude;
         //COMMENTED CODE GIVING ERRORS
-        //float animSpeedCurr = anim.GetFloat("Speed");
+        float animSpeedCurr = anim.GetFloat("speed");
         //INCOMPLETE CODE, DID NOT WORK WHEN COMPLETED
-        //anim.SetFloat()
-    //}
+        anim.SetFloat("speed", Mathf.Lerp(animSpeedCurr, agentSpeedCurr, Time.deltaTime * animTransSpeed));
+    }
 
     private void DoRoam()
     {
@@ -122,28 +121,28 @@ public class SpiderAI : MonoBehaviour, IDamage
 
     private void DoAttack()
     {
-       attackTimer = 0f;
 
-       // ATTACK ANIMATIONS GO HERE
+        anim.SetTrigger("attack");
+        attackTimer = 0f;
 
-        EnableLegs();
 
-       // TURN THEM OFF AFTER
 
-       Invoke(nameof(DisableLegs), 0.5f);
+        weaponColOn();
+
+       Invoke(nameof(weaponColOff), 0.5f);
 
     }
 
-    private void EnableLegs()
+    private void weaponColOn()
     {
-        if (leftLeg != null) leftLeg.enabled = true;
-        if (rightLeg != null) rightLeg.enabled = false;
+        if (weaponCol != null) weaponCol.enabled = true;
+      
     }
 
-    private void DisableLegs()
+    private void weaponColOff()
     {
-        if (leftLeg != null) leftLeg.enabled = false;
-        if (rightLeg != null) rightLeg.enabled = false;
+        if (weaponCol != null) weaponCol.enabled = false;
+       
     }
 
     private void FaceTarget()
@@ -174,9 +173,33 @@ public class SpiderAI : MonoBehaviour, IDamage
     public void takeDamage(int amount)
     {
         HP -= amount;
+        agent.SetDestination(gameManager.instance.player.transform.position);
+        StartCoroutine(flashRed());
         if (HP <= 0)
         {
-            Destroy(gameObject);
+            dropTimer += Time.deltaTime;
+            gameManager.instance.updateGameGoal(-1);
+            anim.SetTrigger("die");
+            Destroy(gameObject, enemyDestroyTime);
+            if (dropTimer > enemyDestroyTime)
+                OnDestroy();
         }
+        else 
+        {
+            anim.SetTrigger("damage");
+        }
+    }
+
+    IEnumerator flashRed()
+    {
+        Model.material.color = Color.red;
+        yield return null;
+        Model.material.color = colorOrig;
+    }
+
+    private void OnDestroy()
+    {
+        if (itemToDrop)
+            Instantiate(itemToDrop, new Vector3(transform.position.x, transform.position.y + 4, transform.position.z), Quaternion.identity);
     }
 }

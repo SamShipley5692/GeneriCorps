@@ -16,6 +16,7 @@ public class gameManager : MonoBehaviour
     public GameObject textPopUp;
     public TMP_Text textPopUpDescription;
     public Image playerHPBar;
+    public Image enemyHPBar;
     public GameObject playerDamageScreen;
     public GameObject player;
     public playercontroller playerScript;
@@ -93,5 +94,10 @@ public class gameManager : MonoBehaviour
             menuActive = menuWin;
             menuActive.SetActive(true);
         }
+    }
+
+    public int getGameGoalCount()
+    {
+        return gameGoalCount;
     }
 }

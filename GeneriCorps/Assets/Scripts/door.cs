@@ -20,6 +20,7 @@ public class door : MonoBehaviour
             if (Input.GetButtonDown("Interact"))
             {
                 doorModel.SetActive(false);
+                button.SetActive(false); // added this line
             }
         }
     }
