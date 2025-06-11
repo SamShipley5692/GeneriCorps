@@ -67,5 +67,27 @@ namespace Holistic3D.Inventory
         {
             inventorySystem.RemoveItem(weapon, quantity);
         }
+
+        //public void DropItem(jumpItems pickup, int quantity)
+        //{
+           // inventorySystem.RemoveItem(pickup, quantity);
+        //}
+
+       // public void DropItem(speedItems pickup, int quantity)
+        //{
+            //inventorySystem.RemoveItem(pickup, quantity);
+        //}
+
+        //public void DropItem(healthItems pickup, int quantity)
+        //{
+        //    inventorySystem.RemoveItem(pickup, quantity);
+        //}
+
+        //private Vector3 GetDropPosition()
+        //{
+        //    Vector3 playerPosition = transform.position;
+          //  Vector3 forwardDirection = transform.forward;
+          //  float dropDistance = 2f;
+       // }
     }
 }
