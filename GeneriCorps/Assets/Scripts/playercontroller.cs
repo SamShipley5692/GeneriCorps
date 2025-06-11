@@ -15,6 +15,8 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
     // Player
     Vector3 moveDir;
     Vector3 playerVel;
+    private Rigidbody2D rb;
+    public float jump;
 
     bool isPlayingStep;
     bool isSprinting;
@@ -57,6 +59,7 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
         speedOrig = speed;
         HPOrig = hp;
         updatePlayerUI();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -68,6 +71,12 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
             movement();
 
         sprint();
+
+        if (Input.GetButtonDown("Jump"))
+        {
+
+            //rb.AddForce(new Vector2(rb.Velocity.x, jump))
+        }
     }
 
     void movement()
