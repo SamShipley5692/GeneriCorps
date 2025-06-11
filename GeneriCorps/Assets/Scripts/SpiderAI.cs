@@ -200,6 +200,6 @@ public class SpiderAI : MonoBehaviour, IDamage
     private void OnDestroy()
     {
         if (itemToDrop)
-            Instantiate(itemToDrop, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+            Instantiate(itemToDrop, new Vector3(transform.position.x, transform.position.y + 4, transform.position.z), Quaternion.identity);
     }
 }

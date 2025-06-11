@@ -648,7 +648,6 @@ MonoBehaviour:
   animTransSpeed: 12
   shootRate: 1
   enemyDestroyTime: 2
-  minKillCount: 1
 --- !u!95 &6954113118197165746
 Animator:
   serializedVersion: 7
@@ -658,7 +657,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 868069985745668083}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 0c18218feab30a94397c5230415876c3, type: 3}
+  m_Avatar: {fileID: 9000000, guid: d14f14fbc63fe2246ae98d672fc0ba5a, type: 2}
   m_Controller: {fileID: 9100000, guid: fa508a8eca4b34643ab2a230a73b6cbe, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0

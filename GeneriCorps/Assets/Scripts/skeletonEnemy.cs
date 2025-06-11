@@ -1,8 +1,7 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UIElements;
+
 
 public class skeletonEnemy : MonoBehaviour, IDamage
 {
@@ -112,7 +111,7 @@ public class skeletonEnemy : MonoBehaviour, IDamage
         RaycastHit hit;
         if (Physics.Raycast(headPos.position, playerDir, out hit))
         {
-            if (angleToPlayer <= FOV && hit.collider.CompareTag("Player"))
+            if (angleToPlayer <= FOV && hit.collider.CompareTag("Player") && HP > 0)
             {
                 agent.SetDestination(gameManager.instance.player.transform.position);
 
@@ -158,8 +157,6 @@ public class skeletonEnemy : MonoBehaviour, IDamage
 
         agent.SetDestination(gameManager.instance.player.transform.position);
 
-        StartCoroutine(flashRed());
-
         if (HP <= 0)
         {
             dropTimer += Time.deltaTime;
@@ -175,6 +172,7 @@ public class skeletonEnemy : MonoBehaviour, IDamage
         }
         else
         {
+            StartCoroutine(flashRed());
             anim.SetTrigger("damage");
         }
     }
@@ -217,7 +215,7 @@ public class skeletonEnemy : MonoBehaviour, IDamage
         //if (gameManager.instance.getGameGoalCount() <= (goalCountOrig - minKillCount))
         //{
         if (itemToDrop)
-            Instantiate(itemToDrop, new Vector3(transform.position.x, transform.position.y + 4, transform.position.z), Quaternion.identity);
+            Instantiate(itemToDrop, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), Quaternion.identity);
         //}
     }
 

@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using Holistic3D.Inventory;
 public interface IPickup
 {
     public void getWeaponStats(weaponStats weapon);
