@@ -17,6 +17,8 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
     Vector3 playerVel;
     private Rigidbody2D rb;
     public float jump;
+    public float Speed = 10;
+    private float moveInput;
 
     bool isPlayingStep;
     bool isSprinting;
@@ -75,7 +77,7 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
         if (Input.GetButtonDown("Jump"))
         {
 
-            //rb.AddForce(new Vector2(rb.Velocity.x, jump))
+            //rb.AddForce(new Vector2(rb.Velocity.x, jump));
         }
     }
 
