@@ -255,4 +255,17 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
         yield return new WaitForSeconds(duration);
         jumpForce = jumpForceOrig;
     }
-}
+
+        // updated for status effect poison
+        public int health = 100;
+
+        public void TakeDamage(int amount)
+        {
+            health -= amount;
+            if (health <= 0)
+            {
+                
+                Debug.Log("Character has died.");
+            }
+        }
+    }
