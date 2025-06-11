@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -65,29 +66,38 @@ namespace Holistic3D.Inventory
 
         public void DropItem(weaponStats weapon, int quantity)
         {
-            inventorySystem.RemoveItem(weapon, quantity);
+            int couldntBeDropped = inventorySystem.RemoveItem(weapon, quantity);
+            int numberDropped = quantity - couldntBeDropped;
+
+            if(numberDropped > 0)
+            {
+                Instantiate(weapon.model, GetDropPosition(), Quaternion.identity);
+            }
+            
         }
 
-        //public void DropItem(jumpItems pickup, int quantity)
+      //public void DropItem(jumpItems pickup, int quantity)
         //{
-           // inventorySystem.RemoveItem(pickup, quantity);
+            //inventorySystem.RemoveItem(pickup, quantity);
         //}
 
-       // public void DropItem(speedItems pickup, int quantity)
+        //public void DropItem(speedItems pickup, int quantity)
         //{
             //inventorySystem.RemoveItem(pickup, quantity);
         //}
 
         //public void DropItem(healthItems pickup, int quantity)
         //{
-        //    inventorySystem.RemoveItem(pickup, quantity);
+            //inventorySystem.RemoveItem(pickup, quantity);
         //}
 
-        //private Vector3 GetDropPosition()
-        //{
-        //    Vector3 playerPosition = transform.position;
-          //  Vector3 forwardDirection = transform.forward;
-          //  float dropDistance = 2f;
-       // }
+        private Vector3 GetDropPosition()
+        {
+            Vector3 playerPosition = transform.position;
+            Vector3 forwardDirection = transform.forward;
+            
+            float dropDistance = 4f;
+            return playerPosition + forwardDirection * dropDistance;
+        }
     }
 }
