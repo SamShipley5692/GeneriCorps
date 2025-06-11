@@ -199,6 +199,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventorySystem: {fileID: 966912204}
+  dropAction:
+    m_Name: Drop
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 69d39a79-8270-45ba-8d3e-98d7a7506907
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  weaponDrop: {fileID: 11400000, guid: 0bf04be81d654e8478dd647c1d5583f1, type: 2}
 --- !u!1 &25414587
 GameObject:
   m_ObjectHideFlags: 0

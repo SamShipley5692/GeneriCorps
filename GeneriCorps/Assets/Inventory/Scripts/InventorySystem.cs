@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 
 namespace Holistic3D.Inventory 
@@ -171,76 +172,136 @@ namespace Holistic3D.Inventory
             return remainingItems;
         }
 
-        public void RemoveItem(weaponStats weapon, int quantity)
+        public int RemoveItem(weaponStats weapon, int quantity, bool removePartial = true)
         {
-            inventorySlot slot = slots.Find(s  => s._weaponStats == weapon);
-            if (slot != null)
-            {
-                if(slot.quantity >= quantity)
-                {
-                    slot.quantity -= quantity;
+            int remainingItems = quantity;
+            List<inventorySlot> slotsWithItem = slots.Where(s => s._weaponStats == weapon).ToList();
 
-                    if(slot.quantity <= 0)
-                    {
-                        slot.ClearSlot();
-                        slots.Remove(slot);
-                    }
+            int totalAvailableItems = slotsWithItem.Sum(s => s.quantity);
+            if(remainingItems > totalAvailableItems && !removePartial)
+            {
+                return quantity;
+            }
+
+            foreach(var slot in slotsWithItem)
+            {
+                if(remainingItems <= 0)
+                {
+                    break;
+                }
+
+                if(slot.quantity < remainingItems)
+                {
+                    remainingItems -= slot.quantity;
+                    slot.ClearSlot();
+                    slots.Remove(slot);
+                }
+                else
+                {
+                    slot.quantity -= remainingItems;
+                    remainingItems = 0;
                 }
             }
+            return remainingItems;
         }
 
-        public void RemoveItem(jumpItems pickup, int quantity)
+        public int RemoveItem(jumpItems pickup, int quantity, bool removePartial)
         {
-            inventorySlot slot = slots.Find(s => s._jumpItems == pickup);
-            if (slot != null)
-            {
-                if (slot.quantity >= quantity)
-                {
-                    slot.quantity -= quantity;
+            int remainingitems = quantity;
+            List<inventorySlot> slotsWithItem = slots.Where(s => s._jumpItems == pickup).ToList();
 
-                    if (slot.quantity <= 0)
-                    {
-                        slot.ClearSlot();
-                        slots.Remove(slot);
-                    }
+            int totalAvailableItems = slotsWithItem.Sum(s => s.quantity);
+            if (remainingitems > totalAvailableItems && !removePartial)
+            {
+                return quantity;
+            }
+
+            foreach (var slot in slotsWithItem)
+            {
+                if (remainingitems <= 0)
+                {
+                    break;
+                }
+
+                if (slot.quantity < remainingitems)
+                {
+                    remainingitems -= slot.quantity;
+                    slot.ClearSlot();
+                    slots.Remove(slot);
+                }
+                else
+                {
+                    slot.quantity -= remainingitems;
+                    remainingitems = 0;
                 }
             }
+            return remainingitems;
         }
 
-        public void RemoveItem(speedItems pickup, int quantity)
+        public int RemoveItem(speedItems pickup, int quantity, bool removePartial)
         {
-            inventorySlot slot = slots.Find(s => s._speedItems == pickup);
-            if (slot != null)
-            {
-                if (slot.quantity >= quantity)
-                {
-                    slot.quantity -= quantity;
+            int remainingitems = quantity;
+            List<inventorySlot> slotsWithItem = slots.Where(s => s._speedItems == pickup).ToList();
 
-                    if (slot.quantity <= 0)
-                    {
-                        slot.ClearSlot();
-                        slots.Remove(slot);
-                    }
+            int totalAvailableItems = slotsWithItem.Sum(s => s.quantity);
+            if (remainingitems > totalAvailableItems && !removePartial)
+            {
+                return quantity;
+            }
+
+            foreach (var slot in slotsWithItem)
+            {
+                if (remainingitems <= 0)
+                {
+                    break;
+                }
+
+                if (slot.quantity < remainingitems)
+                {
+                    remainingitems -= slot.quantity;
+                    slot.ClearSlot();
+                    slots.Remove(slot);
+                }
+                else
+                {
+                    slot.quantity -= remainingitems;
+                    remainingitems = 0;
                 }
             }
+            return remainingitems;
         }
 
-        public void RemoveItem(healthItems pickup, int quantity)
+        public int RemoveItem(healthItems pickup, int quantity, bool removePartial)
         {
-            inventorySlot slot = slots.Find(s => s._healthItems == pickup);
-            if (slot != null)
-            {
-                if (slot.quantity >= quantity)
-                {
-                    slot.quantity -= quantity;
+            int remainingitems = quantity;
+            List<inventorySlot> slotsWithItem = slots.Where(s => s._healthItems == pickup).ToList();
 
-                    if (slot.quantity <= 0)
-                    {
-                        slot.ClearSlot();
-                        slots.Remove(slot);
-                    }
+            int totalAvailableItems = slotsWithItem.Sum(s => s.quantity);
+            if (remainingitems > totalAvailableItems && !removePartial)
+            {
+                return quantity;
+            }
+
+            foreach (var slot in slotsWithItem)
+            {
+                if (remainingitems <= 0)
+                {
+                    break;
+                }
+
+                if (slot.quantity < remainingitems)
+                {
+                    remainingitems -= slot.quantity;
+                    slot.ClearSlot();
+                    slots.Remove(slot);
+                }
+                else
+                {
+                    slot.quantity -= remainingitems;
+                    remainingitems = 0;
                 }
             }
+            return remainingitems;
         }
 
         public void RemoveItemsFromSlot(int slotNumber)
