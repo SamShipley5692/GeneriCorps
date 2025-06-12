@@ -9,6 +9,7 @@ namespace Holistic3D.Inventory
         public weaponStats _weaponStats;
         public jumpItems _jumpItems;
         public healthItems _healthItems;
+        public InvincibleItems _invincibleItems;
         
         public int quantity;
         
@@ -36,9 +37,16 @@ namespace Holistic3D.Inventory
            _jumpItems = pickup;
             quantity = q;
         }
+
+        public inventorySlot(InvincibleItems pickup, int q)
+        {
+            _invincibleItems = pickup;
+            quantity = q;
+        }
+
         public bool IsEmpty()
         {
-            return _speedItems == null && _weaponStats == null && _jumpItems == null && _healthItems == null || quantity <= 0;
+            return _speedItems == null && _weaponStats == null && _jumpItems == null && _healthItems == null && _invincibleItems == null || quantity <= 0;
         }
 
         public void ClearSlot()
@@ -47,6 +55,7 @@ namespace Holistic3D.Inventory
             _weaponStats = null;
             _jumpItems = null;
             _healthItems = null;
+            _invincibleItems = null;
             quantity = 0;
         }
 
@@ -71,6 +80,12 @@ namespace Holistic3D.Inventory
         public void SetItem(healthItems newItem, int newQuantity)
         {
             _healthItems = newItem;
+            quantity = newQuantity;
+        }
+
+        public void SetItem(InvincibleItems newItem, int newQuantity)
+        {
+            _invincibleItems = newItem;
             quantity = newQuantity;
         }
     }

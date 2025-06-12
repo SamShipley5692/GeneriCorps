@@ -8,7 +8,11 @@ namespace Holistic3D.Inventory
     {
         public InventorySystem inventorySystem;
         public InputAction dropAction;
-        public weaponStats weaponDrop; //for testing
+        public weaponStats weaponDrop;
+        public jumpItems jumpItemDrop;
+        public healthItems healthItemDrop;
+        public speedItems speedItemDrop;
+        public InvincibleItems invincibleItemsDrop;
 
         private void Start()
         {
@@ -20,7 +24,13 @@ namespace Holistic3D.Inventory
             if (dropAction.WasPressedThisFrame())
             {
                 DropItem(weaponDrop, 1);
+                DropItem(jumpItemDrop, 1);
+                DropItem(healthItemDrop, 1);
+                DropItem(speedItemDrop, 1);
+                DropItem(invincibleItemsDrop, 1);
             }
+            
+
         }
 
         public int PickupItem(weaponStats weapon, int q)
@@ -59,6 +69,15 @@ namespace Holistic3D.Inventory
             return q;
         }
 
+        public int PickupItem(InvincibleItems pickup, int q)
+        {
+            if (!inventorySystem.IsFull() || pickup.isStackable)
+            {
+                return inventorySystem.AddItem(pickup, q);
+            }
+            return q;
+        }
+
         public void DropItemsFromSlot(int slotNumber)
         {
             inventorySystem.RemoveItemsFromSlot(slotNumber);
@@ -76,20 +95,49 @@ namespace Holistic3D.Inventory
             
         }
 
-      //public void DropItem(jumpItems pickup, int quantity)
-        //{
-            //inventorySystem.RemoveItem(pickup, quantity);
-        //}
+      public void DropItem(jumpItems pickup, int quantity)
+        {
+            int couldntBeDropped = inventorySystem.RemoveItem(pickup, quantity);
+            int numberDropped = quantity - couldntBeDropped;
 
-        //public void DropItem(speedItems pickup, int quantity)
-        //{
-            //inventorySystem.RemoveItem(pickup, quantity);
-        //}
+            if (numberDropped > 0)
+            {
+                Instantiate(pickup.itemModel, GetDropPosition(), Quaternion.identity);
+            }
+        }
 
-        //public void DropItem(healthItems pickup, int quantity)
-        //{
-            //inventorySystem.RemoveItem(pickup, quantity);
-        //}
+        public void DropItem(speedItems pickup, int quantity)
+        {
+            int couldntBeDropped = inventorySystem.RemoveItem(pickup, quantity);
+            int numberDropped = quantity - couldntBeDropped;
+
+            if (numberDropped > 0)
+            {
+                Instantiate(pickup.itemModel, GetDropPosition(), Quaternion.identity);
+            }
+        }
+
+        public void DropItem(healthItems pickup, int quantity)
+        {
+            int couldntBeDropped = inventorySystem.RemoveItem(pickup, quantity);
+            int numberDropped = quantity - couldntBeDropped;
+
+            if (numberDropped > 0)
+            {
+                Instantiate(pickup.itemModel, GetDropPosition(), Quaternion.identity);
+            }
+        }
+
+        public void DropItem(InvincibleItems pickup, int quantity)
+        {
+            int couldntBeDropped = inventorySystem.RemoveItem(pickup, quantity);
+            int numberDropped = quantity - couldntBeDropped;
+
+            if (numberDropped > 0)
+            {
+                Instantiate(pickup.itemModel, GetDropPosition(), Quaternion.identity);
+            }
+        }
 
         private Vector3 GetDropPosition()
         {
