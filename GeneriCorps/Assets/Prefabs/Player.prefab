@@ -167,6 +167,8 @@ MonoBehaviour:
     m_Bits: 8
   aud: {fileID: 2806105733055613510}
   gravity: 30
+  jump: 0
+  Speed: 10
   hp: 100
   speed: 12
   sprintMod: 2
@@ -201,6 +203,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ba27b57e6eff6f2478ce3a6b91bd961b, type: 3}
   audStepVol: 0.1
   weaponInv: []
+  health: 100
 --- !u!114 &5781111141251098943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,6 +217,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventorySystem: {fileID: 0}
+  dropAction:
+    m_Name: Drop
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 4341d526-d04d-4766-b1f1-5065ad5962e0
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  weaponDrop: {fileID: 0}
+  jumpItemDrop: {fileID: 0}
+  healthItemDrop: {fileID: 0}
+  speedItemDrop: {fileID: 0}
+  invincibleItemsDrop: {fileID: 0}
 --- !u!33 &3105657134156700726
 MeshFilter:
   m_ObjectHideFlags: 0
