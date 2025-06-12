@@ -43,6 +43,9 @@ public class pickup : MonoBehaviour
             if (itemPickup != null)
             {
                 pickupReceiver.getHealthItemStats(itemPickup);
+                var clips = itemPickup.pickupSound;
+                var clip = clips[Random.Range(0, clips.Length)];
+                AudioSource.PlayClipAtPoint(clip, transform.position, itemPickup.pickupSoundVol);
                 playerInventorySystem playerInventory = other.GetComponent<playerInventorySystem>();//Tenia
                 if (playerInventory != null)
                 {
@@ -76,6 +79,9 @@ public class pickup : MonoBehaviour
             if (jumpPickup != null)
             {
                 pickupReceiver.getJumpItemStats(jumpPickup); // Cade
+                var clips = jumpPickup.pickupSound;
+                var clip = clips[Random.Range(0, clips.Length)];
+                AudioSource.PlayClipAtPoint(clip, transform.position, jumpPickup.pickupSoundVol);
                 playerInventorySystem playerInventory = other.GetComponent<playerInventorySystem>(); //Tenia
                 if (playerInventory != null)
                 {
@@ -92,10 +98,13 @@ public class pickup : MonoBehaviour
         if (invinciblePickup != null)
         {
             pickupReceiver.getInvincibleStats(invinciblePickup);
+            var clips = invinciblePickup.pickupSound;
+            var clip = clips[Random.Range(0, clips.Length)];
+            AudioSource.PlayClipAtPoint(clip, transform.position, invinciblePickup.pickupSoundVol);
             playerInventorySystem playerInventory = other.GetComponent<playerInventorySystem>();
             if (playerInventory != null)
             {
-                quantity = playerInventory.PickupItem(jumpPickup, quantity);
+                quantity = playerInventory.PickupItem(invinciblePickup, quantity);
                 if (quantity <= 0)
                 {
                     Destroy(gameObject);
