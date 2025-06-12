@@ -11,4 +11,6 @@ public interface IPickup
     public void getJumpItemStats(jumpItems item); // Cade
 
     public void getInvincibleStats(InvincibleItems item); // Cade 
+
+
 }

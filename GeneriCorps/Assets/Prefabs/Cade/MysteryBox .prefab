@@ -6333,7 +6333,7 @@ MonoBehaviour:
   HP: 3
   anim: {fileID: 7717637297340157154}
   Model: {fileID: 1809572205407591958}
-  enemyDestroyTime: 0.5
+  enemyDestroyTime: 0.75
 --- !u!95 &7717637297340157154
 Animator:
   serializedVersion: 7

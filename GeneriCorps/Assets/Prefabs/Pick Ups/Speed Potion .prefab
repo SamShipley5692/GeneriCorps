@@ -4999,8 +4999,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 0}
   itemPickup: {fileID: 0}
-  speedPickup: {fileID: 11400000, guid: 6c67d13db1e991c4ea0f6395e9e305c1, type: 2}
+  speedPickup: {fileID: 11400000, guid: 63104dff0852f614284aeb5e301d7fba, type: 2}
   jumpPickup: {fileID: 0}
+  invinciblePickup: {fileID: 0}
+  quantity: 1
 --- !u!65 &6021124294226823902
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -58,6 +58,9 @@ public class pickup : MonoBehaviour
             if (speedPickup != null)
             {
                 pickupReceiver.getSpeedItemStats(speedPickup); // Cade
+                var clips = speedPickup.pickupSound;
+                var clip = clips[Random.Range(0, clips.Length)];
+                AudioSource.PlayClipAtPoint(clip, transform.position, speedPickup.pickupSoundVol);
                 playerInventorySystem playerInventory = other.GetComponent<playerInventorySystem>();//Tenia
                 if (playerInventory != null)
                 {

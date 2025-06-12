@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemModel: {fileID: 6669507856320324066, guid: 0d3cc3e39248b4c409b0b8b7693e02c0, type: 3}
   speedAmount: 3
-  pickupSound: []
-  pickupSoundVol: 0
+  pickupSound:
+  - {fileID: 8300000, guid: 11a7e71782ae6430390d783bc08409df, type: 3}
+  pickupSoundVol: 1
   buffDuration: 10
   itemType: 1
   isStackable: 1

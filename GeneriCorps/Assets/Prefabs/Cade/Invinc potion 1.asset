@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a90b939eb1321444a817eecdb187bf9, type: 3}
   m_Name: Invinc potion 1
   m_EditorClassIdentifier: 
-  itemModel: {fileID: 0}
-  pickupSound: []
-  pickupSoundVol: 0
+  itemModel: {fileID: 4100435186685911143, guid: cdf7638044e6c544fad573dafef35fa5, type: 3}
+  pickupSound:
+  - {fileID: 8300000, guid: 11a7e71782ae6430390d783bc08409df, type: 3}
+  pickupSoundVol: 1
   buffDuration: 10
   itemType: 0
   isStackable: 1
