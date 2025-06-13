@@ -29,7 +29,6 @@ public class dragonBoss : MonoBehaviour, IDamage
     [SerializeField][Range(1, 30)] int animTransSpeed;
     [SerializeField][Range(0.1f, 10)] float enemyDestroyTime;
     [SerializeField][Range(0.1f, 10)] float restTime;
-    [SerializeField][Range(0.1f, 10)] float spawnDelay;
 
 
     Vector3 startingPos;
@@ -56,6 +55,7 @@ public class dragonBoss : MonoBehaviour, IDamage
         stoppingDistOrig = agent.stoppingDistance;
         maxHP = HP;
         percentHP = (HP / maxHP) * 100;
+        anim.SetBool("isSleeping", true);
 
         if (jawCol)
             jawCol.enabled = false;
@@ -154,15 +154,21 @@ public class dragonBoss : MonoBehaviour, IDamage
 
     void attackRoutine()
     {
+        wakeUp();
+
+
         if (percentHP >= 70)
         {
-            isAttacking = true;
-            anim.SetBool("move", false);
+            anim.SetBool("isMoving", false);
             wakeUp();
-            biteAttack();
-            groundRest();
-            jumpAttack();
-            groundRest();
+            //anim.SetBool("isBiting", true);
+            StartCoroutine(biteAttack());
+            StartCoroutine(rest());
+            //groundRest();
+            StartCoroutine(jumpAttack());
+            StartCoroutine(rest());
+
+            //groundRest();
         }
         else if (percentHP < 70 && percentHP >= 40)
         {  // slightly increase movement speed
@@ -195,10 +201,10 @@ public class dragonBoss : MonoBehaviour, IDamage
     void stageOne()
     {
         biteAttack();
-        groundRest();
+        //groundRest();
         //StartCoroutine(groundRest());
         jumpAttack();
-        groundRest();
+        //groundRest();
         //StartCoroutine(groundRest());
     }
 
@@ -207,144 +213,145 @@ public class dragonBoss : MonoBehaviour, IDamage
         fly();
         flyAttack();
         //StartCoroutine(flyRest());
-        flyRest();
+        //flyRest();
     }
 
     void stageThree()
     {
-        roar();
+        summon();
         //StartCoroutine(groundRest());
-        groundRest();
+        //groundRest();
         changePos();
         jumpAttack();
         //StartCoroutine(groundRest());
-        groundRest();
+        //groundRest();
         changePos();
         flameAttack();
         //StartCoroutine(groundRest());
-        groundRest();
+        //groundRest();
         changePos();
         biteAttack();
         //StartCoroutine(groundRest());
-        groundRest();
+        //groundRest();
 
     }
 
     void wakeUp()
     {
-        anim.SetTrigger("wakeUp");
-        anim.SetTrigger("roar");
+        anim.SetBool("isSleeping", false);
         playerInRange = true;
     }
 
-    void groundRest()
+    IEnumerator rest()
     {
-        restTimer += Time.deltaTime;
-        anim.SetTrigger("groundRest");
-        if (restTimer >= restTime)
-            restTimer = 0f;
+        anim.SetBool("isResting", true);
+        yield return new WaitForSeconds(2f);
+        anim.SetBool("isResting", false);
     }
 
-    void flyRest()
-    {
-        restTimer += Time.deltaTime;
-        anim.SetTrigger("flyRest");
-        if (restTimer >= restTime)
-            restTimer = 0f;
-    }
-
-    void biteAttack()
+    IEnumerator biteAttack()
     {
         faceTarget();
-        anim.SetTrigger("biteAttack");
+        anim.SetBool("isBiting", true);
+        yield return new WaitForSeconds(1.2f);
+        anim.SetBool("isBiting", false);
     }
 
-    void jumpAttack()
+    IEnumerator jumpAttack()
     {
         faceTarget();
-        anim.SetTrigger("jumpAttack");
+        anim.SetBool("isJumping", true);
+        yield return new WaitForSeconds(3f);
+        anim.SetBool("isJumping", false);
     }
 
-    void flameAttack()
+    IEnumerator flameAttack()
     {
         faceTarget();
-        anim.SetTrigger("flameAttack");
+        anim.SetBool("isFiring", true);
+        yield return new WaitForSeconds(2.7f);
+        anim.SetBool("isFiring", false);
     }
 
-    void roar()
+    IEnumerator summon()
     {
-        anim.SetTrigger("summon");
-        StartCoroutine(spawnEnemies());
         faceTarget();
+        anim.SetBool("isSummoning", true);
+        spawnEnemies();
+        yield return new WaitForSeconds(3.4f);
+        anim.SetBool("isSummoning", false);
     }
 
-    IEnumerator spawnEnemies()
+    void spawnEnemies()
     {
-        yield return new WaitForSeconds(spawnDelay);
         if (spawnHealer)
             Instantiate(spawnHealer, healerPos.position, healerPos.transform.rotation);
         if (spawnFighter)
             Instantiate(spawnFighter, fighterPos.position, fighterPos.transform.rotation);
-
-        yield return new WaitForSeconds(restTime);
     }
 
-    void stageTransition()
+    IEnumerator stageTransition()
     {
-        anim.SetTrigger("roar");
+        anim.SetBool("isRoaring", true);
+        yield return new WaitForSeconds(3.4f);
+        anim.SetBool("isRoaring", true);
+
     }
 
-    public void flyAttack()
+    IEnumerator flyAttack()
     {
         faceTarget();
-        anim.SetTrigger("flyAttack");
+        anim.SetBool("isFlyAttacking", true);
+        yield return new WaitForSeconds(3f);
+        anim.SetBool("isFlyAttacking", false);
     }
 
     public void takeOff()
     {
-        anim.SetTrigger("takeOff");
+        anim.SetBool("isAscending", true);
+
         Vector3 newPos = new Vector3(gameObject.transform.position.x, flyPos[0].position.y, gameObject.transform.position.z);
         gameObject.transform.position = newPos;
-        //transform.position = Vector3.MoveTowards(transform.position, newPos, movementSpeed * Time.deltaTime); 
-        // get movement speed from rb? Or make it a variable I can control.
+        //gameObject.transform.position = Vector3.MoveTowards(transform.position, newPos, agent.speed * Time.deltaTime);
+
+        anim.SetBool("isAscending", false);
     }
 
     public void fly()
     {
-        anim.SetTrigger("fly"); // may need to specify flying animation though it’s a float, not a trigger. Maybe set anim parameters here instead?
+        anim.SetBool("isFlying", true);
+
         int randIndex = Random.Range(0, flyPos.Length);
         Transform randPos = flyPos[randIndex];
         gameObject.transform.position = randPos.position;
-        //transform.position = Vector3.MoveTowards(transform.position, ranPos, movementSpeed * Time.deltaTime); 
-        // get movement speed from rb? Or make it a variable I can control.
+        //gameObject.transform.position = Vector3.MoveTowards(transform.position, randPos.position, agent.speed * Time.deltaTime);
+
+        anim.SetBool("isFlying", false);
     }
 
     public void land()
     {
-        anim.SetTrigger("land");
+        anim.SetBool("isDescending", true);
+
         Vector3 newPos = new Vector3(gameObject.transform.position.x, groundPos[0].position.y, gameObject.transform.position.z);
         gameObject.transform.position = newPos;
-        //transform.position = Vector3.MoveTowards(transform.position, newPos, movementSpeed * Time.deltaTime); 
-        // get movement speed from rb? Or make it a variable I can control.
+        //gameObject.transform.position = Vector3.MoveTowards(transform.position, newPos, agent.speed * Time.deltaTime);
+
+        anim.SetBool("isDescending", false);
     }
 
     void changePos()
     {
-        //anim.SetTrigger("move");
-        anim.SetBool("move", true);
-        if (anim.GetBool("move") == true)
-        {
-            isAttacking = false;
-            if (agent.remainingDistance < 0.01f && !isAttacking) // && !isAttacking
-            {
-                int ranIndex = Random.Range(0, groundPos.Length);
-                Transform ranPos = groundPos[ranIndex];
-                agent.destination = ranPos.position;
-                anim.SetBool("move", false);
+        anim.SetBool("isMoving", true);
 
-            }
+        if (agent.remainingDistance < 0.01f)
+        {
+            int ranIndex = Random.Range(0, groundPos.Length);
+            Transform ranPos = groundPos[ranIndex];
+            agent.destination = ranPos.position;
         }
-        
+
+        anim.SetBool("isMoving", false);
     }
 
     public void jawColOn()
