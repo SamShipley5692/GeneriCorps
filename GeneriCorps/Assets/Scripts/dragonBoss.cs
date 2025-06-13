@@ -10,7 +10,6 @@ public class dragonBoss : MonoBehaviour, IDamage
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Animator anim;
     [SerializeField] Transform headPos;
-    [SerializeField] Transform flamePos;
     [SerializeField] Transform healerPos;
     [SerializeField] Transform fighterPos;
     [SerializeField] Transform arenaCenterPos;
@@ -25,9 +24,10 @@ public class dragonBoss : MonoBehaviour, IDamage
     [SerializeField][Range(0.001f, 1)] float dissolveRate;
     [SerializeField][Range(0.001f, 2)] float refreshRate;
     [SerializeField][Range(1, 200)] int HP;
+    [SerializeField][Range(1, 15)] int roamDist;
     [SerializeField][Range(1, 50)] int faceTargetSpeed;
     [SerializeField][Range(1, 30)] int animTransSpeed;
-    [SerializeField][Range(0.1f, 10)] int enemyDestroyTime;
+    [SerializeField][Range(0.1f, 10)] float enemyDestroyTime;
     [SerializeField][Range(0.1f, 10)] float restTime;
     [SerializeField][Range(0.1f, 10)] float spawnDelay;
 
@@ -39,9 +39,10 @@ public class dragonBoss : MonoBehaviour, IDamage
     int maxHP;
     int percentHP;
 
+    float restTimer;
+
     bool playerInRange;
-    bool isWoken;
-    bool isDamageable;
+    bool isAttacking;
 
     private Material[] skinnedMaterials;
 
@@ -65,40 +66,16 @@ public class dragonBoss : MonoBehaviour, IDamage
         }
     }
 
+
     // Update is called once per frame
     void Update()
     {
         setAnimPara();
         percentHP = (HP / maxHP) * 100;
 
-        if (isWoken)
-        {
-            StartCoroutine(wakeUp());
-        }
         if (playerInRange)
         {
-            if (percentHP >= 70)
-            {
-                stageOne();
-                changePos();
-            }
-            else if (percentHP < 70 && percentHP >= 40) 
-            {  // slightly increase movement speed
-                if (transform.position.y < flyPos[0].position.y)
-                {
-                    stageTransition();
-                    takeOff();
-                }
-                stageTwo();
-            }
-            else if (percentHP < 40 && percentHP > 0)
-            { // increase movement speed and reduce damage taken
-                if (transform.position.y > groundPos[0].position.y)
-                {
-                    land();
-                }
-                stageThree();
-            }
+            attackRoutine();
         }
 
     }
@@ -143,7 +120,7 @@ public class dragonBoss : MonoBehaviour, IDamage
     {
         if (other.CompareTag("Player"))
         {
-            isWoken = true;
+            playerInRange = true;
         }
     }
 
@@ -171,59 +148,109 @@ public class dragonBoss : MonoBehaviour, IDamage
 
     void faceTarget()
     {
-        Quaternion rot = Quaternion.LookRotation(new Vector3(arenaCenterPos.transform.position.x, arenaCenterPos.transform.position.y, arenaCenterPos.transform.position.z));
+        Quaternion rot = Quaternion.LookRotation(new Vector3(arenaCenterPos.position.x, arenaCenterPos.position.y, arenaCenterPos.position.z));
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceTargetSpeed);
+    }
+
+    void attackRoutine()
+    {
+        if (percentHP >= 70)
+        {
+            isAttacking = true;
+            anim.SetBool("move", false);
+            wakeUp();
+            biteAttack();
+            groundRest();
+            jumpAttack();
+            groundRest();
+        }
+        else if (percentHP < 70 && percentHP >= 40)
+        {  // slightly increase movement speed
+            if (transform.position.y < flyPos[0].position.y)
+            {
+                stageTransition();
+                takeOff();
+            }
+            stageTwo();
+        }
+        else if (percentHP < 40 && percentHP > 0)
+        { // increase movement speed and reduce damage taken
+            if (transform.position.y > groundPos[0].position.y)
+            {
+                land();
+            }
+            stageThree();
+        }
+        if (gameObject.transform.position.y < flyPos[0].position.y)
+        {
+            changePos();
+        }
+        else if (gameObject.transform.position.y > groundPos[0].position.y)
+        {
+            fly();
+        }
+
     }
 
     void stageOne()
     {
         biteAttack();
-        StartCoroutine(groundRest());
+        groundRest();
+        //StartCoroutine(groundRest());
         jumpAttack();
-        StartCoroutine(groundRest());
+        groundRest();
+        //StartCoroutine(groundRest());
     }
 
     void stageTwo()
     {
         fly();
         flyAttack();
-        StartCoroutine(flyRest());
+        //StartCoroutine(flyRest());
+        flyRest();
     }
 
     void stageThree()
     {
         roar();
-        StartCoroutine(groundRest());
+        //StartCoroutine(groundRest());
+        groundRest();
         changePos();
         jumpAttack();
-        StartCoroutine(groundRest());
+        //StartCoroutine(groundRest());
+        groundRest();
         changePos();
         flameAttack();
-        StartCoroutine(groundRest());
+        //StartCoroutine(groundRest());
+        groundRest();
         changePos();
         biteAttack();
-        StartCoroutine(groundRest());
+        //StartCoroutine(groundRest());
+        groundRest();
+
     }
 
-    IEnumerator wakeUp()
+    void wakeUp()
     {
-        faceTarget();
-        yield return new WaitForSeconds(1f);
+        anim.SetTrigger("wakeUp");
         anim.SetTrigger("roar");
-        yield return new WaitForSeconds(3f);
-        isWoken = false;
         playerInRange = true;
     }
 
-    IEnumerator groundRest()
-    { // change length of rest time depending on enemy health
-      // anim.SetTrigger(“idle”);
-        yield return new WaitForSeconds(restTime);
+    void groundRest()
+    {
+        restTimer += Time.deltaTime;
+        anim.SetTrigger("groundRest");
+        if (restTimer >= restTime)
+            restTimer = 0f;
     }
-    IEnumerator flyRest()
-    { // change length of rest time depending on enemy health
-      // anim.SetTrigger(“flyIdle”);
-        yield return new WaitForSeconds(restTime);
+
+    void flyRest()
+    {
+        restTimer += Time.deltaTime;
+        anim.SetTrigger("flyRest");
+        if (restTimer >= restTime)
+            restTimer = 0f;
     }
 
     void biteAttack()
@@ -235,7 +262,7 @@ public class dragonBoss : MonoBehaviour, IDamage
     void jumpAttack()
     {
         faceTarget();
-        anim.SetTrigger("clawAttack");
+        anim.SetTrigger("jumpAttack");
     }
 
     void flameAttack()
@@ -246,7 +273,7 @@ public class dragonBoss : MonoBehaviour, IDamage
 
     void roar()
     {
-        anim.SetTrigger("roar");
+        anim.SetTrigger("summon");
         StartCoroutine(spawnEnemies());
         faceTarget();
     }
@@ -264,7 +291,7 @@ public class dragonBoss : MonoBehaviour, IDamage
 
     void stageTransition()
     {
-        anim.SetTrigger("fireRoar");
+        anim.SetTrigger("roar");
     }
 
     public void flyAttack()
@@ -274,7 +301,7 @@ public class dragonBoss : MonoBehaviour, IDamage
     }
 
     public void takeOff()
-    { 
+    {
         anim.SetTrigger("takeOff");
         Vector3 newPos = new Vector3(gameObject.transform.position.x, flyPos[0].position.y, gameObject.transform.position.z);
         gameObject.transform.position = newPos;
@@ -293,7 +320,7 @@ public class dragonBoss : MonoBehaviour, IDamage
     }
 
     public void land()
-    { 
+    {
         anim.SetTrigger("land");
         Vector3 newPos = new Vector3(gameObject.transform.position.x, groundPos[0].position.y, gameObject.transform.position.z);
         gameObject.transform.position = newPos;
@@ -303,17 +330,21 @@ public class dragonBoss : MonoBehaviour, IDamage
 
     void changePos()
     {
-        //anim.SetTrigger("walk"); // may need to specify moving animation though it’s a float, not a trigger. Maybe set anim parameters here instead?
-        int ranIndex = Random.Range(0, groundPos.Length);
-        Transform ranPos = groundPos[ranIndex];
-        gameObject.transform.position = ranPos.position;
-        // transform.position = Vector3.MoveTowards(transform.position, ranPos, movementSpeed * Time.deltaTime); 
-        // get movement speed from rb? Or make it a variable I can control.
-    }
+        //anim.SetTrigger("move");
+        anim.SetBool("move", true);
+        if (anim.GetBool("move") == true)
+        {
+            isAttacking = false;
+            if (agent.remainingDistance < 0.01f && !isAttacking) // && !isAttacking
+            {
+                int ranIndex = Random.Range(0, groundPos.Length);
+                Transform ranPos = groundPos[ranIndex];
+                agent.destination = ranPos.position;
+                anim.SetBool("move", false);
 
-    public void defend()
-    {
-        anim.SetTrigger("defend");
+            }
+        }
+        
     }
 
     public void jawColOn()
@@ -328,11 +359,15 @@ public class dragonBoss : MonoBehaviour, IDamage
             jawCol.enabled = false;
     }
 
-    public void instantiateFlame()
+    public void enableFlame()
     {
         if (dragonFire != null)
-            Instantiate(dragonFire, flamePos.position, headPos.transform.rotation);
+            dragonFire.SetActive(true);
     }
 
-
+    void disableFlame()
+    {
+        if (dragonFire != null)
+            dragonFire.SetActive(false);
+    }
 }
