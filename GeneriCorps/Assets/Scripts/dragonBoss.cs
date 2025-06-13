@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 using UnityEngine.VFX;
 
 public class dragonBoss : MonoBehaviour, IDamage
@@ -10,28 +11,39 @@ public class dragonBoss : MonoBehaviour, IDamage
     [SerializeField] Animator anim;
     [SerializeField] Transform headPos;
     [SerializeField] Transform flamePos;
+    [SerializeField] Transform healerPos;
+    [SerializeField] Transform fighterPos;
+    [SerializeField] Transform arenaCenterPos;
+    [SerializeField] Transform[] flyPos;
+    [SerializeField] Transform[] groundPos;
     [SerializeField] Collider jawCol;
     [SerializeField] GameObject dragonFire;
+    [SerializeField] GameObject spawnHealer;
+    [SerializeField] GameObject spawnFighter;
+
 
     [SerializeField][Range(0.001f, 1)] float dissolveRate;
     [SerializeField][Range(0.001f, 2)] float refreshRate;
     [SerializeField][Range(1, 200)] int HP;
     [SerializeField][Range(1, 50)] int faceTargetSpeed;
-    [SerializeField][Range(1, 90)] int FOV;
     [SerializeField][Range(1, 30)] int animTransSpeed;
-    [SerializeField][Range(0.1f, 2)] float attackRate; // don't need
     [SerializeField][Range(0.1f, 10)] int enemyDestroyTime;
+    [SerializeField][Range(0.1f, 10)] float restTime;
+    [SerializeField][Range(0.1f, 10)] float spawnDelay;
 
-    Vector3 playerDir;
+
     Vector3 startingPos;
 
-    float attackTimer; // don't need
-    float angleToPlayer;
     float stoppingDistOrig;
 
-    bool playerInRange;
+    int maxHP;
+    int percentHP;
 
-    private Material[] skinnedMaterials; 
+    bool playerInRange;
+    bool isWoken;
+    bool isDamageable;
+
+    private Material[] skinnedMaterials;
 
 
 
@@ -41,6 +53,8 @@ public class dragonBoss : MonoBehaviour, IDamage
         anim = GetComponent<Animator>();
         startingPos = transform.position;
         stoppingDistOrig = agent.stoppingDistance;
+        maxHP = HP;
+        percentHP = (HP / maxHP) * 100;
 
         if (jawCol)
             jawCol.enabled = false;
@@ -54,18 +68,37 @@ public class dragonBoss : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K)) // for testing purposes, remove later
-        {
-            StartCoroutine(dissolve());
-        }
-
         setAnimPara();
+        percentHP = (HP / maxHP) * 100;
 
-        attackTimer += Time.deltaTime;
-
+        if (isWoken)
+        {
+            StartCoroutine(wakeUp());
+        }
         if (playerInRange)
         {
-
+            if (percentHP >= 70)
+            {
+                stageOne();
+                changePos();
+            }
+            else if (percentHP < 70 && percentHP >= 40) 
+            {  // slightly increase movement speed
+                if (transform.position.y < flyPos[0].position.y)
+                {
+                    stageTransition();
+                    takeOff();
+                }
+                stageTwo();
+            }
+            else if (percentHP < 40 && percentHP > 0)
+            { // increase movement speed and reduce damage taken
+                if (transform.position.y > groundPos[0].position.y)
+                {
+                    land();
+                }
+                stageThree();
+            }
         }
 
     }
@@ -76,7 +109,7 @@ public class dragonBoss : MonoBehaviour, IDamage
         {
             float counter = 0;
 
-            while (skinnedMaterials[0].GetFloat("_Dissolve_Amount") < 1f) 
+            while (skinnedMaterials[0].GetFloat("_Dissolve_Amount") < 1f)
             {
                 counter += dissolveRate;
                 for (int i = 0; i < skinnedMaterials.Length; i++)
@@ -88,75 +121,48 @@ public class dragonBoss : MonoBehaviour, IDamage
         }
     }
 
-    void setAnimPara()
+    void setAnimPara() // instead of changing speed by setting animation parameters, increase speed of the rigid body?
     {
-        float agentGroundSpeedCur = agent.velocity.normalized.magnitude;
-        float animGroundSpeedCur = anim.GetFloat("groundSpeed");
-
-        anim.SetFloat("groundSpeed", Mathf.Lerp(animGroundSpeedCur, agentGroundSpeedCur, Time.deltaTime * animTransSpeed));
-
-        //float agentFlySpeedCur = agent.velocity.normalized.magnitude;
-        //float animFlySpeedCur = anim.GetFloat("flySpeed");
-
-        //anim.SetFloat("flySpeed", Mathf.Lerp(animFlySpeedCur, agentFlySpeedCur, Time.deltaTime * animTransSpeed));
-
-    }
-
-    bool canSeePlayer()
-    {
-        playerDir = (gameManager.instance.player.transform.position - headPos.position);
-        angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, 0, playerDir.z), transform.forward);
-        Debug.DrawRay(headPos.position, new Vector3(playerDir.x, 0, playerDir.z));
-
-        RaycastHit hit;
-        if (Physics.Raycast(headPos.position, playerDir, out hit))
+        if (transform.position.y < flyPos[0].position.y)
         {
-            if (angleToPlayer <= FOV && hit.collider.CompareTag("Player") && HP > 0)
-            {
-                agent.SetDestination(gameManager.instance.player.transform.position);
-
-                if (attackTimer >= attackRate)
-                {
-                    groundAttack();
-                }
-
-                if (agent.remainingDistance <= agent.stoppingDistance)
-                {
-                    faceTarget();
-                }
-
-                agent.stoppingDistance = stoppingDistOrig;
-                return true;
-            }
+            float agentGroundSpeedCur = agent.velocity.normalized.magnitude;
+            float animGroundSpeedCur = anim.GetFloat("groundSpeed");
+            anim.SetFloat("groundSpeed", Mathf.Lerp(animGroundSpeedCur, agentGroundSpeedCur, Time.deltaTime * animTransSpeed));
         }
 
-        agent.stoppingDistance = 0;
-        return false;
+        if (transform.position.y >= flyPos[0].position.y)
+        {
+            float agentFlySpeedCur = agent.velocity.normalized.magnitude;
+            float animFlySpeedCur = anim.GetFloat("flySpeed");
+            anim.SetFloat("flySpeed", Mathf.Lerp(animFlySpeedCur, agentFlySpeedCur, Time.deltaTime * animTransSpeed));
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            playerInRange = true;
+            isWoken = true;
         }
     }
 
     public void takeDamage(int amount)
     {
-        HP -= amount;
-
-        //agent.SetDestination(gameManager.instance.player.transform.position);
+        if (percentHP > 10)
+            HP -= amount;
+        else
+            HP -= (amount / 2);
 
         if (HP <= 0)
         {
-            gameManager.instance.updateGameGoal(-1);
             playerInRange = false;
             anim.SetTrigger("die");
-            gameObject.GetComponent<Collider>().enabled = false;
             Destroy(gameObject, enemyDestroyTime);
             StartCoroutine(dissolve());
+            gameManager.instance.updateGameGoal(-1);
         }
+
         else
         {
             anim.SetTrigger("getHit");
@@ -165,56 +171,149 @@ public class dragonBoss : MonoBehaviour, IDamage
 
     void faceTarget()
     {
-        Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, transform.position.y, playerDir.z));
+        Quaternion rot = Quaternion.LookRotation(new Vector3(arenaCenterPos.transform.position.x, arenaCenterPos.transform.position.y, arenaCenterPos.transform.position.z));
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceTargetSpeed);
     }
 
-    public void groundAttack()
+    void stageOne()
     {
-        string[] attackStates = { "biteAttack", "jumpAttack", "flameAttack" };
-        int attackType = Random.Range(0, attackStates.Length); 
+        biteAttack();
+        StartCoroutine(groundRest());
+        jumpAttack();
+        StartCoroutine(groundRest());
+    }
 
-        switch(attackType)
-        {
-            case 0:
-                anim.SetTrigger("biteAttack");
-                break;
-            case 1:
-                anim.SetTrigger("jumpAttack");
-                break;
-            case 2:
-                anim.SetTrigger("flameAttack");
-                break;
-            default:
-                break;
-        }
-        float agentGroundSpeedCur = agent.velocity.normalized.magnitude;
-        float animGroundSpeedCur = anim.GetFloat("groundSpeed");
-        anim.SetFloat("groundSpeed", Mathf.Lerp(animGroundSpeedCur, agentGroundSpeedCur, Time.deltaTime * animTransSpeed));
+    void stageTwo()
+    {
+        fly();
+        flyAttack();
+        StartCoroutine(flyRest());
+    }
+
+    void stageThree()
+    {
+        roar();
+        StartCoroutine(groundRest());
+        changePos();
+        jumpAttack();
+        StartCoroutine(groundRest());
+        changePos();
+        flameAttack();
+        StartCoroutine(groundRest());
+        changePos();
+        biteAttack();
+        StartCoroutine(groundRest());
+    }
+
+    IEnumerator wakeUp()
+    {
+        faceTarget();
+        yield return new WaitForSeconds(1f);
+        anim.SetTrigger("roar");
+        yield return new WaitForSeconds(3f);
+        isWoken = false;
+        playerInRange = true;
+    }
+
+    IEnumerator groundRest()
+    { // change length of rest time depending on enemy health
+      // anim.SetTrigger(“idle”);
+        yield return new WaitForSeconds(restTime);
+    }
+    IEnumerator flyRest()
+    { // change length of rest time depending on enemy health
+      // anim.SetTrigger(“flyIdle”);
+        yield return new WaitForSeconds(restTime);
+    }
+
+    void biteAttack()
+    {
+        faceTarget();
+        anim.SetTrigger("biteAttack");
+    }
+
+    void jumpAttack()
+    {
+        faceTarget();
+        anim.SetTrigger("clawAttack");
+    }
+
+    void flameAttack()
+    {
+        faceTarget();
+        anim.SetTrigger("flameAttack");
+    }
+
+    void roar()
+    {
+        anim.SetTrigger("roar");
+        StartCoroutine(spawnEnemies());
+        faceTarget();
+    }
+
+    IEnumerator spawnEnemies()
+    {
+        yield return new WaitForSeconds(spawnDelay);
+        if (spawnHealer)
+            Instantiate(spawnHealer, healerPos.position, healerPos.transform.rotation);
+        if (spawnFighter)
+            Instantiate(spawnFighter, fighterPos.position, fighterPos.transform.rotation);
+
+        yield return new WaitForSeconds(restTime);
+    }
+
+    void stageTransition()
+    {
+        anim.SetTrigger("fireRoar");
     }
 
     public void flyAttack()
     {
-
+        faceTarget();
         anim.SetTrigger("flyAttack");
+    }
+
+    public void takeOff()
+    { 
+        anim.SetTrigger("takeOff");
+        Vector3 newPos = new Vector3(gameObject.transform.position.x, flyPos[0].position.y, gameObject.transform.position.z);
+        gameObject.transform.position = newPos;
+        //transform.position = Vector3.MoveTowards(transform.position, newPos, movementSpeed * Time.deltaTime); 
+        // get movement speed from rb? Or make it a variable I can control.
+    }
+
+    public void fly()
+    {
+        anim.SetTrigger("fly"); // may need to specify flying animation though it’s a float, not a trigger. Maybe set anim parameters here instead?
+        int randIndex = Random.Range(0, flyPos.Length);
+        Transform randPos = flyPos[randIndex];
+        gameObject.transform.position = randPos.position;
+        //transform.position = Vector3.MoveTowards(transform.position, ranPos, movementSpeed * Time.deltaTime); 
+        // get movement speed from rb? Or make it a variable I can control.
+    }
+
+    public void land()
+    { 
+        anim.SetTrigger("land");
+        Vector3 newPos = new Vector3(gameObject.transform.position.x, groundPos[0].position.y, gameObject.transform.position.z);
+        gameObject.transform.position = newPos;
+        //transform.position = Vector3.MoveTowards(transform.position, newPos, movementSpeed * Time.deltaTime); 
+        // get movement speed from rb? Or make it a variable I can control.
+    }
+
+    void changePos()
+    {
+        //anim.SetTrigger("walk"); // may need to specify moving animation though it’s a float, not a trigger. Maybe set anim parameters here instead?
+        int ranIndex = Random.Range(0, groundPos.Length);
+        Transform ranPos = groundPos[ranIndex];
+        gameObject.transform.position = ranPos.position;
+        // transform.position = Vector3.MoveTowards(transform.position, ranPos, movementSpeed * Time.deltaTime); 
+        // get movement speed from rb? Or make it a variable I can control.
     }
 
     public void defend()
     {
         anim.SetTrigger("defend");
-    }
-    public void flyTakeOff()
-    {
-        anim.SetTrigger("takeOff");
-    }
-    public void fly()
-    {
-        anim.SetTrigger("fly");
-    }
-
-    public void flyLand()
-    {
-        anim.SetTrigger("land");
     }
 
     public void jawColOn()

@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - Enemy
+  - Dragon Fire
+  - Dragon Boss
   layers:
   - Default
   - TransparentFX
@@ -16,8 +18,8 @@ TagManager:
   - Enemy bullet
   - Player Bullet
   - 3D Preview
-  - 
-  - 
+  - Dragon Fire
+  - Dragon Boss
   - 
   - 
   - 
