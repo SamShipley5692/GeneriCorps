@@ -4,7 +4,13 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Main Scenes/Level 2.unity
+    guid: fe7dad79009d2bb4f896a236684c00b6
+  - enabled: 1
+    path: Assets/Scenes/Main Scenes/Level 4 - Boss.unity
+    guid: 858fedd84dccc7645a414f2c25bdc237
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   m_UseUCBPForAssetBundles: 0

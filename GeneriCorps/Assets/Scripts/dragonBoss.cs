@@ -12,9 +12,6 @@ public class dragonBoss : MonoBehaviour, IDamage
     [SerializeField] Transform arenaCenterPos;
     [SerializeField] Collider jawCol;
     [SerializeField] GameObject dragonFire;
-    //[SerializeField] GameObject spawnHealer;
-    //[SerializeField] GameObject spawnFighter;
-
 
     [SerializeField][Range(0.001f, 1)] float dissolveRate;
     [SerializeField][Range(0.001f, 2)] float refreshRate;
@@ -33,8 +30,7 @@ public class dragonBoss : MonoBehaviour, IDamage
     [Range(0, 1)][SerializeField] float audFlameVol;
     [SerializeField] AudioClip[] audAttack;
     [Range(0, 1)][SerializeField] float audAttackVol;
-    //[SerializeField] AudioClip[] audFly;
-    //[Range(0, 1)][SerializeField] float audFlyVol;
+
 
     int maxHP;
     int percentHP;
@@ -70,6 +66,12 @@ public class dragonBoss : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.B)) // for testing purposes, remove later
+        {
+            StartCoroutine(dissolve());
+        }
+
         percentHP = (HP / maxHP) * 100;
 
         if (playerInRange)
@@ -237,8 +239,10 @@ public class dragonBoss : MonoBehaviour, IDamage
         //anim.SetBool("isResting", true);
         //yield return new WaitForSeconds(2f);
         //anim.SetBool("isResting", false);
+        anim.SetBool("isBiting", true);
+
     }
-   
+
     IEnumerator wakeUp()
     {
         anim.SetBool("isSleeping", false);

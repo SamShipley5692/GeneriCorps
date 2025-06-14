@@ -120,7 +120,7 @@ public class skeletonEnemy : MonoBehaviour, IDamage
 
     IEnumerator PlayStep()
     {
-        isPlayingStep = true; // isPlayingFlight
+        isPlayingStep = true; 
         effectAudio.PlayOneShot(audWalk[Random.Range(0, audWalk.Length)], audWalkVol);
 
         yield return new WaitForSeconds(0.4f);
