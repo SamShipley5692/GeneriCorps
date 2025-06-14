@@ -49,7 +49,9 @@ MonoBehaviour:
   weapon: {fileID: 0}
   itemPickup: {fileID: 0}
   speedPickup: {fileID: 0}
-  jumpPickup: {fileID: 11400000, guid: 32b23238a9202ee468e50f19ca0743c3, type: 2}
+  jumpPickup: {fileID: 11400000, guid: b808e83a01bfd11498440a9131bf7582, type: 2}
+  invinciblePickup: {fileID: 0}
+  quantity: 1
 --- !u!65 &3478556105489331374
 BoxCollider:
   m_ObjectHideFlags: 0
