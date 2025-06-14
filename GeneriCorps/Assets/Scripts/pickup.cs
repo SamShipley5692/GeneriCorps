@@ -6,6 +6,7 @@ public class pickup : MonoBehaviour
     [SerializeField] healthItems itemPickup; // added this
     [SerializeField] speedItems speedPickup; // Cade
     [SerializeField] jumpItems jumpPickup; // Cade
+    [SerializeField] InvincibleItems invinciblePickup;
 
     public int quantity = 1; //Tenia
 
@@ -42,6 +43,9 @@ public class pickup : MonoBehaviour
             if (itemPickup != null)
             {
                 pickupReceiver.getHealthItemStats(itemPickup);
+                var clips = itemPickup.pickupSound;
+                var clip = clips[Random.Range(0, clips.Length)];
+                AudioSource.PlayClipAtPoint(clip, transform.position, itemPickup.pickupSoundVol);
                 playerInventorySystem playerInventory = other.GetComponent<playerInventorySystem>();//Tenia
                 if (playerInventory != null)
                 {
@@ -57,6 +61,9 @@ public class pickup : MonoBehaviour
             if (speedPickup != null)
             {
                 pickupReceiver.getSpeedItemStats(speedPickup); // Cade
+                var clips = speedPickup.pickupSound;
+                var clip = clips[Random.Range(0, clips.Length)];
+                AudioSource.PlayClipAtPoint(clip, transform.position, speedPickup.pickupSoundVol);
                 playerInventorySystem playerInventory = other.GetComponent<playerInventorySystem>();//Tenia
                 if (playerInventory != null)
                 {
@@ -72,6 +79,9 @@ public class pickup : MonoBehaviour
             if (jumpPickup != null)
             {
                 pickupReceiver.getJumpItemStats(jumpPickup); // Cade
+                var clips = jumpPickup.pickupSound;
+                var clip = clips[Random.Range(0, clips.Length)];
+                AudioSource.PlayClipAtPoint(clip, transform.position, jumpPickup.pickupSoundVol);
                 playerInventorySystem playerInventory = other.GetComponent<playerInventorySystem>(); //Tenia
                 if (playerInventory != null)
                 {
@@ -84,6 +94,24 @@ public class pickup : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-        
+
+        if (invinciblePickup != null)
+        {
+            pickupReceiver.getInvincibleStats(invinciblePickup);
+            var clips = invinciblePickup.pickupSound;
+            var clip = clips[Random.Range(0, clips.Length)];
+            AudioSource.PlayClipAtPoint(clip, transform.position, invinciblePickup.pickupSoundVol);
+            playerInventorySystem playerInventory = other.GetComponent<playerInventorySystem>();
+            if (playerInventory != null)
+            {
+                quantity = playerInventory.PickupItem(invinciblePickup, quantity);
+                if (quantity <= 0)
+                {
+                    Destroy(gameObject);
+                }
+            }
+            Destroy(gameObject);
+        }
+
     }
 }

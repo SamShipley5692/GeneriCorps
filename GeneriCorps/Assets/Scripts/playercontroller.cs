@@ -199,6 +199,13 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
         gameManager.instance.playerDamageScreen.SetActive(false);
     }
 
+    IEnumerator flashHealthScreen()
+    {
+        gameManager.instance.playerHealthScreen.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        gameManager.instance.playerHealthScreen.SetActive(false);
+    }
+
     public void getWeaponStats(weaponStats weapon)
     {
         weaponInv.Add(weapon);
@@ -238,6 +245,8 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
             hp = HPOrig;
         }
         updatePlayerUI();
+
+        StartCoroutine(flashHealthScreen());
     }
 
     public void getSpeedItemStats(speedItems item) // Cade 
@@ -279,4 +288,19 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
                 Debug.Log("Character has died.");
             }
         }
+
+    public void getInvincibleStats(InvincibleItems item)
+    {
+        StartCoroutine(applyInvincibilityBuff(item.buffDuration));
     }
+
+    private IEnumerator applyInvincibilityBuff(float duration)
+    {
+        controller.detectCollisions = false;
+
+        yield return new WaitForSeconds(duration);
+
+        controller.detectCollisions = true;
+    }
+
+}

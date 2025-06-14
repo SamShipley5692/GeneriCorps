@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemModel: {fileID: 97115191286189501, guid: 5f0c5b5a893a3e74f90248bdb9812ada, type: 3}
   jumpForceAmount: 10
-  pickupSound: []
-  pickupSoundVol: 0
+  pickupSound:
+  - {fileID: 8300000, guid: 11a7e71782ae6430390d783bc08409df, type: 3}
+  pickupSoundVol: 1
   buffDuration: 10
   itemType: 1
   isStackable: 1

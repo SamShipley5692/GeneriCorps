@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemModel: {fileID: 4905224105322391774, guid: 06cf3c4f08d55674baec259928bdd00c, type: 3}
   healthAmount: 10
-  pickupSound: []
-  pickupSoundVol: 0.5
+  pickupSound:
+  - {fileID: 8300000, guid: 11a7e71782ae6430390d783bc08409df, type: 3}
+  pickupSoundVol: 1
   itemType: 1
   isStackable: 1
   maxStackSize: 5
