@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using Holistic3D.Inventory;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
 public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
 {
     [SerializeField] CharacterController controller;
@@ -19,6 +22,25 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
     public float jump;
     public float Speed = 10;
     private float moveInput;
+    public GameObject player;
+    bool grounded;
+    private float mobileInput;
+    private int ammo = 10;
+    private int Hp = 100;
+    public Text HP;
+    public Text ammoammount;
+    public GameObject bulletEmitter;
+    public GameObject bulletprefab;
+    private int grapesdead = 0;
+    public Image winning;
+    public GameObject grape1;
+    public GameObject grape2;
+    private bool g1; 
+    private bool g2;
+    private bool shielded;
+    [SerializeField]
+    private GameObject shield;
+
 
     bool isPlayingStep;
     bool isSprinting;
@@ -57,6 +79,8 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        shielded = false;
+        grounded = true;
         jumpForceOrig = jumpForce;
         speedOrig = speed;
         HPOrig = hp;
