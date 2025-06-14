@@ -10,38 +10,44 @@ namespace Holistic3D.Inventory
         public jumpItems _jumpItems;
         public healthItems _healthItems;
         public InvincibleItems _invincibleItems;
-        
         public int quantity;
+
+        private itemButtonSettings itemButton;
         
 
         public inventorySlot(weaponStats weapon, int q)
         {
             _weaponStats = weapon;
             quantity = q;
+            itemButton = InventoryPanelManager.instance.CreateInventoryButton(weapon);
         }
 
         public inventorySlot(healthItems pickup, int q)
         {
             _healthItems = pickup;
             quantity = q;
+            itemButton = InventoryPanelManager.instance.CreateInventoryButton(pickup);
         }
 
         public inventorySlot(speedItems pickup, int q)
         {
             _speedItems = pickup;
             quantity = q;
+            itemButton = InventoryPanelManager.instance.CreateInventoryButton(pickup);
         }
 
         public inventorySlot(jumpItems pickup, int q)
         {
            _jumpItems = pickup;
             quantity = q;
+            itemButton = InventoryPanelManager.instance.CreateInventoryButton(pickup);
         }
 
         public inventorySlot(InvincibleItems pickup, int q)
         {
             _invincibleItems = pickup;
             quantity = q;
+            itemButton = InventoryPanelManager.instance.CreateInventoryButton(pickup);
         }
 
         public bool IsEmpty()

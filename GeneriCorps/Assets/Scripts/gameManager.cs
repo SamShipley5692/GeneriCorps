@@ -36,8 +36,8 @@ public class gameManager : MonoBehaviour
         playerScript = player.GetComponent<playercontroller>();
         timeScaleOriginal = Time.timeScale;
 
-        //Cursor.visible = false;
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame

@@ -23,5 +23,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b7f8695cf65a4f24eb37544298821146, type: 3}
   shootSoundVol: 0.5
   itemType: 0
+  icon: {fileID: 78907373, guid: 3cfa3b52b2d72aa4ba6279592b12b39a, type: 3}
   isStackable: 0
   maxStackSize: 1
