@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Holistic3D.Inventory
 {
@@ -18,6 +19,7 @@ namespace Holistic3D.Inventory
 
         //Tenia
         public ItemType itemType;
+        public Sprite icon;
         public bool isStackable;
         public int maxStackSize;
     }
