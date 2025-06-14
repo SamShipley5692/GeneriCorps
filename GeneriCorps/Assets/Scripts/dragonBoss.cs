@@ -244,26 +244,26 @@ public class dragonBoss : MonoBehaviour, IDamage
 
         //if (anim.GetBool("isMoving") == true)
         //    changePos();
-        isInvulnerable = true;
-        anim.SetBool("isMoving", true);
+        //isInvulnerable = true;
+        //anim.SetBool("isMoving", true);
 
-        if (effectAudio != null && audWalk.Length > 0)
-        {
-            if (!isPlayingStep)
-                StartCoroutine(PlayStep());
-        }
+        //if (effectAudio != null && audWalk.Length > 0)
+        //{
+        //    if (!isPlayingStep)
+        //        StartCoroutine(PlayStep());
+        //}
 
-        if (agent.remainingDistance < 0.01f)
-        {
-            int ranIndex = Random.Range(0, groundPos.Length);
-            Transform ranPos = groundPos[ranIndex];
-            //agent.destination = ranPos.position;
-            gameObject.transform.position = Vector3.MoveTowards(transform.position, ranPos.position, agent.speed * Time.deltaTime);
+        //if (agent.remainingDistance < 0.01f)
+        //{
+        //    int ranIndex = Random.Range(0, groundPos.Length);
+        //    Transform ranPos = groundPos[ranIndex];
+        //    //agent.destination = ranPos.position;
+        //    gameObject.transform.position = Vector3.MoveTowards(transform.position, ranPos.position, agent.speed * Time.deltaTime);
 
-        }
+        //}
 
-        anim.SetBool("isMoving", false);
-        isInvulnerable = false;
+        //anim.SetBool("isMoving", false);
+        //isInvulnerable = false;
 
     }
 

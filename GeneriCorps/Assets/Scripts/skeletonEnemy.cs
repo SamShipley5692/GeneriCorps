@@ -19,33 +19,26 @@ public class skeletonEnemy : MonoBehaviour, IDamage
     [SerializeField][Range(1, 5)] int roamPauseTime;
     [SerializeField][Range(1, 30)] int animTransSpeed;
     [SerializeField][Range(0.1f, 2)] float attackRate;
-    [SerializeField][Range(0.1f, 5)] int enemyDestroyTime;
-    //[SerializeField][Range(0, 10)] int minKillCount;
-
-    Color colorOrig;
+    [SerializeField][Range(0.1f, 15)] float deathScaleDuration;
 
     Vector3 playerDir;
     Vector3 startingPos;
+    Vector3 startScale;
 
     float attackTimer;
     float angleToPlayer;
     float roamTimer;
     float stoppingDistOrig;
-    float dropTimer;
-
-    //int goalCountOrig;
 
     bool playerInRange;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        colorOrig = model.material.color;
         anim = GetComponent<Animator>();
-        //gameManager.instance.updateGameGoal(1);
         startingPos = transform.position;
         stoppingDistOrig = agent.stoppingDistance;
-        //goalCountOrig = gameManager.instance.getGameGoalCount();
+        startScale = transform.localScale;
 
         if (weaponCol)
             weaponCol.enabled = false;
@@ -70,6 +63,11 @@ public class skeletonEnemy : MonoBehaviour, IDamage
         else if (!playerInRange)
         {
             checkRoam();
+        }
+
+        if (Input.GetKeyDown(KeyCode.K)) // for testing purposes remove later
+        { 
+            StartCoroutine(scaleDown());
         }
     }
 
@@ -159,29 +157,33 @@ public class skeletonEnemy : MonoBehaviour, IDamage
 
         if (HP <= 0)
         {
-            dropTimer += Time.deltaTime;
             gameManager.instance.updateGameGoal(-1);
             playerInRange = false;
             anim.SetTrigger("die");
             gameObject.GetComponent<Collider>().enabled = false;
-            Destroy(gameObject, enemyDestroyTime);
+            
+            StartCoroutine(scaleDown());
 
-            if (dropTimer > enemyDestroyTime)
-                OnDestroy();
-
+            OnDestroy();
         }
         else
         {
-            StartCoroutine(flashRed());
             anim.SetTrigger("damage");
         }
     }
 
-    IEnumerator flashRed()
+    IEnumerator scaleDown()
     {
-        model.material.color = Color.red;
-        yield return new WaitForSeconds(0.05f);
-        model.material.color = colorOrig;
+        float time = 0;
+
+        while (time < deathScaleDuration)
+        {
+            float scaleY = Mathf.Lerp(startScale.y, 0f, time / deathScaleDuration);
+            transform.localScale = new Vector3(startScale.x, scaleY, startScale.z);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        Destroy(gameObject);
     }
 
     void faceTarget()
@@ -210,13 +212,8 @@ public class skeletonEnemy : MonoBehaviour, IDamage
 
     private void OnDestroy()
     {
-        // if goalCountOrig = 5 and minKillCount = 3, then 5 - 3 = 2 so if current count is <= 2, drop item 
-
-        //if (gameManager.instance.getGameGoalCount() <= (goalCountOrig - minKillCount))
-        //{
         if (itemToDrop)
-            Instantiate(itemToDrop, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), Quaternion.identity);
-        //}
+            Instantiate(itemToDrop, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
     }
 
 }

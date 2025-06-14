@@ -23,23 +23,16 @@ public class GiantAI : MonoBehaviour, IDamage
     [SerializeField][Range(1,5)] int roamPauseTime;
     [SerializeField][Range(1,30)] int animTransSpeed;
     [SerializeField][Range(0.1f,2)] float attackRate;
-    [SerializeField][Range(0.1f, 5)] int enemyDestoryTime;
-    int miniKillCount;
-   
+    [SerializeField][Range(0.1f, 15)] float deathScaleDuration;
 
     Vector3 playerDir;
     Vector3 startingPos;
-
-    Color colorOrig;
-
+    Vector3 startScale;
 
     float attackTimer;
     float angleToPlayer;
     float roamTimer;
     float stoppingDistOrig;
-    float dropTimer;
-
-    int goalCountOrig;
 
     bool playerInRange;
 
@@ -48,10 +41,8 @@ public class GiantAI : MonoBehaviour, IDamage
     void Start()
     {
         anim = GetComponent<Animator>();
-        //gameManager.instance.updateGameGoal(1);
         startingPos = transform.position;
         stoppingDistOrig = agent.stoppingDistance;
-        goalCountOrig = gameManager.instance.getGameGoalCount();
     }
 
     // Update is called once per frame
@@ -158,8 +149,24 @@ public class GiantAI : MonoBehaviour, IDamage
         {
             gameManager.instance.updateGameGoal(-1);
             anim.SetTrigger("die");
-            Destroy(gameObject);
+            StartCoroutine(scaleDown());
+
+            OnDestroy();
         }
+    }
+
+    IEnumerator scaleDown()
+    {
+        float time = 0;
+
+        while (time < deathScaleDuration)
+        {
+            float scaleY = Mathf.Lerp(startScale.y, 0f, time / deathScaleDuration);
+            transform.localScale = new Vector3(startScale.x, scaleY, startScale.z);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        Destroy(gameObject);
     }
 
     void faceTarget()
@@ -187,11 +194,8 @@ public class GiantAI : MonoBehaviour, IDamage
 
     private void OnDestroy()
     {
-        if(gameManager.instance.getGameGoalCount() <= (goalCountOrig - miniKillCount))
-        {
             if (itemToDrop)
                 Instantiate(itemToDrop, new Vector3(transform.position.x, transform.position.y + 4, transform.position.z), Quaternion.identity);
-        }
     }
 
 
