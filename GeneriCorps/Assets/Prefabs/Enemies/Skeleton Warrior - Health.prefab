@@ -263,7 +263,7 @@ MonoBehaviour:
   roamPauseTime: 3
   animTransSpeed: 12
   attackRate: 1.5
-  deathScaleDuration: 0.1
+  deathScaleDuration: 3
 --- !u!95 &6561218963953672023
 Animator:
   serializedVersion: 7

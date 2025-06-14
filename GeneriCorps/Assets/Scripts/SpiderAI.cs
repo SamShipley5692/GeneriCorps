@@ -23,12 +23,11 @@ public class SpiderAI : MonoBehaviour, IDamage
     [SerializeField][Range(1, 20)] float roamDist;
     [SerializeField][Range(1,5)] float roamPause;
     [SerializeField][Range(0.1f, 2)] float attackRate;
-    [SerializeField][Range(0.1f, 5)] int enemyDestroyTime;
+    [SerializeField][Range(0.1f, 15)] float deathScaleDuration;
 
-    Color colorOrig;
-   
     Vector3 startingPOS;
     Vector3 playerDir;
+    Vector3 startScale;
 
     float attackTimer;
     float roamTimer;
@@ -40,7 +39,6 @@ public class SpiderAI : MonoBehaviour, IDamage
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        colorOrig = Model.material.color;
         //COMMENTED CODE GIVING ERRORS 
         anim = GetComponent<Animator>();
         startingPOS = transform.position;
@@ -174,15 +172,15 @@ public class SpiderAI : MonoBehaviour, IDamage
     {
         HP -= amount;
         agent.SetDestination(gameManager.instance.player.transform.position);
-        StartCoroutine(flashRed());
+
         if (HP <= 0)
         {
             dropTimer += Time.deltaTime;
             gameManager.instance.updateGameGoal(-1);
             anim.SetTrigger("die");
-            Destroy(gameObject, enemyDestroyTime);
-            if (dropTimer > enemyDestroyTime)
-                OnDestroy();
+
+            StartCoroutine(scaleDown());
+            OnDestroy();
         }
         else 
         {
@@ -190,11 +188,18 @@ public class SpiderAI : MonoBehaviour, IDamage
         }
     }
 
-    IEnumerator flashRed()
+    IEnumerator scaleDown()
     {
-        Model.material.color = Color.red;
-        yield return null;
-        Model.material.color = colorOrig;
+        float time = 0;
+
+        while (time < deathScaleDuration)
+        {
+            float scaleY = Mathf.Lerp(startScale.y, 0f, time / deathScaleDuration);
+            transform.localScale = new Vector3(startScale.x, scaleY, startScale.z);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        Destroy(gameObject);
     }
 
     private void OnDestroy()

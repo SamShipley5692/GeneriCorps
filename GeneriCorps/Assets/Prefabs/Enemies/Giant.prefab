@@ -1832,7 +1832,7 @@ MonoBehaviour:
   roamPauseTime: 3
   animTransSpeed: 5
   attackRate: 2
-  enemyDestoryTime: 2
+  deathScaleDuration: 3
 --- !u!95 &7415762461010983797
 Animator:
   serializedVersion: 7
