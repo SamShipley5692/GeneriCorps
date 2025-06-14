@@ -25,6 +25,16 @@ public class SpiderAI : MonoBehaviour, IDamage
     [SerializeField][Range(0.1f, 2)] float attackRate;
     [SerializeField][Range(0.1f, 15)] float deathScaleDuration;
 
+    [SerializeField] AudioSource effectAudio;
+    [SerializeField] AudioClip[] audDeath;
+    [Range(0, 1)][SerializeField] float audDeathVol;
+    [SerializeField] AudioClip[] audHurt;
+    [Range(0, 1)][SerializeField] float audHurtVol;
+    [SerializeField] AudioClip[] audWalk;
+    [Range(0, 1)][SerializeField] float audWalkVol;
+    [SerializeField] AudioClip[] audAttack;
+    [Range(0, 1)][SerializeField] float audAttackVol;
+
     Vector3 startingPOS;
     Vector3 playerDir;
     Vector3 startScale;
@@ -36,6 +46,8 @@ public class SpiderAI : MonoBehaviour, IDamage
     float dropTimer;
 
     bool playerInRange;
+    bool isPlayingStep;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -85,6 +97,12 @@ public class SpiderAI : MonoBehaviour, IDamage
 
     private void DoRoam()
     {
+        if (effectAudio != null && audWalk.Length > 0)
+        {
+            if (!isPlayingStep)
+                StartCoroutine(PlayStep());
+        }
+
         if (agent.remainingDistance < 0.01f)
         {
             roamTimer += Time.deltaTime;
@@ -101,6 +119,16 @@ public class SpiderAI : MonoBehaviour, IDamage
                 roamTimer = 0f;
             }
         }
+    }
+
+    IEnumerator PlayStep()
+    {
+        isPlayingStep = true; // isPlayingFlight
+        effectAudio.PlayOneShot(audWalk[Random.Range(0, audWalk.Length)], audWalkVol);
+
+        yield return new WaitForSeconds(0.4f);
+
+        isPlayingStep = false;
     }
 
     private bool CanSeePlayer()
@@ -175,6 +203,10 @@ public class SpiderAI : MonoBehaviour, IDamage
 
         if (HP <= 0)
         {
+            if (effectAudio != null && audDeath.Length > 0)
+            {
+                effectAudio.PlayOneShot(audDeath[Random.Range(0, audDeath.Length)], audDeathVol);
+            }
             dropTimer += Time.deltaTime;
             gameManager.instance.updateGameGoal(-1);
             anim.SetTrigger("die");
@@ -184,6 +216,10 @@ public class SpiderAI : MonoBehaviour, IDamage
         }
         else 
         {
+            if (effectAudio != null && audHurt.Length > 0)
+            {
+                effectAudio.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVol);
+            }
             anim.SetTrigger("damage");
         }
     }
