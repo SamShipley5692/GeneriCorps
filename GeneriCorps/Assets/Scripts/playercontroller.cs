@@ -6,11 +6,21 @@ using Holistic3D.Inventory;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
+public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen, IMovement, IAction
 {
     [SerializeField] CharacterController controller;
     [SerializeField] LayerMask ignoreLayer;
     [SerializeField] AudioSource aud;
+
+    // Status Effects
+    [SerializeField] StatusEffectPoison poisonEffect;
+    [SerializeField] StatusEffectOnFire fireEffect;
+    [SerializeField] StatusEffectFreeze freezeEffect;
+
+    [SerializeField] private gameManager gameManager;
+
+
+
 
     // World 
     [SerializeField] int gravity;
@@ -52,6 +62,7 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
     [SerializeField] int hp;
     [SerializeField] int speed;
     [SerializeField] int sprintMod;
+    
 
     [SerializeField] int jumpMax;
     [SerializeField] int jumpForce;
@@ -75,6 +86,12 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
 
     int weaponInvPos;
     [SerializeField] List<weaponStats> weaponInv = new List<weaponStats>();
+
+    // Status effect controls
+    public bool canMove = true;
+    public bool canAct = true;
+
+    public int health = 100;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -300,19 +317,6 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
         jumpForce = jumpForceOrig;
     }
 
-        // updated for status effect poison
-        public int health = 100;
-
-        public void TakeDamage(int amount)
-        {
-            health -= amount;
-            if (health <= 0)
-            {
-                
-                Debug.Log("Character has died.");
-            }
-        }
-
     public void getInvincibleStats(InvincibleItems item)
     {
         StartCoroutine(applyInvincibilityBuff(item.buffDuration));
@@ -327,4 +331,39 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen
         controller.detectCollisions = true;
     }
 
+    //Added for status effect control
+    public void ApplyFireEffect()
+    {
+        if (fireEffect != null)
+            fireEffect.Ignite();
+    }
+
+    public void ApplyPoisonEffect()
+    {
+        if (poisonEffect != null)
+            poisonEffect.ApplyPoison();
+    }
+
+    public void ApplyFreezeEffect()
+    {
+        if (freezeEffect != null)
+            freezeEffect.ApplyFreeze();
+    }
+
+    public void DisableMovement() => canMove = false;
+    public void EnableMovement() => canMove = true;
+
+    public void DisableActions() => canAct = false;
+    public void EnableActions() => canAct = true;
 }
+//trying to restore checkpoint but having issues with gamemanager will check on this later on
+//public void RestoreToCheckpoint()
+//{
+    //hp = HPOrig;
+    //health = HPOrig;
+    //updatePlayerUI();
+//}
+
+
+
+

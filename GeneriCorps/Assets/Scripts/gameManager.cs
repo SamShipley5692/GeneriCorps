@@ -101,4 +101,25 @@ public class gameManager : MonoBehaviour
     {
         return gameGoalCount;
     }
+
+    public Vector3 savedCheckpointPos;
+
+    public void SetCheckpoint(Vector3 pos, GameObject player)
+    {
+        savedCheckpointPos = pos;
+        
+    }
+
+    // having issues getting this to work with player controller will check back on this later on.
+    //public void RespawnPlayer(GameObject player)
+    //{
+       // player.transform.position = savedCheckpointPos;
+
+        //playercontroller pc = player.GetComponent<playercontroller>();
+        //if (pc != null)
+        //{
+            //pc.RestoreToCheckpoint();
+        //}
+    //}
+
 }

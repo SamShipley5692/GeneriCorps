@@ -30,7 +30,8 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] GameObject projectile;
     [SerializeField] Transform shootPos;
 
-
+    public bool canSeePlayer;
+    private bool isInQueue = false;
 
     Color colorOrig;
 
@@ -153,5 +154,16 @@ public class enemyAI : MonoBehaviour, IDamage
         anim.SetFloat("Speed", navAgent.velocity.normalized.magnitude);
     }
 
-}
+    //adding For PoliteAiQueue 
+    public void EnableAttack()
+    {
+        canSeePlayer = true;
+        shootTimer = shootRate; 
+    }
 
+    public void WaitInQueue()
+    {
+        canSeePlayer = false;
+        navAgent.SetDestination(transform.position); 
+    }
+}
