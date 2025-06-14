@@ -19,5 +19,6 @@ MonoBehaviour:
   pickupSoundVol: 1
   buffDuration: 10
   itemType: 1
+  icon: {fileID: 1897816424, guid: 2ecf769f2ffc3ff49a10aa85ad0accfb, type: 3}
   isStackable: 1
   maxStackSize: 5

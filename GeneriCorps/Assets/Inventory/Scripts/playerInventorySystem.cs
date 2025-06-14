@@ -1,4 +1,5 @@
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,15 +9,19 @@ namespace Holistic3D.Inventory
     {
         public InventorySystem inventorySystem;
         public InputAction dropAction;
+        public InputAction inventoryAction;
         public weaponStats weaponDrop;
         public jumpItems jumpItemDrop;
         public healthItems healthItemDrop;
         public speedItems speedItemDrop;
         public InvincibleItems invincibleItemsDrop;
+        [SerializeField] InventoryPanelManager inventoryPanelManager;
 
         private void Start()
         {
             dropAction = InputSystem.actions.FindAction("Drop");
+            inventoryAction = InputSystem.actions.FindAction("Inventory");
+            inventoryPanelManager.gameObject.SetActive(false);
         }
 
         private void Update()
@@ -29,8 +34,26 @@ namespace Holistic3D.Inventory
                 DropItem(speedItemDrop, 1);
                 DropItem(invincibleItemsDrop, 1);
             }
-            
+            else if(inventoryAction.WasPressedThisFrame())
+            {
+                OpenCloseInventory();
+            }
 
+        }
+
+        public void OpenCloseInventory()
+        {
+            inventoryPanelManager.gameObject.SetActive(!inventoryPanelManager.gameObject.activeSelf);
+            if(inventoryPanelManager.gameObject.activeSelf)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            else if(!inventoryPanelManager.gameObject.activeSelf)
+            {
+                Cursor.lockState= CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
         }
 
         public int PickupItem(weaponStats weapon, int q)

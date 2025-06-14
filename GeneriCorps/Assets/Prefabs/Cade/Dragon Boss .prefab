@@ -3958,7 +3958,16 @@ MonoBehaviour:
   roamDist: 10
   roamPause: 1
   shootRate: 0.97
-  enemyDestroyTime: 1
+  deathScaleDuration: 0.1
+  effectAudio: {fileID: 0}
+  audDeath: []
+  audDeathVol: 0
+  audHurt: []
+  audHurtVol: 0
+  audWalk: []
+  audWalkVol: 0
+  audAttack: []
+  audAttackVol: 0
 --- !u!195 &386037600839686931
 NavMeshAgent:
   m_ObjectHideFlags: 0

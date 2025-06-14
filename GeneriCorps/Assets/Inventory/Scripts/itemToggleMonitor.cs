@@ -22,6 +22,7 @@ namespace Holistic3D.Inventory
                         HandleToggleChanged(toggle);
                     }
                 });
+                if (toggle.isOn) InventoryPanelManager.instance.FilterItemsByType(toggle.GetComponent<ToggleItemType>().toggleItemType);
             }
         }
 
@@ -31,7 +32,7 @@ namespace Holistic3D.Inventory
             {
                 lastSelectedToggle = selectToggle;
                 ItemType selectedType = selectToggle.GetComponent<ToggleItemType>().toggleItemType;
-                Debug.Log("Toggle Selected + " + selectedType);
+                InventoryPanelManager.instance.FilterItemsByType(selectedType);
             }
         }
     }
