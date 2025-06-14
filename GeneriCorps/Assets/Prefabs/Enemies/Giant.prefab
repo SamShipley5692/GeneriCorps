@@ -1835,9 +1835,15 @@ MonoBehaviour:
   attackRate: 2
   deathScaleDuration: 3
   effectAudio: {fileID: 8484650477012506214}
-  audDeath: []
+  audDeath:
+  - {fileID: 8300000, guid: 8eec252f0ea0fd24c81539c8c401daf8, type: 3}
   audDeathVol: 0.5
-  audHurt: []
+  audHurt:
+  - {fileID: 8300000, guid: 06a1c6a73b4d42c42868e3818abb3e89, type: 3}
+  - {fileID: 8300000, guid: 29fd123bd9504ce488d710eea6a62783, type: 3}
+  - {fileID: 8300000, guid: 947cd7dd556f58b449f35d5dd3f96d4d, type: 3}
+  - {fileID: 8300000, guid: 718e080712ea1c3498cceea2139e8190, type: 3}
+  - {fileID: 8300000, guid: 977a5e3c0915ebe4fbeb9a6d581b53be, type: 3}
   audHurtVol: 0.5
   audWalk: []
   audWalkVol: 0.2
