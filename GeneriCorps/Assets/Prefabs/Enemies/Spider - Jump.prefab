@@ -712,7 +712,8 @@ MonoBehaviour:
   effectAudio: {fileID: 8180002383909649211}
   audDeath: []
   audDeathVol: 0.5
-  audHurt: []
+  audHurt:
+  - {fileID: 8300000, guid: a37f44cbf8c2a7443a3c361efa2f233a, type: 3}
   audHurtVol: 0.5
   audWalk: []
   audWalkVol: 0.2

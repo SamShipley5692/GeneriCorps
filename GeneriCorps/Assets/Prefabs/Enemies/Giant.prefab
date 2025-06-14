@@ -1845,10 +1845,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 718e080712ea1c3498cceea2139e8190, type: 3}
   - {fileID: 8300000, guid: 977a5e3c0915ebe4fbeb9a6d581b53be, type: 3}
   audHurtVol: 0.5
-  audWalk: []
-  audWalkVol: 0.2
-  audAttack: []
-  audAttackVol: 0.5
+  audWalk:
+  - {fileID: 8300000, guid: 9b713c76b05f8b04882a23a60605b0d2, type: 3}
+  audWalkVol: 0.15
+  audAttack:
+  - {fileID: 8300000, guid: 958408b32ccf3714ea02821877b0870c, type: 3}
+  audAttackVol: 0.3
 --- !u!95 &7415762461010983797
 Animator:
   serializedVersion: 7
