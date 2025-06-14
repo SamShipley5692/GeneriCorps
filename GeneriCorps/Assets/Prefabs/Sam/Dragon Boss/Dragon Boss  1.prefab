@@ -394,15 +394,34 @@ MonoBehaviour:
   enemyDestroyTime: 3
   restTime: 3
   effectAudio: {fileID: 5628752723168290585}
-  audRoar: []
+  audRoar:
+  - {fileID: 8300000, guid: bdd60da33f4670045acd99d281053fc3, type: 3}
+  - {fileID: 8300000, guid: 15c66e56cf8113947b264c20ae6a4d62, type: 3}
+  - {fileID: 8300000, guid: 4ff94a45a13d85f41ae639d89c4f8892, type: 3}
+  - {fileID: 8300000, guid: 368a6adcc8ba98945887689d62917cf4, type: 3}
+  - {fileID: 8300000, guid: e6be96a2096869a419ebf560ab1212ab, type: 3}
   audRoarVol: 0.5
-  audHurt: []
+  audHurt:
+  - {fileID: 8300000, guid: 5aa45d78b1d2cd442b8b369f8465cb96, type: 3}
+  - {fileID: 8300000, guid: 28a24316f79076e41af8a0acc77fe4a1, type: 3}
+  - {fileID: 8300000, guid: 898b556d6a94f41488e2cfeeafc6a4e2, type: 3}
+  - {fileID: 8300000, guid: 880b0cace5dde1e44987c35ccfee83f3, type: 3}
   audHurtVol: 0.5
   audWalk: []
   audWalkVol: 0.5
-  audFlame: []
+  audFlame:
+  - {fileID: 8300000, guid: e6be96a2096869a419ebf560ab1212ab, type: 3}
+  - {fileID: 8300000, guid: 6295b2690a99bf740a76981a0e5e95d2, type: 3}
+  - {fileID: 8300000, guid: 4f87885ccdb963e4982ec642752d30ff, type: 3}
+  - {fileID: 8300000, guid: c05b078acd7917d4d8e6d27b8a7be4ab, type: 3}
+  - {fileID: 8300000, guid: bed4dec13ef248045b7cd1356a79f835, type: 3}
+  - {fileID: 8300000, guid: 7d156b8a5b340cd46bcf0a76557dd2dd, type: 3}
   audFlameVol: 0.5
-  audAttack: []
+  audAttack:
+  - {fileID: 8300000, guid: 4d4cc30972dd7214aa50235c26633e4a, type: 3}
+  - {fileID: 8300000, guid: f481e535982fa9d47a14e2d82a3ed58f, type: 3}
+  - {fileID: 8300000, guid: efd419711424d244ba872eaa0d9d0d98, type: 3}
+  - {fileID: 8300000, guid: ac6034ade498bb94b87620cdf6eac48b, type: 3}
   audAttackVol: 0.5
   audFly: []
   audFlyVol: 0.5
