@@ -375,24 +375,14 @@ MonoBehaviour:
   model: {fileID: 3746016663283140264}
   agent: {fileID: 1518782134787575006}
   anim: {fileID: 5886308386468948125}
-  headPos: {fileID: 3241877638726877623}
   arenaCenterPos: {fileID: 0}
-  flyPos:
-  - {fileID: 0}
-  groundPos:
-  - {fileID: 0}
-  - {fileID: 0}
   jawCol: {fileID: 5998222541202841374}
   dragonFire: {fileID: 4010318430241474984}
-  spawnHealer: {fileID: 0}
-  spawnFighter: {fileID: 0}
   dissolveRate: 0.0075
   refreshRate: 0.025
   HP: 5
   faceTargetSpeed: 8
-  animTransSpeed: 12
   enemyDestroyTime: 3
-  restTime: 3
   effectAudio: {fileID: 5628752723168290585}
   audRoar:
   - {fileID: 8300000, guid: bdd60da33f4670045acd99d281053fc3, type: 3}
@@ -407,8 +397,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 898b556d6a94f41488e2cfeeafc6a4e2, type: 3}
   - {fileID: 8300000, guid: 880b0cace5dde1e44987c35ccfee83f3, type: 3}
   audHurtVol: 0.5
-  audWalk: []
-  audWalkVol: 0.5
+  audDeath: []
+  audDeathVol: 0
   audFlame:
   - {fileID: 8300000, guid: e6be96a2096869a419ebf560ab1212ab, type: 3}
   - {fileID: 8300000, guid: 6295b2690a99bf740a76981a0e5e95d2, type: 3}
@@ -423,8 +413,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: efd419711424d244ba872eaa0d9d0d98, type: 3}
   - {fileID: 8300000, guid: ac6034ade498bb94b87620cdf6eac48b, type: 3}
   audAttackVol: 0.5
-  audFly: []
-  audFlyVol: 0.5
 --- !u!195 &1518782134787575006
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -457,7 +445,7 @@ Animator:
   m_GameObject: {fileID: 897280000597923031}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 6294396a7eba544449e00ea3c3d045e3, type: 2}
-  m_Controller: {fileID: 9100000, guid: 51db74d569e736c4f879043a898c1b20, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5c72683acebab264091df6500c64ae84, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
