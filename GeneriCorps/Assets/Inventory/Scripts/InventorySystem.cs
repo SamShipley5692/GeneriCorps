@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 
 
 namespace Holistic3D.Inventory 
@@ -9,6 +10,7 @@ namespace Holistic3D.Inventory
     {
         public List<inventorySlot> slots = new List<inventorySlot>();
         public int maxSlots = 20;
+        public playerInventorySystem playerInventorySystem;
 
         public int AddItem(weaponStats weapon, int q)
         {
@@ -25,11 +27,11 @@ namespace Holistic3D.Inventory
                 {
                     if(slot._weaponStats == weapon)
                     {
-                        int spaceInStack = weapon.maxStackSize - slot.quantity;
+                        int spaceInStack = weapon.maxStackSize - slot.Quantity;
                         if (spaceInStack > 0)
                         {
                             int itemsToAdd = Mathf.Min(remainingItems, spaceInStack);
-                            slot.quantity += itemsToAdd;
+                            slot.Quantity += itemsToAdd;
                             remainingItems -= itemsToAdd;
 
                             if(remainingItems <= 0)
@@ -66,11 +68,11 @@ namespace Holistic3D.Inventory
                 {
                     if (slot._jumpItems == pickup)
                     {
-                        int spaceInStack = pickup.maxStackSize - slot.quantity;
+                        int spaceInStack = pickup.maxStackSize - slot.Quantity;
                         if (spaceInStack > 0)
                         {
                             int itemsToAdd = Mathf.Min(remainingItems, spaceInStack);
-                            slot.quantity += itemsToAdd;
+                            slot.Quantity += itemsToAdd;
                             remainingItems -= itemsToAdd;
 
                             if (remainingItems <= 0)
@@ -106,11 +108,11 @@ namespace Holistic3D.Inventory
                 {
                     if (slot._healthItems == pickup)
                     {
-                        int spaceInStack = pickup.maxStackSize - slot.quantity;
+                        int spaceInStack = pickup.maxStackSize - slot.Quantity;
                         if (spaceInStack > 0)
                         {
                             int itemsToAdd = Mathf.Min(remainingItems, spaceInStack);
-                            slot.quantity += itemsToAdd;
+                            slot.Quantity += itemsToAdd;
                             remainingItems -= itemsToAdd;
 
                             if (remainingItems <= 0)
@@ -146,11 +148,11 @@ namespace Holistic3D.Inventory
                 {
                     if (slot._speedItems == pickup)
                     {
-                        int spaceInStack = pickup.maxStackSize - slot.quantity;
+                        int spaceInStack = pickup.maxStackSize - slot.Quantity;
                         if (spaceInStack > 0)
                         {
                             int itemsToAdd = Mathf.Min(remainingItems, spaceInStack);
-                            slot.quantity += itemsToAdd;
+                            slot.Quantity += itemsToAdd;
                             remainingItems -= itemsToAdd;
 
                             if (remainingItems <= 0)
@@ -187,11 +189,11 @@ namespace Holistic3D.Inventory
                 {
                     if (slot._invincibleItems == pickup)
                     {
-                        int spaceInStack = pickup.maxStackSize - slot.quantity;
+                        int spaceInStack = pickup.maxStackSize - slot.Quantity;
                         if (spaceInStack > 0)
                         {
                             int itemsToAdd = Mathf.Min(remainingItems, spaceInStack);
-                            slot.quantity += itemsToAdd;
+                            slot.Quantity += itemsToAdd;
                             remainingItems -= itemsToAdd;
 
                             if (remainingItems <= 0)
@@ -218,7 +220,7 @@ namespace Holistic3D.Inventory
             int remainingItems = quantity;
             List<inventorySlot> slotsWithItem = slots.Where(s => s._weaponStats == weapon).ToList();
 
-            int totalAvailableItems = slotsWithItem.Sum(s => s.quantity);
+            int totalAvailableItems = slotsWithItem.Sum(s => s.Quantity);
             if(remainingItems > totalAvailableItems && !removePartial)
             {
                 return quantity;
@@ -231,15 +233,15 @@ namespace Holistic3D.Inventory
                     break;
                 }
 
-                if(slot.quantity < remainingItems)
+                if(slot.Quantity < remainingItems)
                 {
-                    remainingItems -= slot.quantity;
+                    remainingItems -= slot.Quantity;
                     slot.ClearSlot();
                     slots.Remove(slot);
                 }
                 else
                 {
-                    slot.quantity -= remainingItems;
+                    slot.Quantity -= remainingItems;
                     remainingItems = 0;
                 }
             }
@@ -251,7 +253,7 @@ namespace Holistic3D.Inventory
             int remainingitems = quantity;
             List<inventorySlot> slotsWithItem = slots.Where(s => s._jumpItems == pickup).ToList();
 
-            int totalAvailableItems = slotsWithItem.Sum(s => s.quantity);
+            int totalAvailableItems = slotsWithItem.Sum(s => s.Quantity);
             if (remainingitems > totalAvailableItems && !removePartial)
             {
                 return quantity;
@@ -264,15 +266,15 @@ namespace Holistic3D.Inventory
                     break;
                 }
 
-                if (slot.quantity < remainingitems)
+                if (slot.Quantity < remainingitems)
                 {
-                    remainingitems -= slot.quantity;
+                    remainingitems -= slot.Quantity;
                     slot.ClearSlot();
                     slots.Remove(slot);
                 }
                 else
                 {
-                    slot.quantity -= remainingitems;
+                    slot.Quantity -= remainingitems;
                     remainingitems = 0;
                 }
             }
@@ -284,7 +286,7 @@ namespace Holistic3D.Inventory
             int remainingitems = quantity;
             List<inventorySlot> slotsWithItem = slots.Where(s => s._speedItems == pickup).ToList();
 
-            int totalAvailableItems = slotsWithItem.Sum(s => s.quantity);
+            int totalAvailableItems = slotsWithItem.Sum(s => s.Quantity);
             if (remainingitems > totalAvailableItems && !removePartial)
             {
                 return quantity;
@@ -297,15 +299,15 @@ namespace Holistic3D.Inventory
                     break;
                 }
 
-                if (slot.quantity < remainingitems)
+                if (slot.Quantity < remainingitems)
                 {
-                    remainingitems -= slot.quantity;
+                    remainingitems -= slot.Quantity;
                     slot.ClearSlot();
                     slots.Remove(slot);
                 }
                 else
                 {
-                    slot.quantity -= remainingitems;
+                    slot.Quantity -= remainingitems;
                     remainingitems = 0;
                 }
             }
@@ -317,7 +319,7 @@ namespace Holistic3D.Inventory
             int remainingitems = quantity;
             List<inventorySlot> slotsWithItem = slots.Where(s => s._healthItems == pickup).ToList();
 
-            int totalAvailableItems = slotsWithItem.Sum(s => s.quantity);
+            int totalAvailableItems = slotsWithItem.Sum(s => s.Quantity);
             if (remainingitems > totalAvailableItems && !removePartial)
             {
                 return quantity;
@@ -330,15 +332,15 @@ namespace Holistic3D.Inventory
                     break;
                 }
 
-                if (slot.quantity < remainingitems)
+                if (slot.Quantity < remainingitems)
                 {
-                    remainingitems -= slot.quantity;
+                    remainingitems -= slot.Quantity;
                     slot.ClearSlot();
                     slots.Remove(slot);
                 }
                 else
                 {
-                    slot.quantity -= remainingitems;
+                    slot.Quantity -= remainingitems;
                     remainingitems = 0;
                 }
             }
@@ -350,7 +352,7 @@ namespace Holistic3D.Inventory
             int remainingitems = quantity;
             List<inventorySlot> slotsWithItem = slots.Where(s => s._invincibleItems == pickup).ToList();
 
-            int totalAvailableItems = slotsWithItem.Sum(s => s.quantity);
+            int totalAvailableItems = slotsWithItem.Sum(s => s.Quantity);
             if (remainingitems > totalAvailableItems && !removePartial)
             {
                 return quantity;
@@ -363,20 +365,89 @@ namespace Holistic3D.Inventory
                     break;
                 }
 
-                if (slot.quantity < remainingitems)
+                if (slot.Quantity < remainingitems)
                 {
-                    remainingitems -= slot.quantity;
+                    remainingitems -= slot.Quantity;
                     slot.ClearSlot();
                     slots.Remove(slot);
                 }
                 else
                 {
-                    slot.quantity -= remainingitems;
+                    slot.Quantity -= remainingitems;
                     remainingitems = 0;
                 }
             }
             return remainingitems;
         }
+
+        public int RemoveItemFromSlot(inventorySlot slot, int quantity)
+        {
+            if(slot.Quantity >= quantity)
+            {
+                slot.Quantity -= quantity;
+                if (slot.Quantity == 0)
+                {
+                    slot.ClearSlot();
+                    slots.Remove(slot);
+                }
+                DropItem(slot._weaponStats, quantity);
+                return 0;
+            }
+            else
+            {
+                int remainingQuantity = quantity - slot.Quantity;
+                DropItem(slot._weaponStats, slot.Quantity);
+                slot.ClearSlot();
+                slots.Remove(slot);
+                return remainingQuantity;
+            }
+        }
+
+        public void DropItem(weaponStats weapon, int numberDropped)
+        {
+            if(numberDropped > 0)
+            {
+                if(weapon != null)
+                Instantiate(weapon, playerInventorySystem.GetDropPosition(), Quaternion.identity).GetComponent<pickup>().quantity = numberDropped;
+            }
+        }
+
+        public void DropItem(jumpItems pickup, int numberDropped)
+        {
+            if (numberDropped > 0)
+            {
+                
+                Instantiate(pickup, playerInventorySystem.GetDropPosition(), Quaternion.identity).GetComponent<pickup>().quantity = numberDropped;
+            }
+        }
+
+        public void DropItem(speedItems pickup, int numberDropped)
+        {
+            if (numberDropped > 0)
+            {
+                
+                Instantiate(pickup, playerInventorySystem.GetDropPosition(), Quaternion.identity).GetComponent<pickup>().quantity = numberDropped;
+            }
+        }
+
+        public void DropItem(healthItems pickup, int numberDropped)
+        {
+            if (numberDropped > 0)
+            {
+               
+                Instantiate(pickup, playerInventorySystem.GetDropPosition(), Quaternion.identity).GetComponent<pickup>().quantity = numberDropped;
+            }
+        }
+
+        public void DropItem(InvincibleItems pickup, int numberDropped)
+        {
+            if (numberDropped > 0)
+            {
+                
+                Instantiate(pickup, playerInventorySystem.GetDropPosition(), Quaternion.identity).GetComponent<pickup>().quantity = numberDropped;
+            }
+        }
+
 
         public void RemoveItemsFromSlot(int slotNumber)
         {

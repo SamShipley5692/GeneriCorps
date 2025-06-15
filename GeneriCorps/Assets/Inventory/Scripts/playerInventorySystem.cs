@@ -21,7 +21,8 @@ namespace Holistic3D.Inventory
         {
             dropAction = InputSystem.actions.FindAction("Drop");
             inventoryAction = InputSystem.actions.FindAction("Inventory");
-            inventoryPanelManager.gameObject.SetActive(false);
+            inventoryPanelManager.SetPanelVisibility(false);
+            inventorySystem.playerInventorySystem = this;
         }
 
         private void Update()
@@ -43,8 +44,8 @@ namespace Holistic3D.Inventory
 
         public void OpenCloseInventory()
         {
-            inventoryPanelManager.gameObject.SetActive(!inventoryPanelManager.gameObject.activeSelf);
-            if(inventoryPanelManager.gameObject.activeSelf)
+            inventoryPanelManager.TogglePanelVisbility();
+            if (inventoryPanelManager.gameObject.activeSelf)
             {
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
@@ -111,7 +112,6 @@ namespace Holistic3D.Inventory
             int couldntBeDropped = inventorySystem.RemoveItem(weapon, quantity);
             int numberDropped = quantity - couldntBeDropped;
 
-            if(numberDropped > 0)
             {
                 Instantiate(weapon.model, GetDropPosition(), Quaternion.identity);
             }
@@ -162,7 +162,7 @@ namespace Holistic3D.Inventory
             }
         }
 
-        private Vector3 GetDropPosition()
+        public Vector3 GetDropPosition()
         {
             Vector3 playerPosition = transform.position;
             Vector3 forwardDirection = transform.forward;

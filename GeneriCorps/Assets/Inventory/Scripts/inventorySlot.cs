@@ -10,49 +10,61 @@ namespace Holistic3D.Inventory
         public jumpItems _jumpItems;
         public healthItems _healthItems;
         public InvincibleItems _invincibleItems;
-        public int quantity;
+        private int quantity;
 
         private itemButtonSettings itemButton;
-        
+
+        public int Quantity
+        {
+            get => quantity;
+            set
+            {
+                quantity = value < 0 ? 0 : value;
+                if(itemButton != null)
+                {
+                    itemButton.UpdateQuanityDisplay(quantity);
+                }
+            }
+        }
 
         public inventorySlot(weaponStats weapon, int q)
         {
             _weaponStats = weapon;
-            quantity = q;
-            itemButton = InventoryPanelManager.instance.CreateInventoryButton(weapon);
+            itemButton = InventoryPanelManager.instance.CreateInventoryButton(weapon, this);
+            Quantity = q;
         }
 
         public inventorySlot(healthItems pickup, int q)
         {
             _healthItems = pickup;
-            quantity = q;
-            itemButton = InventoryPanelManager.instance.CreateInventoryButton(pickup);
+            itemButton = InventoryPanelManager.instance.CreateInventoryButton(pickup, this);
+            Quantity = q;
         }
 
         public inventorySlot(speedItems pickup, int q)
         {
             _speedItems = pickup;
-            quantity = q;
-            itemButton = InventoryPanelManager.instance.CreateInventoryButton(pickup);
+            itemButton = InventoryPanelManager.instance.CreateInventoryButton(pickup, this);
+            Quantity = q;
         }
 
         public inventorySlot(jumpItems pickup, int q)
         {
            _jumpItems = pickup;
-            quantity = q;
-            itemButton = InventoryPanelManager.instance.CreateInventoryButton(pickup);
+            itemButton = InventoryPanelManager.instance.CreateInventoryButton(pickup, this);
+            Quantity = q;
         }
 
         public inventorySlot(InvincibleItems pickup, int q)
         {
             _invincibleItems = pickup;
-            quantity = q;
-            itemButton = InventoryPanelManager.instance.CreateInventoryButton(pickup);
+            itemButton = InventoryPanelManager.instance.CreateInventoryButton(pickup, this);
+            Quantity = q;
         }
 
         public bool IsEmpty()
         {
-            return _speedItems == null && _weaponStats == null && _jumpItems == null && _healthItems == null && _invincibleItems == null || quantity <= 0;
+            return _speedItems == null && _weaponStats == null && _jumpItems == null && _healthItems == null && _invincibleItems == null || Quantity <= 0;
         }
 
         public void ClearSlot()
@@ -62,37 +74,41 @@ namespace Holistic3D.Inventory
             _jumpItems = null;
             _healthItems = null;
             _invincibleItems = null;
-            quantity = 0;
+            Quantity = 0;
+            if(itemButton != null)
+            {
+               InventoryPanelManager.instance.DestroyInventoryButton(itemButton.gameObject);
+            }
         }
 
         public void SetItem(speedItems newItem, int newQuantity)
         {
             _speedItems = newItem;
-            quantity = newQuantity;
+            Quantity = newQuantity;
         }
 
         public void SetItem(weaponStats newItem, int newQuantity)
         {
             _weaponStats = newItem;
-            quantity = newQuantity;
+            Quantity = newQuantity;
         }
 
         public void SetItem(jumpItems newItem, int newQuantity)
         {
             _jumpItems = newItem;
-            quantity= newQuantity;
+            Quantity = newQuantity;
         }
 
         public void SetItem(healthItems newItem, int newQuantity)
         {
             _healthItems = newItem;
-            quantity = newQuantity;
+            Quantity = newQuantity;
         }
 
         public void SetItem(InvincibleItems newItem, int newQuantity)
         {
             _invincibleItems = newItem;
-            quantity = newQuantity;
+            Quantity = newQuantity;
         }
     }
 }

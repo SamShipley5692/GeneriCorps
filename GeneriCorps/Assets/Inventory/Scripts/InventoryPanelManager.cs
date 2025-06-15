@@ -10,6 +10,8 @@ namespace Holistic3D.Inventory
     {
         [SerializeField] private GameObject itemButtonPrefab;
         [SerializeField] private GameObject itemContainer;
+        [SerializeField] private Button dropButton;
+        [SerializeField] private InventorySystem inventorySystem;
         [SerializeField] private List<weaponStats> allWeapons;
         [SerializeField] private jumpItems jumpPickups;
         [SerializeField] private speedItems speedPickups;
@@ -22,6 +24,7 @@ namespace Holistic3D.Inventory
 
         public static InventoryPanelManager instance { get; private set; }
 
+        private ItemType activeItemTypeTab;
         
 
         private void Awake()
@@ -48,113 +51,117 @@ namespace Holistic3D.Inventory
             }
         }
 
-        void Start()
+        public void SetPanelVisibility(bool isVisible)
         {
-            /*for (int i = 0; i < allWeapons.Count; i++)
-            {
-                GameObject itemButton = Instantiate(itemButtonPrefab, itemContainer.transform);
-                weaponStats thisWeapon = Random.Range(0,2) == 1 ? allWeapons[0] : allWeapons[1];
-                itemButton.GetComponent<itemButtonSettings>().Init(thisWeapon, Random.Range(1, 10));
-                inventoryItemMap.Add(itemButton, thisWeapon.itemType);
-
-                itemButton.GetComponent<Button>().onClick.AddListener(() => ShowItem(thisWeapon.name));
-            }
-
-            for (int i = 0; i < 10; i++)
-            {
-                GameObject itemButton = Instantiate(itemButtonPrefab, itemContainer.transform);
-                jumpItems thisItem = jumpPickups;
-                itemButton.GetComponent<itemButtonSettings>().Init(thisItem, Random.Range(1, 10));
-                inventoryItemMap.Add(itemButton, thisItem.itemType);
-
-                itemButton.GetComponent<Button>().onClick.AddListener(() => ShowItem(thisItem.name));
-
-            }
-
-            for (int i = 0; i < 10; i++)
-            {
-                GameObject itemButton = Instantiate(itemButtonPrefab, itemContainer.transform);
-                speedItems thisItem = speedPickups;
-                itemButton.GetComponent<itemButtonSettings>().Init(thisItem, Random.Range(1, 10));
-                inventoryItemMap.Add(itemButton, thisItem.itemType);
-
-                itemButton.GetComponent<Button>().onClick.AddListener(() => ShowItem(thisItem.name));
-            }
-
-            for (int i = 0; i < 10; i++)
-            {
-                GameObject itemButton = Instantiate(itemButtonPrefab, itemContainer.transform);
-                healthItems thisItem = healthPickups;
-                itemButton.GetComponent<itemButtonSettings>().Init(thisItem, Random.Range(1, 10));
-                inventoryItemMap.Add(itemButton, thisItem.itemType);
-
-                itemButton.GetComponent<Button>().onClick.AddListener(() => ShowItem(thisItem.name));
-            }
-
-            {
-                GameObject itemButton = Instantiate(itemButtonPrefab, itemContainer.transform);
-                InvincibleItems thisItem = invinciblePickups;
-                itemButton.GetComponent<itemButtonSettings>().Init(thisItem, Random.Range(1, 10));
-                inventoryItemMap.Add(itemButton, thisItem.itemType);
-
-                itemButton.GetComponent<Button>().onClick.AddListener(() => ShowItem(thisItem.name));
-            }*/
-
+            CanvasGroup canvasGroup = this.GetComponent<CanvasGroup>();
+            canvasGroup.alpha = isVisible ? 1 : 0;
+            canvasGroup.interactable = isVisible;
+            canvasGroup.blocksRaycasts = isVisible;
         }
 
-        public itemButtonSettings CreateInventoryButton(weaponStats weapon)
+        public void TogglePanelVisbility()
+        {
+            CanvasGroup canvasGroup = this.GetComponent<CanvasGroup>();
+            if (canvasGroup.alpha == 1)
+            {
+                canvasGroup.alpha = 0;
+                canvasGroup.interactable = false;
+                canvasGroup.blocksRaycasts = false;
+            }
+            else
+            {
+                canvasGroup.alpha = 1;
+                canvasGroup.interactable = true;
+                canvasGroup.blocksRaycasts = true;
+            }
+        }
+
+        public itemButtonSettings CreateInventoryButton(weaponStats weapon, inventorySlot slot)
         {
             GameObject itemButton = Instantiate(itemButtonPrefab, itemContainer.transform);
             itemButtonSettings _itemButtonSettings = itemButton.GetComponent<itemButtonSettings>();
             _itemButtonSettings.Init(weapon, 1);
             inventoryItemMap.Add(itemButton, weapon.itemType);
-            itemButton.GetComponent<Button>().onClick.AddListener(() => ShowItem(weapon.name));
+            itemButton.GetComponent<Button>().onClick.AddListener(() => ShowItem(weapon.name, slot));
+
+            if (weapon.itemType != activeItemTypeTab)
+            {
+                itemButton.gameObject.SetActive(false);
+            }
             return _itemButtonSettings;
         }
 
-        public itemButtonSettings CreateInventoryButton(jumpItems pickup)
+        public itemButtonSettings CreateInventoryButton(jumpItems pickup, inventorySlot slot)
         {
             GameObject itemButton = Instantiate(itemButtonPrefab, itemContainer.transform);
             itemButtonSettings _itemButtonSettings = itemButton.GetComponent<itemButtonSettings>();
             _itemButtonSettings.Init(pickup, 1);
             inventoryItemMap.Add(itemButton, pickup.itemType);
-            itemButton.GetComponent<Button>().onClick.AddListener(() => ShowItem(pickup.name));
+            itemButton.GetComponent<Button>().onClick.AddListener(() => ShowItem(pickup.name, slot));
+
+            if (pickup.itemType != activeItemTypeTab)
+            {
+                itemButton.gameObject.SetActive(false);
+            }
             return _itemButtonSettings;
         }
 
-        public itemButtonSettings CreateInventoryButton(speedItems pickup)
+        public itemButtonSettings CreateInventoryButton(speedItems pickup, inventorySlot slot)
         {
             GameObject itemButton = Instantiate(itemButtonPrefab, itemContainer.transform);
             itemButtonSettings _itemButtonSettings = itemButton.GetComponent<itemButtonSettings>();
             _itemButtonSettings.Init(pickup, 1);
             inventoryItemMap.Add(itemButton, pickup.itemType);
-            itemButton.GetComponent<Button>().onClick.AddListener(() => ShowItem(pickup.name));
+            itemButton.GetComponent<Button>().onClick.AddListener(() => ShowItem(pickup.name, slot));
+
+            if (pickup.itemType != activeItemTypeTab)
+            {
+                itemButton.gameObject.SetActive(false);
+            }
             return _itemButtonSettings;
         }
 
-        public itemButtonSettings CreateInventoryButton(healthItems pickup)
+        public itemButtonSettings CreateInventoryButton(healthItems pickup, inventorySlot slot)
         {
             GameObject itemButton = Instantiate(itemButtonPrefab, itemContainer.transform);
             itemButtonSettings _itemButtonSettings = itemButton.GetComponent<itemButtonSettings>();
             _itemButtonSettings.Init(pickup, 1);
             inventoryItemMap.Add(itemButton, pickup.itemType);
-            itemButton.GetComponent<Button>().onClick.AddListener(() => ShowItem(pickup.name));
+            itemButton.GetComponent<Button>().onClick.AddListener(() => ShowItem(pickup.name, slot));
+
+            if (pickup.itemType != activeItemTypeTab)
+            {
+                itemButton.gameObject.SetActive(false);
+            }
             return _itemButtonSettings;
         }
 
-        public itemButtonSettings CreateInventoryButton(InvincibleItems pickup)
+        public itemButtonSettings CreateInventoryButton(InvincibleItems pickup, inventorySlot slot)
         {
             GameObject itemButton = Instantiate(itemButtonPrefab, itemContainer.transform);
             itemButtonSettings _itemButtonSettings = itemButton.GetComponent<itemButtonSettings>();
             _itemButtonSettings.Init(pickup, 1);
             inventoryItemMap.Add(itemButton, pickup.itemType);
-            itemButton.GetComponent<Button>().onClick.AddListener(() => ShowItem(pickup.name));
+            itemButton.GetComponent<Button>().onClick.AddListener(() => ShowItem(pickup.name, slot));
+
+            if(pickup.itemType != activeItemTypeTab)
+            {
+                itemButton.gameObject.SetActive(false);
+            }
             return _itemButtonSettings;
+        }
+
+        public void DestroyInventoryButton(GameObject inventoryButton)
+        {
+            inventoryItemMap.Remove(inventoryButton);
+            Destroy(inventoryButton);
         }
 
         public void FilterItemsByType(ItemType type)
         {
-            foreach(var kvp in inventoryItemMap)
+            activeItemTypeTab = type;
+
+            foreach (var kvp in inventoryItemMap)
             {
                 GameObject itemButton = kvp.Key;
                 ItemType itemType = kvp.Value;
@@ -163,8 +170,10 @@ namespace Holistic3D.Inventory
             }
         }
 
-        public void ShowItem(string itemName) 
+        public void ShowItem(string itemName, inventorySlot slot) 
         { 
+            dropButton.onClick.RemoveAllListeners();
+            dropButton.onClick.AddListener(() => inventorySystem.RemoveItemFromSlot(slot, 1));
             foreach(var obj in previewItemObjects.Values)
             {
                 obj.SetActive(false);

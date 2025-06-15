@@ -44,6 +44,11 @@ namespace Holistic3D.Inventory
             numberInSlot.text = itemCount.ToString();
             _itemType = pickup.itemType;
         }
+
+        public void UpdateQuanityDisplay(int quantity)
+        {
+            numberInSlot.text = quantity.ToString();
+        }
     }
 }
 
