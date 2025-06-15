@@ -2410,6 +2410,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dragon Boss  1
       objectReference: {fileID: 0}
+    - target: {fileID: 4010318430241474984, guid: 4ac22a5b13eb8d5469673b5183dbc747, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4981542292109827788, guid: 4ac22a5b13eb8d5469673b5183dbc747, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.1

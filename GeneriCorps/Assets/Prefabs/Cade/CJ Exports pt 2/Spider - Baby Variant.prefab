@@ -64,6 +64,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spider - Baby Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 6304140633551554042, guid: 82fd7bc44798d2a4cb65b7bbfe1d1697, type: 3}
+      propertyPath: HP
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6304140633551554042, guid: 82fd7bc44798d2a4cb65b7bbfe1d1697, type: 3}
+      propertyPath: FOV
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6304140633551554042, guid: 82fd7bc44798d2a4cb65b7bbfe1d1697, type: 3}
+      propertyPath: roamDist
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6304140633551554042, guid: 82fd7bc44798d2a4cb65b7bbfe1d1697, type: 3}
+      propertyPath: roamPause
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6304140633551554042, guid: 82fd7bc44798d2a4cb65b7bbfe1d1697, type: 3}
+      propertyPath: animTransSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6304140633551554042, guid: 82fd7bc44798d2a4cb65b7bbfe1d1697, type: 3}
+      propertyPath: faceTargetSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6304140633551554042, guid: 82fd7bc44798d2a4cb65b7bbfe1d1697, type: 3}
+      propertyPath: deathScaleDuration
+      value: 0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2934072640950401890, guid: 82fd7bc44798d2a4cb65b7bbfe1d1697, type: 3}
     m_RemovedGameObjects:

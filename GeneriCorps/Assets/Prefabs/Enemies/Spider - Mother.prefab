@@ -925,6 +925,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6150777864964362031}
+  - component: {fileID: 7181334898734280141}
   - component: {fileID: 118279702283208107}
   - component: {fileID: 6428337508975236825}
   - component: {fileID: 3722099552840425627}
@@ -955,6 +956,40 @@ Transform:
   - {fileID: 7456683890200506952}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7181334898734280141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6004828694398603214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff9f8bf8b9d366044957baac3628a301, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Model: {fileID: 0}
+  agent: {fileID: 0}
+  anim: {fileID: 0}
+  headPOS: {fileID: 0}
+  itemToDrop: {fileID: 0}
+  spawner: {fileID: 0}
+  HP: 1
+  animTransSpeed: 1
+  faceTargetSpeed: 1
+  FOV: 1
+  roamDist: 1
+  roamPause: 1
+  deathScaleDuration: 0.1
+  effectAudio: {fileID: 0}
+  audDeath: []
+  audDeathVol: 0
+  audHurt: []
+  audHurtVol: 0
+  audWalk: []
+  audWalkVol: 0
+  audAttack: []
+  audAttackVol: 0
 --- !u!114 &118279702283208107
 MonoBehaviour:
   m_ObjectHideFlags: 0

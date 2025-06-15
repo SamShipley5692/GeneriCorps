@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4095601362804284113}
-  - component: {fileID: 5174446346504424413}
+  - component: {fileID: 3918920945407370662}
   - component: {fileID: 7140029369791917248}
   - component: {fileID: 6711480939489601537}
   - component: {fileID: 6018106460895057644}
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1956227014908550763}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.71, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
@@ -38,7 +38,7 @@ Transform:
   - {fileID: 5221612669001197017}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5174446346504424413
+--- !u!114 &3918920945407370662
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -47,17 +47,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1956227014908550763}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c8607e847f9fb04ba2dfe4993906db5, type: 3}
+  m_Script: {fileID: 11500000, guid: d3cbe2834dd19074aac74f05d54dd8fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToSpawn: {fileID: 7648145716074355035, guid: bd6c4d783fa49594fb529c3a4d117811, type: 3}
-  numToSpawn: 6
-  spawnRate: 3
-  spawnPOS:
-  - {fileID: 4743113692982876006}
-  - {fileID: 5243555696820749793}
-  - {fileID: 5221612669001197017}
-  - {fileID: 0}
+  spawnedObject: {fileID: 4338874726316726476, guid: 82fd7bc44798d2a4cb65b7bbfe1d1697, type: 3}
+  numToSpawn: 0
+  spawnRate: 0
+  spawnPOS: []
 --- !u!33 &7140029369791917248
 MeshFilter:
   m_ObjectHideFlags: 0

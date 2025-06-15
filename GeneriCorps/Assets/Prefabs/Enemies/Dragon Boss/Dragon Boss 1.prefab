@@ -741,7 +741,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1128644335065383556}
-  - component: {fileID: 4154139901410266207}
+  - component: {fileID: 6915099129451853523}
   - component: {fileID: 5998222541202841374}
   m_Layer: 11
   m_Name: 'Mouth Collider '
@@ -765,7 +765,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1627886663686960375}
   m_LocalEulerAnglesHint: {x: -55.67, y: 0, z: 0}
---- !u!114 &4154139901410266207
+--- !u!114 &6915099129451853523
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -774,10 +774,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1273009643337098027}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c015c0c7798f4e46b8dda634f6e7587, type: 3}
+  m_Script: {fileID: 11500000, guid: 3ccfc17b081d87f44956e9d645c70133, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
+  type: 1
   rb: {fileID: 0}
   damageAmount: 5
   damageRate: 0
@@ -4531,6 +4531,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dragon Fire
       objectReference: {fileID: 0}
+    - target: {fileID: 2582369443195725514, guid: 6d3f76990b7302f48856601497074a0e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3736312680756259240, guid: 6d3f76990b7302f48856601497074a0e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.61
@@ -4571,10 +4575,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5395274149318694311, guid: 6d3f76990b7302f48856601497074a0e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2582369443195725514, guid: 6d3f76990b7302f48856601497074a0e, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 3585501394891189971}
   m_SourcePrefab: {fileID: 100100000, guid: 6d3f76990b7302f48856601497074a0e, type: 3}
 --- !u!4 &2858629732541155018 stripped
 Transform:
@@ -4586,3 +4594,21 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2582369443195725514, guid: 6d3f76990b7302f48856601497074a0e, type: 3}
   m_PrefabInstance: {fileID: 1473213703213018978}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3585501394891189971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4010318430241474984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ccfc17b081d87f44956e9d645c70133, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
+  rb: {fileID: 0}
+  damageAmount: 3
+  damageRate: 2
+  speed: 0
+  destroyTime: 0

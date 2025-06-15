@@ -241,7 +241,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8177494828678639012}
-  - component: {fileID: 4218850157436368336}
+  - component: {fileID: 9040390967126668746}
   - component: {fileID: 3573307473407294828}
   - component: {fileID: 6416057385216750134}
   - component: {fileID: 4489238090939067194}
@@ -267,7 +267,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5594556465574120981}
   m_LocalEulerAnglesHint: {x: 150.76, y: 180, z: 45}
---- !u!114 &4218850157436368336
+--- !u!114 &9040390967126668746
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -276,12 +276,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2530697095482395503}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c015c0c7798f4e46b8dda634f6e7587, type: 3}
+  m_Script: {fileID: 11500000, guid: 3ccfc17b081d87f44956e9d645c70133, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
+  type: 1
   rb: {fileID: 0}
-  damageAmount: 2
+  damageAmount: 1
   damageRate: 0
   speed: 0
   destroyTime: 0
@@ -653,6 +653,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 872368786589281170}
+  - component: {fileID: 6304140633551554042}
   - component: {fileID: 2934072640950401890}
   - component: {fileID: 3461423100503890448}
   - component: {fileID: 4087787594720176451}
@@ -683,6 +684,40 @@ Transform:
   - {fileID: 3851804853941272470}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6304140633551554042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4338874726316726476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68b41b5a5b5e5aa4eaed32d23c08f5ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Model: {fileID: 0}
+  agent: {fileID: 0}
+  anim: {fileID: 0}
+  headPOS: {fileID: 0}
+  itemToDrop: {fileID: 0}
+  HP: 1
+  animTransSpeed: 1
+  faceTargetSpeed: 1
+  FOV: 1
+  roamDist: 1
+  roamPause: 1
+  damageAmount: 1
+  deathScaleDuration: 0.1
+  effectAudio: {fileID: 0}
+  audDeath: []
+  audDeathVol: 0
+  audHurt: []
+  audHurtVol: 0
+  audWalk: []
+  audWalkVol: 0
+  audAttack: []
+  audAttackVol: 0
 --- !u!114 &2934072640950401890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -709,6 +744,7 @@ MonoBehaviour:
   roamPause: 3
   attackRate: 1
   deathScaleDuration: 2
+  enemyDestroyDelay: 0.1
   effectAudio: {fileID: 8180002383909649211}
   audDeath: []
   audDeathVol: 0.5

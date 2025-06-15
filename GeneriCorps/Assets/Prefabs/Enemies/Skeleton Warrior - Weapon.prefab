@@ -3086,7 +3086,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 715110174775328614}
-  - component: {fileID: 3030295966231353890}
+  - component: {fileID: 9093904992586308870}
   - component: {fileID: 3036092439696669905}
   - component: {fileID: 3001257297223745856}
   - component: {fileID: 8135603278865050154}
@@ -3112,7 +3112,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4866698506270415336}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3030295966231353890
+--- !u!114 &9093904992586308870
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3121,12 +3121,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8152536009579240750}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c015c0c7798f4e46b8dda634f6e7587, type: 3}
+  m_Script: {fileID: 11500000, guid: 3ccfc17b081d87f44956e9d645c70133, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
+  type: 1
   rb: {fileID: 0}
-  damageAmount: 5
+  damageAmount: 3
   damageRate: 0
   speed: 0
   destroyTime: 0

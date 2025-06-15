@@ -119,8 +119,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6006302518709592859}
+  - component: {fileID: 7836558710301709978}
   - component: {fileID: 996291585746901860}
-  - component: {fileID: 5781111141251098943}
   - component: {fileID: 3105657134156700726}
   - component: {fileID: 1340948429784827122}
   - component: {fileID: 7249214319221793354}
@@ -149,6 +149,43 @@ Transform:
   - {fileID: 8683427771453753426}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7836558710301709978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2452439792792328178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40b5b7f9a5e14ca4ab8c08cbdc475409, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventorySystem: {fileID: 0}
+  dropAction:
+    m_Name: Drop
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 69d39a79-8270-45ba-8d3e-98d7a7506907
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  inventoryAction:
+    m_Name: Inventory
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: da47809a-5624-429a-9c40-1200800f077a
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  weaponDrop: {fileID: 11400000, guid: 0bf04be81d654e8478dd647c1d5583f1, type: 2}
+  jumpItemDrop: {fileID: 11400000, guid: b808e83a01bfd11498440a9131bf7582, type: 2}
+  healthItemDrop: {fileID: 11400000, guid: 62cd39748f0590f4f81ae8a85008885d, type: 2}
+  speedItemDrop: {fileID: 11400000, guid: 63104dff0852f614284aeb5e301d7fba, type: 2}
+  invincibleItemsDrop: {fileID: 11400000, guid: 7bfb1030de046aa43a0a1c7cad8e56dc, type: 2}
+  inventoryPanelManager: {fileID: 0}
 --- !u!114 &996291585746901860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,9 +203,22 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   aud: {fileID: 2806105733055613510}
+  poisonEffect: {fileID: 0}
+  fireEffect: {fileID: 0}
+  freezeEffect: {fileID: 0}
+  gameManager: {fileID: 0}
   gravity: 30
   jump: 0
   Speed: 10
+  player: {fileID: 0}
+  HP: {fileID: 0}
+  ammoammount: {fileID: 0}
+  bulletEmitter: {fileID: 0}
+  bulletprefab: {fileID: 0}
+  winning: {fileID: 0}
+  grape1: {fileID: 0}
+  grape2: {fileID: 0}
+  shield: {fileID: 0}
   hp: 100
   speed: 12
   sprintMod: 2
@@ -179,17 +229,25 @@ MonoBehaviour:
   shootRate: 0.5
   shootDist: 200
   audJump:
-  - {fileID: 8300000, guid: fa19a14d8799c194ab836f55eacf964d, type: 3}
-  - {fileID: 8300000, guid: 4826ed35861004d4ab59516381c75fa8, type: 3}
-  - {fileID: 8300000, guid: 4ded6f930cc142245bcaf663793134d7, type: 3}
+  - {fileID: 8300000, guid: 70d21687156c5b84dbee279f3bb6086f, type: 3}
+  - {fileID: 8300000, guid: 3f3669dc2bf61434783f4934700e82f6, type: 3}
+  - {fileID: 8300000, guid: 592fe506ec079e94d8f1df5b5bd83edf, type: 3}
+  - {fileID: 8300000, guid: 55520881781472649ac612614a24f148, type: 3}
+  - {fileID: 8300000, guid: 8fd5ff887d615154e8ba739faaf3999f, type: 3}
+  - {fileID: 8300000, guid: 2547873d23b27ec468d3928555b8a483, type: 3}
+  - {fileID: 8300000, guid: 214ae2eaa4e28d04d8dcafd97aa588e4, type: 3}
+  - {fileID: 8300000, guid: 41e992cf8181c8a478521147ffc4904a, type: 3}
+  - {fileID: 8300000, guid: 5b50263fc644a7e46b152d31541d7607, type: 3}
   audJumpVol: 0.5
   audHurt:
-  - {fileID: 8300000, guid: a60263e0f0cf8d34986556325ce5f154, type: 3}
-  - {fileID: 8300000, guid: 1263d85dd5d704640be5f09518091fbb, type: 3}
-  - {fileID: 8300000, guid: 6ba901900409b7644a5ec31f9253f11c, type: 3}
-  - {fileID: 8300000, guid: dab56e1cfc60a4543b8578da6ea08e97, type: 3}
-  - {fileID: 8300000, guid: 13becb0e6bcdf7a4d8342683cafce031, type: 3}
-  - {fileID: 8300000, guid: 1f33bcf9d1f17584694cde13c87128f6, type: 3}
+  - {fileID: 8300000, guid: 164c4cd428e81554a89f938451aae22f, type: 3}
+  - {fileID: 8300000, guid: 5c25a8b6c2ef9624caf832fe0d756bbd, type: 3}
+  - {fileID: 8300000, guid: 616758222d84f6f47b8b9dd6a3e5d3b8, type: 3}
+  - {fileID: 8300000, guid: 7ed99645cac6f06438be178db3df164c, type: 3}
+  - {fileID: 8300000, guid: 7b85f48408e15f748a6a7de0f94963cf, type: 3}
+  - {fileID: 8300000, guid: 5d5f587ae155eb94f867257211a96f5e, type: 3}
+  - {fileID: 8300000, guid: 5ed176f89f549d24a83fa420c256201e, type: 3}
+  - {fileID: 8300000, guid: 0e1457ebf7dc95b4db34ba2fa89929fc, type: 3}
   audHurtVol: 0.5
   audSteps:
   - {fileID: 8300000, guid: bcc9784155bae57449454435700c7e2c, type: 3}
@@ -203,34 +261,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ba27b57e6eff6f2478ce3a6b91bd961b, type: 3}
   audStepVol: 0.1
   weaponInv: []
+  canMove: 1
+  canAct: 1
   health: 100
---- !u!114 &5781111141251098943
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2452439792792328178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40b5b7f9a5e14ca4ab8c08cbdc475409, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventorySystem: {fileID: 0}
-  dropAction:
-    m_Name: Drop
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 4341d526-d04d-4766-b1f1-5065ad5962e0
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  weaponDrop: {fileID: 0}
-  jumpItemDrop: {fileID: 0}
-  healthItemDrop: {fileID: 0}
-  speedItemDrop: {fileID: 0}
-  invincibleItemsDrop: {fileID: 0}
 --- !u!33 &3105657134156700726
 MeshFilter:
   m_ObjectHideFlags: 0
