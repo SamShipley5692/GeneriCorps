@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UIElements;
@@ -16,6 +17,7 @@ public class dragonBoss : MonoBehaviour, IDamage
     [SerializeField][Range(0.001f, 1)] float dissolveRate;
     [SerializeField][Range(0.001f, 2)] float refreshRate;
     [SerializeField][Range(1, 200)] int HP;
+    [SerializeField][Range(1, 30)] int animTransSpeed;
     [SerializeField][Range(1, 50)] int faceTargetSpeed;
     [SerializeField][Range(0.1f, 10)] float enemyDestroyTime;
 
@@ -35,12 +37,9 @@ public class dragonBoss : MonoBehaviour, IDamage
     int maxHP;
     int percentHP;
 
-    bool playerInRange;
     bool isInvulnerable;
-    bool coroutinePlayed;
 
     Material[] skinnedMaterials;
-
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -48,10 +47,10 @@ public class dragonBoss : MonoBehaviour, IDamage
     {
         anim = GetComponent<Animator>();
         maxHP = HP;
+        gameManager.instance.updateGameGoal(1); 
         percentHP = (HP / maxHP) * 100;
         anim.SetBool("isSleeping", true);
         isInvulnerable = false;
-        coroutinePlayed = false;
 
         if (jawCol)
             jawCol.enabled = false;
@@ -66,19 +65,12 @@ public class dragonBoss : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.B)) // for testing purposes, remove later
         {
             StartCoroutine(dissolve());
         }
 
         percentHP = (HP / maxHP) * 100;
-
-        if (playerInRange)
-        {
-            attackRoutine();
-        }
-
     }
 
     IEnumerator dissolve()
@@ -103,27 +95,29 @@ public class dragonBoss : MonoBehaviour, IDamage
     {
         if (other.CompareTag("Player"))
         {
-            playerInRange = true;
+            attackRoutine();
         }
     }
+
 
     public void takeDamage(int amount)
     {
         if (!isInvulnerable)
         {
-            if (percentHP > 10)
+            //if (percentHP > 10)
                 HP -= amount;
-            else
-                HP -= (amount / 2);
+            //else
+            //    HP -= (amount / 2);
 
             if (HP <= 0)
             {
-                playerInRange = false;
-                anim.SetTrigger("die");
-                if (effectAudio != null && audHurt.Length > 0)
-                {
-                    effectAudio.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVol);
-                }
+                //playerInRange = false;
+                //anim.SetTrigger("die");
+                //if (effectAudio != null && audHurt.Length > 0)
+                //{
+                //    effectAudio.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVol);
+                //}
+                StartCoroutine(deathSequence());
                 Destroy(gameObject, enemyDestroyTime);
                 StartCoroutine(dissolve());
                 gameManager.instance.updateGameGoal(-1);
@@ -135,97 +129,41 @@ public class dragonBoss : MonoBehaviour, IDamage
                 {
                     effectAudio.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVol);
                 }
-                anim.SetBool("isHit", true);
                 //anim.SetTrigger("getHit");
+                StartCoroutine(getHit());
+
             }
-            anim.SetBool("isHit", false);
+
         }
     }
 
-    void faceTarget()
-    {
-        if (arenaCenterPos)
-        {
-            Vector3 direction = arenaCenterPos.position - transform.position;
-            direction.Normalize();
-            Quaternion rot = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceTargetSpeed);
-        }
-    }
 
     void attackRoutine()
     {
-        faceTarget();
+        //faceTarget();
+        StartCoroutine(AttackCycle());
+    }
 
-        if (coroutinePlayed == false)
-        {
-            StartCoroutine(wakeUp());
-        }
+    IEnumerator getHit()
+    {
+        anim.SetBool("isHit", true);
+        yield return new WaitForSeconds(1.333f);
+        anim.SetBool("isHit", false);
+    }
 
-        if (HP > 0)
+    IEnumerator deathSequence()
+    {
+        anim.SetTrigger("die");
+        if (effectAudio != null && audHurt.Length > 0)
         {
-            StartCoroutine(AttackCycle());
+            effectAudio.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVol);
         }
+        yield return new WaitForSeconds(2.133f);
     }
 
     IEnumerator AttackCycle()
     {
-        // bite attack
-        isInvulnerable = true;
-
-        anim.SetBool("isBiting", true);
-        if (effectAudio != null && audAttack.Length > 0)
-        {
-            effectAudio.PlayOneShot(audAttack[Random.Range(0, audAttack.Length)], audAttackVol);
-        }
-        yield return new WaitForSeconds(1.167f);
-        anim.SetBool("isBiting", false);
-        isInvulnerable = false;
-
-        // rest animations for damage from player
-        //anim.SetBool("isResting", true);
-        //yield return new WaitForSeconds(2f);
-        //anim.SetBool("isResting", false);
-
-        // jump attack
-        isInvulnerable = true;
-
-        anim.SetBool("isJumping", true);
-        if (effectAudio && audAttack.Length > 0)
-        {
-            effectAudio.PlayOneShot(audAttack[Random.Range(0, audAttack.Length)], audAttackVol);
-        }
-        yield return new WaitForSeconds(3f);
-        anim.SetBool("isJumping", false);
-        isInvulnerable = false;
-
-        // rest animations for damage from player
-        //anim.SetBool("isResting", true);
-        //yield return new WaitForSeconds(2f);
-        //anim.SetBool("isResting", false);
-
-        // flame attack
-        isInvulnerable = true;
-
-        anim.SetBool("isFiring", true);
-        if (effectAudio != null && audFlame.Length > 0)
-        {
-            effectAudio.PlayOneShot(audFlame[Random.Range(0, audFlame.Length)], audFlameVol);
-        }
-        yield return new WaitForSeconds(2.667f);
-        anim.SetBool("isFiring", false);
-        isInvulnerable = false;
-
-        // rest animations for damage from player
-        //anim.SetBool("isResting", true);
-        //yield return new WaitForSeconds(2f);
-        //anim.SetBool("isResting", false);
-        anim.SetBool("isBiting", true);
-
-    }
-
-    IEnumerator wakeUp()
-    {
+        // wake up dragon and roar
         anim.SetBool("isSleeping", false);
         yield return new WaitForSeconds(1f);
         anim.SetBool("isRoaring", true);
@@ -233,10 +171,91 @@ public class dragonBoss : MonoBehaviour, IDamage
         {
             effectAudio.PlayOneShot(audRoar[Random.Range(0, audRoar.Length)], audRoarVol);
         }
-        yield return new WaitForSeconds(3.4f);
+        yield return new WaitForSeconds(3.333f);
         anim.SetBool("isRoaring", false);
-        playerInRange = true;
-        coroutinePlayed = true;
+        StartCoroutine(disableFlameDelay());
+
+        //start the repeating attack cycle
+        while (percentHP > 0)
+        {
+            // bite attack
+            anim.SetBool("isBiting", true);
+            isInvulnerable = true;
+
+            if (effectAudio != null && audAttack.Length > 0)
+            {
+                effectAudio.PlayOneShot(audAttack[Random.Range(0, audAttack.Length)], audAttackVol);
+            }
+            yield return new WaitForSeconds(1.167f);
+            anim.SetBool("isBiting", false);
+            isInvulnerable = false;
+
+            // rest animations for damage from player
+            anim.SetBool("isResting", true);
+            yield return new WaitForSeconds(2f);
+            anim.SetBool("isResting", false);
+
+            // jump attack
+            isInvulnerable = true;
+
+            anim.SetBool("isJumping", true);
+            if (effectAudio && audAttack.Length > 0)
+            {
+                effectAudio.PlayOneShot(audAttack[Random.Range(0, audAttack.Length)], audAttackVol);
+            }
+            yield return new WaitForSeconds(3f);
+            anim.SetBool("isJumping", false);
+            isInvulnerable = false;
+
+            //rest animations for damage from player
+            anim.SetBool("isResting", true);
+            yield return new WaitForSeconds(2f);
+            anim.SetBool("isResting", false);
+
+            // flame attack
+            isInvulnerable = true;
+
+            anim.SetBool("isFiring", true);
+            if (effectAudio != null && audFlame.Length > 0)
+            {
+                effectAudio.PlayOneShot(audFlame[Random.Range(0, audFlame.Length)], audFlameVol);
+            }
+            yield return new WaitForSeconds(2.667f);
+            anim.SetBool("isFiring", false);
+            isInvulnerable = false;
+            StartCoroutine(disableFlameDelay());
+
+            // rest animations for damage from player
+            anim.SetBool("isResting", true);
+            yield return new WaitForSeconds(2f);
+            anim.SetBool("isResting", false);
+
+        }
+
+        // stage transition
+
+
+        //while (percentHP < 50 && percentHP > 0)
+        //{
+
+
+        //}
+
+    }
+
+    //void OnParticleCollision(GameObject other)
+    //{
+    //    if (other.CompareTag("Dragon Fire"))
+    //    {
+    //        gameManager.instance.player.GetComponent<PlayerHealth>().TakeDamage(1);
+    //    }
+    //}
+
+    IEnumerator disableFlameDelay()
+    {
+        //ParticleSystem ps = dragonFire.GetComponent<ParticleSystem>().GetCollisionEvents;
+        yield return new WaitForSeconds(3f);
+        disableFlame();
     }
 
     public void jawColOn()
@@ -262,6 +281,32 @@ public class dragonBoss : MonoBehaviour, IDamage
         if (dragonFire != null)
             dragonFire.SetActive(false);
     }
+
+    //void faceTarget()
+    //{
+    //    if (arenaCenterPos)
+    //    {
+    //        Vector3 direction = arenaCenterPos.position - transform.position;
+    //        direction.Normalize();
+    //        Quaternion rot = Quaternion.LookRotation(direction);
+    //        transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceTargetSpeed);
+    //    }
+    //}
+
+
+
+    //IEnumerator wakeUp()
+    //{
+    //    anim.SetBool("isSleeping", false);
+    //    yield return new WaitForSeconds(1f);
+    //    anim.SetBool("isRoaring", true);
+    //    if (effectAudio && audRoar.Length > 0)
+    //    {
+    //        effectAudio.PlayOneShot(audRoar[Random.Range(0, audRoar.Length)], audRoarVol);
+    //    }
+    //    yield return new WaitForSeconds(3.333f);
+    //    anim.SetBool("isRoaring", false);
+    //}
 
 
     //void setAnimPara() 
