@@ -334,9 +334,9 @@ GameObject:
   - component: {fileID: 5769209504785398403}
   - component: {fileID: 1518782134787575006}
   - component: {fileID: 5886308386468948125}
-  - component: {fileID: 6203900708459910962}
   - component: {fileID: 5628752723168290585}
   - component: {fileID: 3235457105783121953}
+  - component: {fileID: 9209910566538023365}
   m_Layer: 11
   m_Name: Dragon Boss 1
   m_TagString: Dragon Boss
@@ -459,27 +459,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!135 &6203900708459910962
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 897280000597923031}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 25
-  m_Center: {x: 0, y: 0, z: 12.62}
 --- !u!82 &5628752723168290585
 AudioSource:
   m_ObjectHideFlags: 0
@@ -600,6 +579,29 @@ CapsuleCollider:
   m_Height: 14.9
   m_Direction: 2
   m_Center: {x: 0, y: 0.84, z: -0.56}
+--- !u!136 &9209910566538023365
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 897280000597923031}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 15
+  m_Height: 50
+  m_Direction: 2
+  m_Center: {x: 0, y: 0.21, z: 3.21}
 --- !u!1 &935464312879621161
 GameObject:
   m_ObjectHideFlags: 0
