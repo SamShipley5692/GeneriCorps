@@ -2,14 +2,15 @@ using UnityEngine;
 
 public class dragonFire : MonoBehaviour
 {
-    [SerializeField][Range(1, 10)] int damageAmount;
+    [SerializeField][Range(1, 5)] int damageAmount;
 
     private void OnParticleCollision(GameObject other)
     {
         if (other.CompareTag("Player"))
         {
-            GameObject player = other;
-            player.GetComponent<PlayerHealth>().TakeDamage(damageAmount); 
+            IDamage dmg = other.GetComponent<IDamage>();
+
+            dmg.takeDamage(damageAmount);
         }
     }
 }

@@ -10,7 +10,7 @@ public class dragonBoss : MonoBehaviour, IDamage
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Animator anim;
-    [SerializeField] Transform arenaCenterPos;
+    //[SerializeField] Transform arenaCenterPos;
     [SerializeField] Collider jawCol;
     [SerializeField] GameObject dragonFire;
 
@@ -50,7 +50,7 @@ public class dragonBoss : MonoBehaviour, IDamage
         gameManager.instance.updateGameGoal(1); 
         percentHP = (HP / maxHP) * 100;
         anim.SetBool("isSleeping", true);
-        isInvulnerable = false;
+        isInvulnerable = true;
 
         if (jawCol)
             jawCol.enabled = false;
@@ -129,8 +129,8 @@ public class dragonBoss : MonoBehaviour, IDamage
                 {
                     effectAudio.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVol);
                 }
-                //anim.SetTrigger("getHit");
-                StartCoroutine(getHit());
+                anim.SetTrigger("getHit");
+                //StartCoroutine(getHit());
 
             }
 
@@ -164,8 +164,8 @@ public class dragonBoss : MonoBehaviour, IDamage
     IEnumerator AttackCycle()
     {
         // wake up dragon and roar
-        anim.SetBool("isSleeping", false);
-        yield return new WaitForSeconds(1f);
+        //anim.SetBool("isSleeping", false);
+        //yield return new WaitForSeconds(1f);
         anim.SetBool("isRoaring", true);
         if (effectAudio && audRoar.Length > 0)
         {
