@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 4939119848677982590}
   - component: {fileID: 6713589550986413005}
   - component: {fileID: 4928544400200392943}
+  - component: {fileID: 6717101850310652288}
   m_Layer: 0
   m_Name: Staff lvl 1
   m_TagString: Untagged
@@ -83,6 +84,8 @@ MonoBehaviour:
   itemPickup: {fileID: 0}
   speedPickup: {fileID: 0}
   jumpPickup: {fileID: 0}
+  invinciblePickup: {fileID: 0}
+  quantity: 1
 --- !u!33 &4939119848677982590
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -157,3 +160,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1.193532, z: 1}
   m_Center: {x: -0.04713075, y: 0.015818477, z: 0.0065920185}
+--- !u!95 &6717101850310652288
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5273214600628939280}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 043553909f243cc459addfce6f189903, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
