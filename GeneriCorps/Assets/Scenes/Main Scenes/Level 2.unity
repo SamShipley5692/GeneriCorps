@@ -42525,6 +42525,26 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1404563531}
   m_Mesh: {fileID: 4300004, guid: d557ab4a381fb044aa9e3ccc9981b24e, type: 3}
+--- !u!1 &1407718740 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2591207654913455599, guid: 009d47276eca30f41839b4c806847c6d, type: 3}
+  m_PrefabInstance: {fileID: 1495609953}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1407718743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1407718740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07805a02a199f6644b82af864f01666c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorModel: {fileID: 1407718740}
+  button: {fileID: 1760359121}
+  text: 
 --- !u!1 &1409162142
 GameObject:
   m_ObjectHideFlags: 0
@@ -43840,10 +43860,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level Exit
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2861229852051514544, guid: 009d47276eca30f41839b4c806847c6d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2591207654913455599, guid: 009d47276eca30f41839b4c806847c6d, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 1407718743}
   m_SourcePrefab: {fileID: 100100000, guid: 009d47276eca30f41839b4c806847c6d, type: 3}
 --- !u!4 &1495609954 stripped
 Transform:
@@ -54504,6 +54528,11 @@ Transform:
   - {fileID: 1733579830}
   m_Father: {fileID: 147476876}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1760359121 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6256384843746656930, guid: 009d47276eca30f41839b4c806847c6d, type: 3}
+  m_PrefabInstance: {fileID: 1495609953}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1760728294
 PrefabInstance:
   m_ObjectHideFlags: 0
