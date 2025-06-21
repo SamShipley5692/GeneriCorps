@@ -2,6 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 public class gameManager : MonoBehaviour
 {
@@ -80,9 +81,7 @@ public class gameManager : MonoBehaviour
 
     public void youLose()
     {
-        statePause();
-        menuActive = menuLose;
-        menuActive.SetActive(true);
+        StartCoroutine(ShowDelayMenu());
     }
 
     public void updateGameGoal(int amount)
@@ -108,7 +107,15 @@ public class gameManager : MonoBehaviour
     public void SetCheckpoint(Vector3 pos, GameObject player)
     {
         savedCheckpointPos = pos;
-        
+    }
+
+    private IEnumerator ShowDelayMenu()
+    {
+        statePause();
+        yield return new WaitForSecondsRealtime(3);
+
+        menuActive = menuLose;
+        menuActive.SetActive(true);
     }
 
     // having issues getting this to work with player controller will check back on this later on.
