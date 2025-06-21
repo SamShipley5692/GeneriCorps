@@ -6,6 +6,7 @@ public class CameraShake : MonoBehaviour
     private Quaternion originalRotation;
 
     private float shakeDuration = 0f;
+
     private float shakeIntensity = 0.1f;
 
     private float timeElapsed = 0f;

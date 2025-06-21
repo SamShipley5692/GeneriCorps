@@ -18,7 +18,9 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField][Range(0.1f, 5)] int enemyDestroyTime;
     [SerializeField] int animTransSpeed;
 
-
+    [SerializeField] GameObject damageTextPrefab;
+    [SerializeField] Transform damageTextSpawn;
+    [SerializeField] EnemyHealthUI healthUI;
 
     // enemy HP 
     [SerializeField] int HP;
@@ -101,7 +103,25 @@ public class enemyAI : MonoBehaviour, IDamage
     public void takeDamage(int damage)
     {
         HP -= damage;
+        // update enemy hp bar
+        if (healthUI != null)
+        {
+            float percent = (float)HP / HPOriginal;
+            healthUI.SetHealth(percent);
+        }
+
         updateEnemyHP();
+
+        // floating damage text
+        if (damageTextPrefab != null && damageTextSpawn != null)
+        {
+            GameObject dt = Instantiate(damageTextPrefab, damageTextSpawn.position, Quaternion.identity);
+            FloatingDamageText text = dt.GetComponent<FloatingDamageText>();
+            if (text != null)
+            {
+                text.SetDamage(damage);
+            }
+        }
 
         if (gameManager.instance != null && gameManager.instance.player != null)
         {
