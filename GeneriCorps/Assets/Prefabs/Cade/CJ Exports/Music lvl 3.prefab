@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7026360465648963106}
-  - component: {fileID: 8029304407224689175}
+  - component: {fileID: 10858389461763868}
   - component: {fileID: 3267973596509369174}
   - component: {fileID: 2274614609282231265}
   m_Layer: 0
-  m_Name: Music
+  m_Name: Music lvl 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,7 +34,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8029304407224689175
+--- !u!114 &10858389461763868
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -60,10 +60,10 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -3763002092240149305, guid: eb41d73b200a7204aa99d4c6489025f9, type: 2}
-  m_audioClip: {fileID: 8300000, guid: f3d27346e504f5a41b13d4be85b41873, type: 3}
-  m_Resource: {fileID: 8300000, guid: f3d27346e504f5a41b13d4be85b41873, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 347359f76440991488260e96c801a834, type: 3}
+  m_Resource: {fileID: 8300000, guid: 347359f76440991488260e96c801a834, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.59
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -157,8 +157,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -3763002092240149305, guid: eb41d73b200a7204aa99d4c6489025f9, type: 2}
-  m_audioClip: {fileID: 8300000, guid: eca2efbc534f6a940bcaa734ec7d62f6, type: 3}
-  m_Resource: {fileID: 8300000, guid: eca2efbc534f6a940bcaa734ec7d62f6, type: 3}
+  m_audioClip: {fileID: 8300000, guid: c54a1dae82250fb4fb103367d7760a5c, type: 3}
+  m_Resource: {fileID: 8300000, guid: c54a1dae82250fb4fb103367d7760a5c, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
