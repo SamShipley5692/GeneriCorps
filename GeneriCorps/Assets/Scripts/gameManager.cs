@@ -81,7 +81,7 @@ public class gameManager : MonoBehaviour
 
     public void youLose()
     {
-        StartCoroutine(ShowDelayMenu());
+        StartCoroutine(ShowDelayLossMenu());
     }
 
     public void updateGameGoal(int amount)
@@ -91,9 +91,7 @@ public class gameManager : MonoBehaviour
 
         if (gameGoalCount <= 0)
         {
-            statePause();
-            menuActive = menuWin;
-            menuActive.SetActive(true);
+            StartCoroutine(ShowDelayWinMenu());
         }
     }
 
@@ -109,12 +107,21 @@ public class gameManager : MonoBehaviour
         savedCheckpointPos = pos;
     }
 
-    private IEnumerator ShowDelayMenu()
+    private IEnumerator ShowDelayLossMenu()
     {
         statePause();
         yield return new WaitForSecondsRealtime(3);
 
         menuActive = menuLose;
+        menuActive.SetActive(true);
+    }
+
+    private IEnumerator ShowDelayWinMenu()
+    {
+        statePause();
+        yield return new WaitForSecondsRealtime(3);
+
+        menuActive = menuWin;
         menuActive.SetActive(true);
     }
 
