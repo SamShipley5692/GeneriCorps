@@ -7,8 +7,6 @@ TagManager:
   - Enemy
   - Dragon Fire
   - Dragon Boss
-  - Trigger1
-  - Trigger2
   layers:
   - Default
   - TransparentFX
@@ -22,7 +20,7 @@ TagManager:
   - 3D Preview
   - Dragon Fire
   - Dragon Boss
-  - 
+  - Dragon Healer
   - 
   - 
   - 
