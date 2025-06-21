@@ -8,7 +8,6 @@ using UnityEngine.VFX;
 public class dragonBoss : MonoBehaviour, IDamage
 {
     [SerializeField] Renderer model;
-    [SerializeField] NavMeshAgent agent;
     [SerializeField] Animator anim;
     [SerializeField] Collider jawCol;
     [SerializeField] GameObject dragonFire;
@@ -85,6 +84,7 @@ public class dragonBoss : MonoBehaviour, IDamage
                 anim.SetBool("isJumping", false);
                 anim.SetBool("isFiring", false);
                 anim.SetBool("isResting", false);
+                disableFlame();
 
                 StartCoroutine(deathSequence());
                 Destroy(gameObject, enemyDestroyTime);

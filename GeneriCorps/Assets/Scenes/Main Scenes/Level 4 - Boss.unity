@@ -106060,7 +106060,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1956669553}
   m_Layer: 0
-  m_Name: Pickups/Breakables
+  m_Name: Pickups
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -118174,52 +118174,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5769209504785398403, guid: 4ac22a5b13eb8d5469673b5183dbc747, type: 3}
-      propertyPath: HP
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5769209504785398403, guid: 4ac22a5b13eb8d5469673b5183dbc747, type: 3}
-      propertyPath: agent
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5769209504785398403, guid: 4ac22a5b13eb8d5469673b5183dbc747, type: 3}
-      propertyPath: audHurtVol
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5769209504785398403, guid: 4ac22a5b13eb8d5469673b5183dbc747, type: 3}
-      propertyPath: audRoarVol
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5769209504785398403, guid: 4ac22a5b13eb8d5469673b5183dbc747, type: 3}
-      propertyPath: audDeathVol
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5769209504785398403, guid: 4ac22a5b13eb8d5469673b5183dbc747, type: 3}
-      propertyPath: audFlameVol
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5769209504785398403, guid: 4ac22a5b13eb8d5469673b5183dbc747, type: 3}
-      propertyPath: audAttackVol
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5769209504785398403, guid: 4ac22a5b13eb8d5469673b5183dbc747, type: 3}
-      propertyPath: dissolveRate
-      value: 0.0075
-      objectReference: {fileID: 0}
-    - target: {fileID: 5769209504785398403, guid: 4ac22a5b13eb8d5469673b5183dbc747, type: 3}
-      propertyPath: enemyDestroyTime
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5769209504785398403, guid: 4ac22a5b13eb8d5469673b5183dbc747, type: 3}
-      propertyPath: audDeath.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5769209504785398403, guid: 4ac22a5b13eb8d5469673b5183dbc747, type: 3}
-      propertyPath: 'audDeath.Array.data[0]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 880b0cace5dde1e44987c35ccfee83f3, type: 3}
-    m_RemovedComponents:
-    - {fileID: 1518782134787575006, guid: 4ac22a5b13eb8d5469673b5183dbc747, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
