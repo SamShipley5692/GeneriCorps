@@ -12,6 +12,7 @@ public class SpiderMother : MonoBehaviour, IDamage
     [SerializeField] Animator anim;
     [SerializeField] Transform headPOS;
     [SerializeField] GameObject itemToDrop;
+    [SerializeField] private float dropChance = 0.25f;
     [SerializeField] Spawner spawner;
 
     [SerializeField][Range(1, 50)] int HP;
@@ -208,7 +209,7 @@ public class SpiderMother : MonoBehaviour, IDamage
 
     private void OnDestroy()
     {
-        if (itemToDrop)
+        if (Random.value <= dropChance && itemToDrop != null)
             Instantiate(itemToDrop, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
     }
 }

@@ -15,7 +15,7 @@ public class GiantAI : MonoBehaviour, IDamage
     [SerializeField] Transform headPos;
     [SerializeField] Collider weaponCol;
     [SerializeField] GameObject itemToDrop;
-
+    [SerializeField] private float dropChance = 0.25f;
 
     [SerializeField][Range(1,100)] int HP;
     [SerializeField][Range(1,50)] int faceTargetSpeed;
@@ -261,13 +261,10 @@ public class GiantAI : MonoBehaviour, IDamage
 
     private void OnDestroy()
     {
-            if (itemToDrop)
-                Instantiate(itemToDrop, new Vector3(transform.position.x, transform.position.y + 4, transform.position.z), Quaternion.identity);
+            if (Random.value <= dropChance && itemToDrop != null)
+
+            Instantiate(itemToDrop, new Vector3(transform.position.x, transform.position.y + 4, transform.position.z), Quaternion.identity);
     }
-
-
-
-
 
 
 

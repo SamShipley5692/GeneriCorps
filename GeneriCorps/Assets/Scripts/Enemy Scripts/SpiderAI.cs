@@ -12,6 +12,7 @@ public class SpiderAI : MonoBehaviour, IDamage
     [SerializeField] Animator anim;
     [SerializeField] Transform headPOS;
     [SerializeField] GameObject itemToDrop;
+    [SerializeField] private float dropChance = 0.25f;
 
     [SerializeField] Collider weaponCol;
 
@@ -242,7 +243,7 @@ public class SpiderAI : MonoBehaviour, IDamage
 
     private void OnDestroy()
     {
-        if (itemToDrop)
+        if (Random.value <= dropChance && itemToDrop != null)
             Instantiate(itemToDrop, new Vector3(transform.position.x, transform.position.y + 4, transform.position.z), Quaternion.identity);
     }
 }

@@ -11,6 +11,7 @@ public class skeletonEnemy : MonoBehaviour, IDamage
     [SerializeField] Transform headPos;
     [SerializeField] Collider weaponCol;
     [SerializeField] GameObject itemToDrop;
+    [SerializeField] private float dropChance = 0.25f;
 
     [SerializeField][Range(1, 200)] int HP;
     [SerializeField][Range(1, 50)] int faceTargetSpeed;
@@ -253,7 +254,7 @@ public class skeletonEnemy : MonoBehaviour, IDamage
 
     private void OnDestroy()
     {
-        if (itemToDrop)
+        if (Random.value <= dropChance && itemToDrop != null)
             Instantiate(itemToDrop, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
     }
 

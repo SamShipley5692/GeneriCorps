@@ -14,6 +14,7 @@ public class SpidershootingAI : MonoBehaviour, IDamage
     [SerializeField] Transform shootPOS;
     [SerializeField] GameObject arrow;
     [SerializeField] GameObject itemToDrop;
+    [SerializeField] private float dropChance = 0.25f;
 
     [SerializeField][Range(1, 50)] int HP;
     [SerializeField][Range(1, 30)] int animTransSpeed;
@@ -225,7 +226,7 @@ public class SpidershootingAI : MonoBehaviour, IDamage
 
     private void OnDestroy()
     {
-        if (itemToDrop)
+        if (Random.value <= dropChance && itemToDrop != null)
             Instantiate(itemToDrop, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
     }
 }

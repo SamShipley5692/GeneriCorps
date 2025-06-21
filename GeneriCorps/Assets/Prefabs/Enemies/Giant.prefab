@@ -1841,6 +1841,7 @@ MonoBehaviour:
   headPos: {fileID: 5020902197688529348}
   weaponCol: {fileID: 4014106263507078325}
   itemToDrop: {fileID: 0}
+  dropChance: 1
   HP: 30
   faceTargetSpeed: 38
   FOV: 60
