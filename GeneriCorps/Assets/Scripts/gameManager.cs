@@ -21,6 +21,7 @@ public class gameManager : MonoBehaviour
     public GameObject player;
     public playercontroller playerScript;
     public GameObject playerHealthScreen;
+    public GameObject playerJumpScreen;
 
     public bool isPaused;
 
