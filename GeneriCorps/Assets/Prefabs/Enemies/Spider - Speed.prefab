@@ -713,12 +713,15 @@ MonoBehaviour:
   effectAudio: {fileID: 7874239750962858574}
   audDeath:
   - {fileID: 8300000, guid: a37f44cbf8c2a7443a3c361efa2f233a, type: 3}
-  audDeathVol: 0.5
-  audHurt: []
-  audHurtVol: 0.5
-  audWalk: []
-  audWalkVol: 0.2
-  audAttack: []
+  audDeathVol: 0.381
+  audHurt:
+  - {fileID: 8300000, guid: a37f44cbf8c2a7443a3c361efa2f233a, type: 3}
+  audHurtVol: 0.182
+  audWalk:
+  - {fileID: 8300000, guid: 3c392e6befcab436bae9c198f4ea422c, type: 3}
+  audWalkVol: 0.463
+  audAttack:
+  - {fileID: 8300000, guid: ac6034ade498bb94b87620cdf6eac48b, type: 3}
   audAttackVol: 0.5
 --- !u!195 &3461423100503890448
 NavMeshAgent:

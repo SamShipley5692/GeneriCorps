@@ -4,6 +4,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine.AI;
 using UnityEngine.UIElements;
+using UnityEngine.Audio;
 
 public class GiantAI : MonoBehaviour, IDamage
 {
@@ -25,7 +26,9 @@ public class GiantAI : MonoBehaviour, IDamage
     [SerializeField][Range(0.1f,2)] float attackRate;
     [SerializeField][Range(0.1f, 15)] float deathScaleDuration;
 
+    [SerializeField] SoundModulator modulator;
     [SerializeField] AudioSource effectAudio;
+    [SerializeField] private AudioClip battleMusic;
     [SerializeField] AudioClip[] audDeath;
     [Range(0, 1)][SerializeField] float audDeathVol;
     [SerializeField] AudioClip[] audHurt;
@@ -34,6 +37,9 @@ public class GiantAI : MonoBehaviour, IDamage
     [Range(0, 1)][SerializeField] float audWalkVol;
     [SerializeField] AudioClip[] audAttack;
     [Range(0, 1)][SerializeField] float audAttackVol;
+    [SerializeField] private AudioMixerSnapshot ambientSnapshot;
+    [SerializeField] private AudioMixerSnapshot battleSnapshot;
+    private bool battleMusicPlayed = false;
 
     Vector3 playerDir;
     Vector3 startingPos;
@@ -50,6 +56,9 @@ public class GiantAI : MonoBehaviour, IDamage
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if (effectAudio == null)
+            effectAudio = GetComponent<AudioSource>();
+
         anim = GetComponent<Animator>();
         startingPos = transform.position;
         stoppingDistOrig = agent.stoppingDistance;
@@ -72,6 +81,12 @@ public class GiantAI : MonoBehaviour, IDamage
         else if (!playerInRange)
         {
             checkRoam();
+        }
+
+        if (battleMusicPlayed && !canSeePlayer())
+        {
+            ambientSnapshot.TransitionTo(1.0f);
+            battleMusicPlayed = false;
         }
     }
 
@@ -113,7 +128,7 @@ public class GiantAI : MonoBehaviour, IDamage
     IEnumerator PlayStep()
     {
         isPlayingStep = true; // isPlayingFlight
-        effectAudio.PlayOneShot(audWalk[Random.Range(0, audWalk.Length)], audWalkVol);
+        modulator.PlayOneShotModulated(audWalk[Random.Range(0, audWalk.Length)], audWalkVol);
 
         yield return new WaitForSeconds(0.4f);
 
@@ -131,6 +146,12 @@ public class GiantAI : MonoBehaviour, IDamage
         {
             if (angleToPlayer <= FOV && hit.collider.CompareTag("Player"))
             {
+
+                if (!battleMusicPlayed)
+                {
+                    battleSnapshot.TransitionTo(1.0f);    
+                    battleMusicPlayed = true;
+                }
                 agent.SetDestination(gameManager.instance.player.transform.position);
                 if (attackTimer >= attackRate)
                 {
@@ -163,6 +184,12 @@ public class GiantAI : MonoBehaviour, IDamage
             playerInRange = true;
             agent.stoppingDistance = 0;
         }
+
+        if (battleMusicPlayed)
+        {
+            ambientSnapshot.TransitionTo(1.0f); 
+            battleMusicPlayed = false;
+        }
     }
 
     public void takeDamage(int amount)
@@ -174,7 +201,7 @@ public class GiantAI : MonoBehaviour, IDamage
         {
             if (effectAudio != null && audDeath.Length > 0)
             {
-                effectAudio.PlayOneShot(audDeath[Random.Range(0, audDeath.Length)], audDeathVol);
+                modulator.PlayOneShotModulated(audDeath[Random.Range(0, audDeath.Length)], audDeathVol);
             }
             gameManager.instance.updateGameGoal(-1);
             anim.SetTrigger("die");
@@ -189,7 +216,7 @@ public class GiantAI : MonoBehaviour, IDamage
         {
             if (effectAudio != null && audHurt.Length > 0)
             {
-                effectAudio.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVol);
+                modulator.PlayOneShotModulated(audHurt[Random.Range(0, audHurt.Length)], audHurtVol);
             }
             anim.SetTrigger("damage");
         }

@@ -3,7 +3,8 @@ using UnityEngine.Audio;
 
 public class AudioSettingsManager : MonoBehaviour
 {
-
+    [SerializeField] private AudioMixerSnapshot ambientSnapshot;
+    [SerializeField] private AudioMixerSnapshot battleSnapshot;
     public static AudioSettingsManager Instance { get; private set; }
     public AudioMixer mixer;
 
@@ -27,13 +28,19 @@ public class AudioSettingsManager : MonoBehaviour
         ApplyKey(musicKey);
         ApplyKey(sfxKey);
 
+        ambientSnapshot.TransitionTo(0f);
+
+        ApplyKey(masterKey);
+        ApplyKey(musicKey);
+        ApplyKey(sfxKey);
+
     }
 
     void Start()
     {
-        ApplyKey(masterKey);
-        ApplyKey(musicKey);
-        ApplyKey(sfxKey);
+       
+
+   
 
         var src = GetComponent<AudioSource>();
         if (src != null && !src.isPlaying)

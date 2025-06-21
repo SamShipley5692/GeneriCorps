@@ -1778,6 +1778,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 153786243878229264}
+  - component: {fileID: 6329355920262265089}
   - component: {fileID: 1870290830163081258}
   - component: {fileID: 7415762461010983797}
   - component: {fileID: 1297447921624463169}
@@ -1808,6 +1809,20 @@ Transform:
   - {fileID: 2498340958089798223}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6329355920262265089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7605100695240796612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55eb05a469c7ddf4387df8690450a0b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pitchVariance: 0.05
+  volumeVariance: 0.1
 --- !u!114 &1870290830163081258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1834,23 +1849,27 @@ MonoBehaviour:
   animTransSpeed: 5
   attackRate: 2
   deathScaleDuration: 3
+  modulator: {fileID: 6329355920262265089}
   effectAudio: {fileID: 8484650477012506214}
+  battleMusic: {fileID: 0}
   audDeath:
-  - {fileID: 8300000, guid: 8eec252f0ea0fd24c81539c8c401daf8, type: 3}
+  - {fileID: 8300000, guid: 5fe4bc0609c03e24097e0cb3666a4fb5, type: 3}
   audDeathVol: 0.5
   audHurt:
-  - {fileID: 8300000, guid: 06a1c6a73b4d42c42868e3818abb3e89, type: 3}
+  - {fileID: 8300000, guid: f481e535982fa9d47a14e2d82a3ed58f, type: 3}
   - {fileID: 8300000, guid: 29fd123bd9504ce488d710eea6a62783, type: 3}
   - {fileID: 8300000, guid: 947cd7dd556f58b449f35d5dd3f96d4d, type: 3}
   - {fileID: 8300000, guid: 718e080712ea1c3498cceea2139e8190, type: 3}
   - {fileID: 8300000, guid: 977a5e3c0915ebe4fbeb9a6d581b53be, type: 3}
   audHurtVol: 0.5
   audWalk:
-  - {fileID: 8300000, guid: 9b713c76b05f8b04882a23a60605b0d2, type: 3}
+  - {fileID: 8300000, guid: c0b2a3c9aeecccb4e89b819568d2633a, type: 3}
   audWalkVol: 0.15
   audAttack:
-  - {fileID: 8300000, guid: 958408b32ccf3714ea02821877b0870c, type: 3}
+  - {fileID: 8300000, guid: c5556322eb40f584f956484f02f5bdc3, type: 3}
   audAttackVol: 0.3
+  ambientSnapshot: {fileID: 0}
+  battleSnapshot: {fileID: 0}
 --- !u!95 &7415762461010983797
 Animator:
   serializedVersion: 7

@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen, IMovement, IAction
 {
+
+    [SerializeField] SoundModulator modulator;
     [SerializeField] CharacterController controller;
     [SerializeField] LayerMask ignoreLayer;
     [SerializeField] AudioSource aud;
@@ -157,7 +159,7 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen, IMovemen
     IEnumerator PlayStep()
     {
         isPlayingStep = true;
-        aud.PlayOneShot(audSteps[Random.Range(0, audSteps.Length)], audStepVol);
+        modulator.PlayOneShotModulated(audSteps[Random.Range(0, audSteps.Length)], audStepVol);
         if (isSprinting)
         {
             yield return new WaitForSeconds(0.3f);
@@ -189,7 +191,7 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen, IMovemen
         {
             jumpCount++;
             playerVel.y = jumpForce;
-            aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
+            modulator.PlayOneShotModulated(audJump[Random.Range(0, audJump.Length)], audJumpVol);
         }
     }
 
@@ -197,7 +199,7 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen, IMovemen
     {
         shootTimer = 0;
         if (aud != null && weaponInv[weaponInvPos].shootSound.Length > 0)
-            aud.PlayOneShot(weaponInv[weaponInvPos].shootSound[Random.Range(0, weaponInv[weaponInvPos].shootSound.Length)], weaponInv[weaponInvPos].shootSoundVol);
+            modulator.PlayOneShotModulated(weaponInv[weaponInvPos].shootSound[Random.Range(0, weaponInv[weaponInvPos].shootSound.Length)], weaponInv[weaponInvPos].shootSoundVol);
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer))
         {
@@ -216,7 +218,7 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen, IMovemen
 
     public void takeDamage(int amount) 
     {
-        aud.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVol);
+        modulator.PlayOneShotModulated(audHurt[Random.Range(0, audHurt.Length)], audHurtVol);
         hp -= amount;
         updatePlayerUI();
         StartCoroutine(flashDamageScreen());

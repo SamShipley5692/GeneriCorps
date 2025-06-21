@@ -2,6 +2,8 @@ using UnityEngine;
 using Holistic3D.Inventory;
 public class pickup : MonoBehaviour
 {
+
+
     [SerializeField] weaponStats weapon;
     [SerializeField] healthItems itemPickup; // added this
     [SerializeField] speedItems speedPickup; // Cade

@@ -6,13 +6,27 @@ AudioMixerSnapshotController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Snapshot - Copy
+  m_Name: Battle
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: bcdbc16fa9e32c6428bdf42a46e4f5bb
   m_FloatValues:
-    cdd592b8e3cf7684d9b972631e1d7bd4: -80
-    ea45950bd3bfb6d49a7419b68a00e64a: 0.3229725
+    cdd592b8e3cf7684d9b972631e1d7bd4: -37.55327
+    ea45950bd3bfb6d49a7419b68a00e64a: -80
   m_TransitionOverrides: {}
+--- !u!244 &-6655753718352100978
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 029d0d6925cb84c4e9f52be70592a8f3
+  m_EffectName: Receive
+  m_MixLevel: 3c8451351f522f14a96a9305dceb7a91
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!244 &-5593824262050328639
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -77,6 +91,8 @@ AudioMixerController:
   m_EnableSuspend: 1
   m_UpdateMode: 0
   m_ExposedParameters:
+  - guid: bbbb65dddc64f3144ac68dae3dbc7fec
+    name: BattleVolume
   - guid: cdd592b8e3cf7684d9b972631e1d7bd4
     name: MasterVolume
   - guid: ea45950bd3bfb6d49a7419b68a00e64a
@@ -134,12 +150,13 @@ AudioMixerSnapshotController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Snapshot
+  m_Name: Ambient
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: af49640fc52867647beafac3252f2fb8
   m_FloatValues:
     cdd592b8e3cf7684d9b972631e1d7bd4: -39.32928
-    ea45950bd3bfb6d49a7419b68a00e64a: -24.162655
+    ea45950bd3bfb6d49a7419b68a00e64a: 0.00061059464
+    bbbb65dddc64f3144ac68dae3dbc7fec: -80
   m_TransitionOverrides: {}
 --- !u!243 &5505029618689783657
 AudioMixerGroupController:
