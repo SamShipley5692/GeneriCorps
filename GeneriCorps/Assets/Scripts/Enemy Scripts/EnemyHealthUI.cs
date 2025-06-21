@@ -6,6 +6,7 @@ public class EnemyHealthUI : MonoBehaviour
     [SerializeField] Image hpFill;
     [SerializeField] Transform targetToFollow;
     [SerializeField] Vector3 offset;
+
     private Camera cam;
 
     void Start()

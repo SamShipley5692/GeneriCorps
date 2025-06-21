@@ -5,6 +5,7 @@ public class FloatingDamageText : MonoBehaviour
 {
     [SerializeField] float riseSpeed = 1f;
     [SerializeField] float lifetime = 3f;
+
     private TextMeshPro text;
     private Transform cam;
 

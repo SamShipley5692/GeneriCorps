@@ -4,6 +4,7 @@ public class CameraBobbing : MonoBehaviour
 {
     [SerializeField] float walkBobSpeed = 5f;
     [SerializeField] float runBobSpeed = 9f;
+
     [SerializeField] float bobAmount = 0.05f;
     [SerializeField] Transform player;
 
