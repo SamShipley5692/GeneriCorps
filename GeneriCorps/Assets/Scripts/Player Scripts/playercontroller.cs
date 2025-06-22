@@ -23,7 +23,6 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen, IMovemen
 
 
 
-
     // World 
     [SerializeField] int gravity;
 
@@ -121,6 +120,18 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen, IMovemen
         {
 
             //rb.AddForce(new Vector2(rb.Velocity.x, jump));
+        }
+
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            RaycastHit[] hits = Physics.SphereCastAll(transform.position + new Vector3(0, checkOffset,0), checkRadius, Vector3.up);
+            foreach (RaycastHit hit in hits)
+            {
+                if(hit.collider.tag == "Zipline")
+                {
+                    hit.collider.GetComponent<Zipline>().StartZipping(gameObject);
+                }
+            }
         }
     }
 
