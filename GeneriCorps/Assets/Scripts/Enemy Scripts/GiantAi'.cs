@@ -6,6 +6,7 @@ using UnityEngine.AI;
 using UnityEngine.UIElements;
 using UnityEngine.Audio;
 
+
 public class GiantAI : MonoBehaviour, IDamage
 {
 
@@ -52,6 +53,7 @@ public class GiantAI : MonoBehaviour, IDamage
 
     bool playerInRange;
     bool isPlayingStep;
+    private int _stage;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -62,6 +64,15 @@ public class GiantAI : MonoBehaviour, IDamage
         anim = GetComponent<Animator>();
         startingPos = transform.position;
         stoppingDistOrig = agent.stoppingDistance;
+
+        //BossChoreography();
+
+
+
+
+
+
+
     }
 
     // Update is called once per frame
@@ -266,7 +277,32 @@ public class GiantAI : MonoBehaviour, IDamage
             Instantiate(itemToDrop, new Vector3(transform.position.x, transform.position.y + 4, transform.position.z), Quaternion.identity);
     }
 
+    //private void BossChoreography()
+    //{
+        //switch (_stage)
+       // {
+           // case 1:
+             //   _speed = 1;
+             //   StartCoroutine(Stage1MovementRoutine());
+              //  StartCoroutine(FireRoutine(3));
+               // break;
 
+            //case 2:
+            ///    StopCoroutine(Stage1MovementRoutine());
+             //   _speed = 3;
+              //  _volleyPause = 0.25f;
+              //  StartCoroutine(FireRoutine(2));
+              //  break;
+
+           // case 3:
+            //    StartCoroutine(EmergencyTeleportRoutine());
+            //    StartCoroutine(PorterMovementRoutine());
+            //    break;
+
+            //default:
+           //     break;
+      //  }
+   // }
 
 
 
