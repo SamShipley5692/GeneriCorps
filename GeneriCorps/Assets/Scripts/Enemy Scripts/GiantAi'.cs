@@ -216,12 +216,14 @@ public class GiantAI : MonoBehaviour, IDamage
             }
             gameManager.instance.updateGameGoal(-1);
             anim.SetTrigger("die");
+            gameObject.GetComponent<Collider>().enabled = false;
 
             agent.isStopped = true;
 
             StartCoroutine(scaleDown());
 
-            //OnDestroy();
+            OnDestroy();
+            StartCoroutine(destroyDrop());
         }
         else
         {
@@ -277,32 +279,38 @@ public class GiantAI : MonoBehaviour, IDamage
             Instantiate(itemToDrop, new Vector3(transform.position.x, transform.position.y + 4, transform.position.z), Quaternion.identity);
     }
 
+    IEnumerator destroyDrop()
+    {
+        yield return new WaitForSeconds(10f);
+        Destroy(itemToDrop);
+    }
+
     //private void BossChoreography()
     //{
-        //switch (_stage)
-       // {
-           // case 1:
-             //   _speed = 1;
-             //   StartCoroutine(Stage1MovementRoutine());
-              //  StartCoroutine(FireRoutine(3));
-               // break;
+    //switch (_stage)
+    // {
+    // case 1:
+    //   _speed = 1;
+    //   StartCoroutine(Stage1MovementRoutine());
+    //  StartCoroutine(FireRoutine(3));
+    // break;
 
-            //case 2:
-            ///    StopCoroutine(Stage1MovementRoutine());
-             //   _speed = 3;
-              //  _volleyPause = 0.25f;
-              //  StartCoroutine(FireRoutine(2));
-              //  break;
+    //case 2:
+    ///    StopCoroutine(Stage1MovementRoutine());
+    //   _speed = 3;
+    //  _volleyPause = 0.25f;
+    //  StartCoroutine(FireRoutine(2));
+    //  break;
 
-           // case 3:
-            //    StartCoroutine(EmergencyTeleportRoutine());
-            //    StartCoroutine(PorterMovementRoutine());
-            //    break;
+    // case 3:
+    //    StartCoroutine(EmergencyTeleportRoutine());
+    //    StartCoroutine(PorterMovementRoutine());
+    //    break;
 
-            //default:
-           //     break;
-      //  }
-   // }
+    //default:
+    //     break;
+    //  }
+    // }
 
 
 
