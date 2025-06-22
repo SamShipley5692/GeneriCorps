@@ -16,7 +16,7 @@ public class ghostPlatform : MonoBehaviour
         myAnim.SetFloat("Disappear Time", 1/disappearTime);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if(collision.transform.tag == playerTag)
         {

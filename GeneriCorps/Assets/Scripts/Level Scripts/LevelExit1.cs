@@ -9,11 +9,6 @@ public class LevelExit : MonoBehaviour
 
     bool playerInTrigger;
 
-    void Start()
-    {
-
-    }
-
     void Update()
     {
         if (playerInTrigger)

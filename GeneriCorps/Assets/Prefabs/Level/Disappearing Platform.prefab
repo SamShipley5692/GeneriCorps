@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 708498599986438278}
   - component: {fileID: 7883956114845102261}
   - component: {fileID: 7157872994996542188}
+  - component: {fileID: 6355607232176165023}
   m_Layer: 0
   m_Name: Disappearing Platform
   m_TagString: Untagged
@@ -148,3 +149,24 @@ MonoBehaviour:
   disappearTime: 3
   canRest: 0
   resetTime: 10
+--- !u!65 &6355607232176165023
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5191101881066272844}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 3.2800655, z: 1}
+  m_Center: {x: -5.720763e-10, y: 1.1152499, z: 0.0000000015464823}
