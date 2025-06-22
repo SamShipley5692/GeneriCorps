@@ -9,20 +9,25 @@ public class BabyDragonMelee : MonoBehaviour
     [SerializeField] float diveCooldown = 4f;
     [SerializeField] float attackDistance = 5f;
     [SerializeField] float damage = 20f;
-    
-    
+
+
     [SerializeField] Transform player;
     [SerializeField] Rigidbody rb;
 
-   
-    
+    [SerializeField] Animator anim;
+    [SerializeField] Collider biteCollider;
+    [SerializeField] Collider tailCollider;
+    [SerializeField] Transform fireballSpawnPoint;
+    [SerializeField] GameObject fireballPrefab;
+
+
     private bool isDiving = false;
-   
+
     private float timer;
 
     void Update()
     {
-       
+
         timer -= Time.deltaTime;
 
         if (!isDiving && timer <= 0f && Vector3.Distance(transform.position, player.position) < attackDistance)
@@ -62,5 +67,49 @@ public class BabyDragonMelee : MonoBehaviour
                 dmg.takeDamage(Mathf.RoundToInt(damage));
             }
         }
+    }
+
+
+    IEnumerator EnableColliderBriefly(Collider col, float duration)
+    {
+        if (col != null)
+        {
+            col.enabled = true;
+            yield return new WaitForSeconds(duration);
+            col.enabled = false;
+        }
+    }
+
+    //Bite Attack 
+    public void DoBite()
+    {
+        anim.SetTrigger("Bite");
+
+
+        StartCoroutine(EnableColliderBriefly(biteCollider, 0.3f));
+    }
+
+    //Fireball
+    public void DoFireball()
+    {
+        anim.SetTrigger("Fireball");
+
+        if (fireballPrefab != null && fireballSpawnPoint != null)
+        {
+            Instantiate(fireballPrefab, fireballSpawnPoint.position, fireballSpawnPoint.rotation);
+        }
+    }
+
+    // tail attack
+    public void DoTailAttack()
+    {
+        anim.SetTrigger("Tail");
+
+        if (tailCollider != null)
+        {
+            StartCoroutine(EnableColliderBriefly(tailCollider, 0.4f)); 
+        }
+
+
     }
 }
