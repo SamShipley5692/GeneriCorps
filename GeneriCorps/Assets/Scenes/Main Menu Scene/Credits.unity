@@ -128,6 +128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 125300356}
+  - component: {fileID: 125300359}
   - component: {fileID: 125300358}
   - component: {fileID: 125300357}
   m_Layer: 5
@@ -255,6 +256,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 125300355}
   m_CullTransparentMesh: 1
+--- !u!114 &125300359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 125300355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d6e0efc07c3f9047852470729bc6bc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollSpeed: 100
+  levelName: 
 --- !u!1 &544904922
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,6 +358,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 578300325}
+  - component: {fileID: 578300328}
   - component: {fileID: 578300327}
   - component: {fileID: 578300326}
   m_Layer: 5
@@ -368,7 +384,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -94, y: -5299}
+  m_AnchoredPosition: {x: -94, y: -6341}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &578300326
@@ -418,8 +434,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48.6
-  m_fontSizeBase: 48.6
+  m_fontSize: 25.95
+  m_fontSizeBase: 25.95
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -470,6 +486,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 578300324}
   m_CullTransparentMesh: 1
+--- !u!114 &578300328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 578300324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d6e0efc07c3f9047852470729bc6bc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollSpeed: 100
+  levelName: MainMenu
 --- !u!1 &660048633
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,6 +509,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 660048634}
+  - component: {fileID: 660048637}
   - component: {fileID: 660048636}
   - component: {fileID: 660048635}
   m_Layer: 5
@@ -533,80 +564,79 @@ MonoBehaviour:
     Deadly_Creatures_Pack1_v1 | Creatures Sound FX | Unity
     Asset Store
 
-    
 
-    Free Sound Effects Pack | Audio Sound FX | Unity Asset
+
+    Free Sound Effects Pack | Audio Sound FX | Unity Asset Store
+
+
+
+    Dragon
+    for Boss Monster : HP | 3D Creatures | Unity Asset Store
+
+
+
+    Legacy Particle
+    Pack | VFX Particles | Unity Asset Store
+
+
+
+    Decrepit Dungeon LITE | 3D Dungeons
+    | Unity Asset Store
+
+
+
+    RPG Essentials Sound Effects - FREE! | Audio Sound
+    FX | Unity Asset Store
+
+
+
+    Hit Effects FREE | VFX Particles | Unity Asset
     Store
 
-    
 
-    Dragon for Boss Monster : HP | 3D Creatures | Unity Asset Store
 
-    
+    Spider Infestation Pack | Characters | Unity Asset Store
 
-    Legacy
-    Particle Pack | VFX Particles | Unity Asset Store
 
-    
 
-    Decrepit Dungeon
-    LITE | 3D Dungeons | Unity Asset Store
+    Potions,
+    Coin And Box of Pandora Pack | 3D Props | Unity Asset Store
 
-    
 
-    RPG Essentials Sound Effects
-    - FREE! | Audio Sound FX | Unity Asset Store
 
-    
+    FREE - Stylized
+    Weapons | 3D Weapons | Unity Asset Store
 
-    Hit Effects FREE | VFX
-    Particles | Unity Asset Store
 
-    
 
-    Spider Infestation Pack | Characters
+    Skeleton Animations FREE | 3D
+    Animations | Unity Asset Store
+
+
+
+    Lowpoly Medieval Skeleton - Free - MEDIEVAL
+    FANTASY SERIES | Characters | Unity Asset Store
+
+
+
+    FREE - RPG Weapons | 3D
+    Weapons | Unity Asset Store
+
+
+
+    Free pack of medieval weapons | 3D Weapons
     | Unity Asset Store
 
-    
 
-    Potions, Coin And Box of Pandora Pack | 3D Props
-    | Unity Asset Store
 
-    
-
-    FREE - Stylized Weapons | 3D Weapons | Unity
-    Asset Store
-
-    
-
-    Skeleton Animations FREE | 3D Animations | Unity Asset
+    Giant Monster Model - Golem | Characters | Unity Asset
     Store
 
-    
 
-    Lowpoly Medieval Skeleton - Free - MEDIEVAL FANTASY SERIES
-    | Characters | Unity Asset Store
-
-    
-
-    FREE - RPG Weapons | 3D Weapons
-    | Unity Asset Store
-
-    
-
-    Free pack of medieval weapons | 3D Weapons |
-    Unity Asset Store
-
-    
-
-    Giant Monster Model - Golem | Characters | Unity
-    Asset Store
-
-    
 
     Giant Animations FREE | 3D Animations | Unity Asset Store
 
-    
+
 
     Voices
     - Essentials | Voices Sound FX | Unity Asset Store
@@ -690,6 +720,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 660048633}
   m_CullTransparentMesh: 1
+--- !u!114 &660048637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660048633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d6e0efc07c3f9047852470729bc6bc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollSpeed: 100
+  levelName: 
 --- !u!1 &772114181
 GameObject:
   m_ObjectHideFlags: 0
@@ -872,6 +916,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1149346495}
+  - component: {fileID: 1149346498}
   - component: {fileID: 1149346497}
   - component: {fileID: 1149346496}
   m_Layer: 5
@@ -1007,7 +1052,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 9.076782, y: 0, z: 13.0390625, w: -190.92017}
+  m_margin: {x: 161.36603, y: 0, z: 183.33069, w: -190.92017}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1021,6 +1066,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1149346494}
   m_CullTransparentMesh: 1
+--- !u!114 &1149346498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1149346494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d6e0efc07c3f9047852470729bc6bc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollSpeed: 100
+  levelName: 
 --- !u!1 &1497908555
 GameObject:
   m_ObjectHideFlags: 0
@@ -1030,6 +1089,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1497908556}
+  - component: {fileID: 1497908559}
   - component: {fileID: 1497908558}
   - component: {fileID: 1497908557}
   m_Layer: 5
@@ -1055,7 +1115,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -5094}
+  m_AnchoredPosition: {x: 0, y: -6136}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1497908557
@@ -1096,6 +1156,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1497908555}
   m_CullTransparentMesh: 1
+--- !u!114 &1497908559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497908555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d6e0efc07c3f9047852470729bc6bc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollSpeed: 100
+  levelName: 
 --- !u!1 &1586748450
 GameObject:
   m_ObjectHideFlags: 0
@@ -1105,7 +1179,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1586748454}
-  - component: {fileID: 1586748455}
   - component: {fileID: 1586748453}
   - component: {fileID: 1586748452}
   - component: {fileID: 1586748451}
@@ -1199,19 +1272,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1586748455
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1586748450}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d6e0efc07c3f9047852470729bc6bc8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scrollSpeed: 50
 --- !u!1 &2131056305
 GameObject:
   m_ObjectHideFlags: 0
@@ -1221,6 +1281,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2131056306}
+  - component: {fileID: 2131056309}
   - component: {fileID: 2131056308}
   - component: {fileID: 2131056307}
   m_Layer: 5
@@ -1246,7 +1307,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -5854}
+  m_AnchoredPosition: {x: 0, y: -6933}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2131056307
@@ -1348,6 +1409,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2131056305}
   m_CullTransparentMesh: 1
+--- !u!114 &2131056309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131056305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d6e0efc07c3f9047852470729bc6bc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollSpeed: 100
+  levelName: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
