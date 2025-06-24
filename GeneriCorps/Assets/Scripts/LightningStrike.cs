@@ -8,11 +8,19 @@ public class LightningStrike : MonoBehaviour
     [SerializeField] LineRenderer line;
     [SerializeField] float damage = 25f;
     [SerializeField] float duration = 0.5f;
+    [SerializeField] ParticleSystem lightningEffect;
+
+
 
     private float timer;
 
     void OnEnable()
     {
+        if (lightningEffect != null)
+        {
+            lightningEffect.Play();
+        }
+
         timer = duration;
         UpdateLine();
 
@@ -28,8 +36,14 @@ public class LightningStrike : MonoBehaviour
     void Update()
     {
         timer -= Time.deltaTime;
+
         if (timer <= 0f)
         {
+            if (lightningEffect != null && lightningEffect.isPlaying)
+            {
+                lightningEffect.Stop();
+            }
+
             gameObject.SetActive(false);
         }
         else
@@ -47,3 +61,4 @@ public class LightningStrike : MonoBehaviour
         }
     }
 }
+

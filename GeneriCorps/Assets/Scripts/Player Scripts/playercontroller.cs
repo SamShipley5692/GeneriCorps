@@ -23,7 +23,6 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen, IMovemen
 
 
 
-
     // World 
     [SerializeField] int gravity;
 
@@ -122,6 +121,7 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen, IMovemen
 
             //rb.AddForce(new Vector2(rb.Velocity.x, jump));
         }
+
     }
 
     void movement()

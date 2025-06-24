@@ -18,9 +18,9 @@ MonoBehaviour:
   shootDistance: 250
   ammoCurrent: 0
   ammoMax: 60
-  hitEffect: {fileID: 1301697207402410478, guid: 39f852c28f9c3fd45a427c24f3564ba7, type: 3}
+  hitEffect: {fileID: 8884371268655795233, guid: 20fda529c996a334da7fd65b48ea40df, type: 3}
   shootSound:
-  - {fileID: 8300000, guid: a652877b012108e41871f867ada9f176, type: 3}
+  - {fileID: 8300000, guid: cc6699269b4c1d44ea1e860518b9bb73, type: 3}
   shootSoundVol: 0.5
   itemType: 0
   icon: {fileID: 1548890178, guid: 7615b1b819c8527419e0599493b104fa, type: 3}

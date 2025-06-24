@@ -193,12 +193,13 @@ public class SpidershootingAI : MonoBehaviour, IDamage
             }
             gameManager.instance.updateGameGoal(-1);
             anim.SetTrigger("die");
+            gameObject.GetComponent<Collider>().enabled = false;
 
             agent.isStopped = true;
 
             StartCoroutine(scaleDown());
 
-            //OnDestroy();
+            OnDestroy();
         }
         else
         {
@@ -229,4 +230,5 @@ public class SpidershootingAI : MonoBehaviour, IDamage
         if (Random.value <= dropChance && itemToDrop != null)
             Instantiate(itemToDrop, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
     }
+
 }

@@ -6,62 +6,122 @@ public class arenaDoor : MonoBehaviour
     [SerializeField] GameObject doorModel;
     [SerializeField] GameObject button;
     [SerializeField] string text;
-    [SerializeField] GameObject hinge;
+    [SerializeField] float rotationAmount = 90f;
+    [SerializeField] float openSpeed = 2f;
+    
+    Vector3 player;
+    Vector3 startRot;
+    Vector3 forward;
 
-    Animator hingeAnim;
+    bool isOpen = false;
 
-    bool playerInTrigger;
+    float forwardDirection;
 
-    void Start()
+    Coroutine animCoroutine;
+
+    void Awake()
     {
-        hingeAnim = hinge.GetComponent<Animator>();
+        startRot = transform.rotation.eulerAngles;
+        forward = transform.right;
+        
     }
 
     void Update()
     {
-        if (playerInTrigger)
+        if (Input.GetButtonDown("Interact"))
         {
-            if (Input.GetButtonDown("Interact"))
+
+            open(player);
+            button.SetActive(false);
+        }
+    }
+
+    public void open(Vector3 userPos)
+    {
+        if (!isOpen)
+        {
+            if (animCoroutine != null)
             {
-                hingeAnim.SetTrigger("open");
-                button.SetActive(false);
+                StopCoroutine(animCoroutine);
             }
+            float dot = Vector3.Dot(forward, (userPos - transform.position).normalized);
+            animCoroutine = StartCoroutine(doRotationOpen(dot));
+        }
+    }
+
+    IEnumerator doRotationOpen(float forwardAmount)
+    {
+        Quaternion startRotation = transform.rotation;
+        Quaternion endRotation;
+
+        if (forwardAmount >= forwardDirection)
+        {
+            endRotation = Quaternion.Euler(new Vector3(0, startRot.y - rotationAmount, 0));
+        }
+        else
+        {
+            endRotation = Quaternion.Euler(new Vector3(0, startRot.y + rotationAmount, 0));
+        }
+
+        isOpen = true;
+
+        float time = 0f;
+        while (time < 1)
+        {
+            transform.rotation = Quaternion.Slerp(startRotation, endRotation, time);
+            yield return null;
+            time += Time.deltaTime * openSpeed;
+        }
+    }
+
+    public void close()
+    {
+        if (isOpen)
+        {
+            if (animCoroutine != null)
+            {
+                StopCoroutine(animCoroutine);
+            }
+            animCoroutine = StartCoroutine(doRotationClose());
+        }
+    }
+
+    IEnumerator doRotationClose()
+    {
+        Quaternion startRotation = transform.rotation;
+        Quaternion endRotation = Quaternion.Euler(startRot);
+        isOpen = false;
+        float time = 0f;
+
+        while (time < 1)
+        {
+            transform.rotation = Quaternion.Slerp(startRotation, endRotation, time);
+            yield return null;
+            time += Time.deltaTime * openSpeed;
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        IOpen openable = other.GetComponent<IOpen>();
-
-
-        if (other.CompareTag("Player") && openable != null)
+        if (other.CompareTag("Player"))
         {
             button.SetActive(true);
             gameManager.instance.textPopUpDescription.text = text;
             gameManager.instance.textPopUp.SetActive(true);
-
-            playerInTrigger = true;
+            player = other.transform.position;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        IOpen openable = other.GetComponent<IOpen>();
-
-        if (openable != null)
+        if (other.CompareTag("Player"))
         {
             button.SetActive(false);
-            playerInTrigger = false;
-            hingeAnim.SetTrigger("close");
-
-            //StartCoroutine(closeDoor());
             gameManager.instance.textPopUp.SetActive(false);
+
+            close();
         }
     }
 
-    IEnumerator closeDoor()
-    {
-        yield return new WaitForSeconds(1f); // Wait for the door to close
-        hingeAnim.SetTrigger("close");
-    }
 }
+

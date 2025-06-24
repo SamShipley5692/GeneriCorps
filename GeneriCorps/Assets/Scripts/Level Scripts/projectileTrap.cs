@@ -6,6 +6,10 @@ public class projectileTrap : MonoBehaviour
     [SerializeField] GameObject projectile;
     [SerializeField] float shootRate;
 
+    [SerializeField] AudioSource effectAudio;
+    [SerializeField] AudioClip[] audShoot;
+    [Range(0, 1)][SerializeField] float audShootVol;
+
     float shootTimer;
     bool playerInRange;
 
@@ -39,6 +43,12 @@ public class projectileTrap : MonoBehaviour
     void shoot()
     {
         shootTimer = 0;
+
+        if (effectAudio != null && audShoot.Length > 0)
+        {
+            effectAudio.PlayOneShot(audShoot[Random.Range(0, audShoot.Length)], audShootVol);
+        }
+
         Instantiate(projectile, shootPos.position, transform.rotation);
     }
 

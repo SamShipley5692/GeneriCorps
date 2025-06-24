@@ -50,4 +50,28 @@ public class BabyDragonHealer : MonoBehaviour
             healTarget.takeDamage(-Mathf.RoundToInt(healAmount)); 
         }
     }
+    public void TakeDamage(int damage)
+    {
+        if (anim != null)
+            anim.SetTrigger("Hit");
+
+        
+        
+    }
+
+    public void Defend()
+    {
+        if (anim != null)
+            anim.SetTrigger("Defend");
+    }
+
+    public void Die()
+    {
+        if (anim != null)
+            anim.SetTrigger("Die");
+
+        agent.isStopped = true;
+        
+    }
+
 }

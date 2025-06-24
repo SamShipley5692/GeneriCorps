@@ -10,7 +10,12 @@ public class MainMenu : MonoBehaviour
 
     public void ShowCaseScene()
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(5);
+    }
+
+    public void LevelSelect()
+    {
+        SceneManager.LoadScene(1);
     }
 
     public void ExitGame()

@@ -7,6 +7,9 @@ TagManager:
   - Enemy
   - Dragon Fire
   - Dragon Boss
+  - Trigger2
+  - Trigger1
+  - Zipline
   layers:
   - Default
   - TransparentFX
