@@ -20,7 +20,7 @@ public class GiantAI : MonoBehaviour, IDamage
 
     [SerializeField][Range(1,100)] int HP;
     [SerializeField][Range(1,50)] int faceTargetSpeed;
-    [SerializeField][Range(1,80)] int FOV;
+    [SerializeField][Range(1,180)] int FOV;
     [SerializeField][Range(1,15)] int roamDist;
     [SerializeField][Range(1,5)] int roamPauseTime;
     [SerializeField][Range(1,30)] int animTransSpeed;

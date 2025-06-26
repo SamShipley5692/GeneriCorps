@@ -12,6 +12,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
+    [SerializeField] GameObject menuOptions;
     [SerializeField] TMP_Text gameGoalText;
 
     public GameObject textPopUp;
@@ -47,6 +48,14 @@ public class gameManager : MonoBehaviour
     {
         if (Input.GetButtonDown("Cancel"))
         {
+            if (menuActive == menuOptions)
+            {
+                menuOptions.SetActive(false);
+                menuPause.SetActive(true);
+                menuActive = menuPause;
+                return;
+            }
+
             if (menuActive == null)
             {
                 statePause();
@@ -77,6 +86,13 @@ public class gameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         menuActive.SetActive(false);
         menuActive = null;
+    }
+
+    public void openOptions()
+    {
+        menuPause.SetActive(false);
+        menuOptions.SetActive(true);
+        menuActive = menuOptions;
     }
 
     public void youLose()

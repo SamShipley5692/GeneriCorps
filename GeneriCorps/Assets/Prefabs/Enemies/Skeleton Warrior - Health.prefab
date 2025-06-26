@@ -257,9 +257,10 @@ MonoBehaviour:
   headPos: {fileID: 6139802943077427669}
   weaponCol: {fileID: 8135603278865050154}
   itemToDrop: {fileID: 4905224105322391774, guid: 06cf3c4f08d55674baec259928bdd00c, type: 3}
+  dropChance: 0.25
   HP: 10
   faceTargetSpeed: 8
-  FOV: 60
+  FOV: 180
   roamDist: 15
   roamPauseTime: 3
   animTransSpeed: 12
@@ -437,7 +438,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 5
+  m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &6792044796268719593
 AudioSource:

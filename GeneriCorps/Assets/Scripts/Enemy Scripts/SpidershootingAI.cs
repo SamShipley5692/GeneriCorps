@@ -20,7 +20,7 @@ public class SpidershootingAI : MonoBehaviour, IDamage
     [SerializeField][Range(1, 30)] int animTransSpeed;
 
     [SerializeField][Range(1, 50)] float faceTargetSpeed;
-    [SerializeField][Range(1, 90)] int FOV;
+    [SerializeField][Range(1, 360)] int FOV;
     [SerializeField][Range(1, 20)] float roamDist;
     [SerializeField][Range(1, 5)] float roamPause;
     [SerializeField][Range(0.1f, 2)] float shootRate;

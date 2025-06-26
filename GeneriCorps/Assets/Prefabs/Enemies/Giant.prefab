@@ -1844,7 +1844,7 @@ MonoBehaviour:
   dropChance: 1
   HP: 30
   faceTargetSpeed: 38
-  FOV: 60
+  FOV: 180
   roamDist: 10
   roamPauseTime: 3
   animTransSpeed: 5
@@ -1957,7 +1957,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 4
+  m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &8484650477012506214
 AudioSource:

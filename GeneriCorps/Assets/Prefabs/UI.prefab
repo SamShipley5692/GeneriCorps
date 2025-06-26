@@ -676,6 +676,7 @@ MonoBehaviour:
   menuPause: {fileID: 267373678793365936}
   menuWin: {fileID: 2334398642133012346}
   menuLose: {fileID: 3753470537739949682}
+  menuOptions: {fileID: 530036716342875999}
   gameGoalText: {fileID: 8143276468479871485}
   textPopUp: {fileID: 5847779729623916041}
   textPopUpDescription: {fileID: 8306300435645859626}
@@ -4258,20 +4259,36 @@ PrefabInstance:
       value: Options
       objectReference: {fileID: 0}
     - target: {fileID: 7873955169444829136, guid: 2313885d63f650e4fb6430c9a686e1ce, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7873955169444829136, guid: 2313885d63f650e4fb6430c9a686e1ce, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7873955169444829136, guid: 2313885d63f650e4fb6430c9a686e1ce, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 530036716342875999}
+      objectReference: {fileID: 2970895712888772706}
     - target: {fileID: 7873955169444829136, guid: 2313885d63f650e4fb6430c9a686e1ce, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 267373678793365936}
     - target: {fileID: 7873955169444829136, guid: 2313885d63f650e4fb6430c9a686e1ce, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
+      value: openOptions
       objectReference: {fileID: 0}
     - target: {fileID: 7873955169444829136, guid: 2313885d63f650e4fb6430c9a686e1ce, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 7873955169444829136, guid: 2313885d63f650e4fb6430c9a686e1ce, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: gameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7873955169444829136, guid: 2313885d63f650e4fb6430c9a686e1ce, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
