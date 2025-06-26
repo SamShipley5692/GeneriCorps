@@ -700,11 +700,12 @@ MonoBehaviour:
   anim: {fileID: 4087787594720176451}
   headPOS: {fileID: 7720642605784775686}
   itemToDrop: {fileID: 6669507856320324066, guid: 0d3cc3e39248b4c409b0b8b7693e02c0, type: 3}
+  dropChance: 0.25
   weaponCol: {fileID: 4489238090939067194}
   HP: 3
   animTransSpeed: 12
   faceTargetSpeed: 8
-  FOV: 60
+  FOV: 360
   roamDist: 15
   roamPause: 3
   attackRate: 1
@@ -831,7 +832,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 13
+  m_Radius: 25
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6251728878937040979
 BoxCollider:
