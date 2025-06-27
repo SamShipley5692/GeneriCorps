@@ -33,7 +33,7 @@ public class dragonBoss : MonoBehaviour, IDamage
     int maxHP;
     int percentHP;
 
-    bool isInvulnerable;
+    public bool isInvulnerable;
 
     Material[] skinnedMaterials;
 

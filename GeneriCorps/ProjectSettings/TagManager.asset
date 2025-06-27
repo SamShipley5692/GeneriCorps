@@ -10,6 +10,7 @@ TagManager:
   - Trigger2
   - Trigger1
   - Zipline
+  - bossDmgTrigger
   layers:
   - Default
   - TransparentFX
