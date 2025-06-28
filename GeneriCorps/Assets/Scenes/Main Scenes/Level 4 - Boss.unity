@@ -118897,6 +118897,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level 3 Exit Door
       objectReference: {fileID: 0}
+    - target: {fileID: 5809154443297654932, guid: bc92cf4cd74539f4e989711989f6b16f, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

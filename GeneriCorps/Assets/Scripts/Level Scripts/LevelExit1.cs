@@ -8,13 +8,15 @@ public class LevelExit : MonoBehaviour
     [SerializeField] string text;
 
     bool playerInTrigger;
+    bool hasBeenOpened = false;
 
     void Update()
     {
-        if (playerInTrigger)
+        if (playerInTrigger && !hasBeenOpened)
         {
             if (Input.GetButtonDown("Interact"))
             {
+                hasBeenOpened = true;
                 doorModel.SetActive(false);
                 button.SetActive(false); // added this line
                 SceneManager.LoadScene("Level 3");
@@ -24,6 +26,11 @@ public class LevelExit : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if(hasBeenOpened)
+        {
+            return;
+        }
+
         IOpen openable = other.GetComponent<IOpen>();
 
         if (openable != null)
@@ -37,6 +44,11 @@ public class LevelExit : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        if (hasBeenOpened) 
+        {
+            return;
+        }
+
         IOpen openable = other.GetComponent<IOpen>();
 
         if (openable != null)

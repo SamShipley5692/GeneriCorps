@@ -8,11 +8,11 @@ public class LevelExit2 : MonoBehaviour
 [SerializeField] string text;
 
 bool playerInTrigger;
+bool hasBeenOpened = false;
 
-
-void Update()
+    void Update()
 {
-    if (playerInTrigger)
+    if (playerInTrigger && !hasBeenOpened)
     {
         if (Input.GetButtonDown("Interact"))
         {
@@ -25,7 +25,12 @@ void Update()
 
 private void OnTriggerEnter(Collider other)
 {
-    IOpen openable = other.GetComponent<IOpen>();
+        if (hasBeenOpened)
+        {
+            return;
+        }
+
+        IOpen openable = other.GetComponent<IOpen>();
 
     if (openable != null)
     {
@@ -38,7 +43,12 @@ private void OnTriggerEnter(Collider other)
 
 private void OnTriggerExit(Collider other)
 {
-    IOpen openable = other.GetComponent<IOpen>();
+        if (hasBeenOpened)
+        {
+            return;
+        }
+
+        IOpen openable = other.GetComponent<IOpen>();
 
     if (openable != null)
     {
