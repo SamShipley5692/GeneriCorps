@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTag: Player
-  disappearTime: 3
+  disappearTime: 1
   canRest: 0
   resetTime: 10
 --- !u!65 &6355607232176165023
