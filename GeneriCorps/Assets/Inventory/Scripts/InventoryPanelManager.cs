@@ -18,7 +18,7 @@ namespace Holistic3D.Inventory
         [SerializeField] private healthItems healthPickups;
         [SerializeField] private InvincibleItems invinciblePickups;
 
-
+        private bool isPanelVisible;
         private Dictionary<GameObject, ItemType> inventoryItemMap = new Dictionary<GameObject, ItemType>();
         private Dictionary<string, GameObject> previewItemObjects;
 
@@ -53,6 +53,8 @@ namespace Holistic3D.Inventory
 
         public void SetPanelVisibility(bool isVisible)
         {
+            isPanelVisible = isVisible;
+
             CanvasGroup canvasGroup = this.GetComponent<CanvasGroup>();
             canvasGroup.alpha = isVisible ? 1 : 0;
             canvasGroup.interactable = isVisible;
@@ -182,6 +184,11 @@ namespace Holistic3D.Inventory
             {
                 itemToShow.SetActive(true);
             }
+        }
+
+        public bool IsPanelVisible()
+        {
+            return isPanelVisible;
         }
     }
 }

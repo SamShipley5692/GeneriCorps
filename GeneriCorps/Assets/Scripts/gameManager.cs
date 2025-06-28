@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using Holistic3D.Inventory;
 
 public class gameManager : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuOptions;
     [SerializeField] TMP_Text gameGoalText;
+    [SerializeField] InventoryPanelManager inventoryPanelManager;
 
     public GameObject textPopUp;
     public TMP_Text textPopUpDescription;
@@ -85,8 +87,17 @@ public class gameManager : MonoBehaviour
         Time.timeScale = timeScaleOriginal;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        menuActive.SetActive(false);
-        menuActive = null;
+        if (menuActive != null)
+        {
+            menuActive.SetActive(false);
+            menuActive = null;
+        }
+
+        if(inventoryPanelManager != null && inventoryPanelManager.IsPanelVisible())
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
 
     public void openOptions()

@@ -44,13 +44,14 @@ namespace Holistic3D.Inventory
 
         public void OpenCloseInventory()
         {
-            inventoryPanelManager.TogglePanelVisbility();
-            if (inventoryPanelManager.gameObject.activeSelf)
+            bool newState = !inventoryPanelManager.IsPanelVisible();
+            inventoryPanelManager.SetPanelVisibility(newState);
+            if (newState)
             {
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
             }
-            else if(!inventoryPanelManager.gameObject.activeSelf)
+            else 
             {
                 Cursor.lockState= CursorLockMode.Locked;
                 Cursor.visible = false;
