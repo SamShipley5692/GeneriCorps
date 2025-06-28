@@ -32,6 +32,10 @@ public class Credits : MonoBehaviour
         {
             rectTransform.anchoredPosition += new Vector2(0, scrollSpeed * Time.deltaTime);
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("MainMenu"); 
+        }
     }
 
     private IEnumerator ShowMainMenuAfterCredits()
@@ -39,4 +43,6 @@ public class Credits : MonoBehaviour
         yield return new WaitForSecondsRealtime(70);
         SceneManager.LoadScene(levelName);
     }
+
+   
 }
