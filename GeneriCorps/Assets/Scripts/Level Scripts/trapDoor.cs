@@ -1,8 +1,10 @@
+using Unity.AI.Navigation;
 using UnityEngine;
 
 public class trapDoor : MonoBehaviour
 {
     [SerializeField] GameObject trapDoorPrefab;
+    [SerializeField] GameObject trapDoorPanel;
     Animator hingeAnim;
 
     private void Start()
@@ -12,11 +14,19 @@ public class trapDoor : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //trapDoorPrefab.GetComponent<Animation>().Play("TrapDoorAnim");
         hingeAnim.SetTrigger("open");
+        //trapDoorPanel.GetComponent<NavMeshSurface>().defaultArea = 0;
+        //trapDoorPanel.GetComponent<NavMeshModifier>().enabled = false;
+        //trapDoorPanel.GetComponent<NavMeshModifier>().area = 0;
+        //trapDoorPanel.GetComponent<NavMeshModifier>().overrideArea = true;
     }
     private void OnTriggerExit(Collider other)
     {
         hingeAnim.SetTrigger("close");
+        //trapDoorPanel.GetComponent<NavMeshSurface>().defaultArea = 1;
+
+        //trapDoorPanel.GetComponent<NavMeshModifier>().enabled = true;
+        //trapDoorPanel.GetComponent<NavMeshModifier>().area = 1;
+
     }
 }

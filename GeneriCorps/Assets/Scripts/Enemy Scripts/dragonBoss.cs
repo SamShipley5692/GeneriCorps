@@ -222,28 +222,23 @@ public class dragonBoss : MonoBehaviour, IDamage
             yield return new WaitForSeconds(2f);
             anim.SetBool("isResting", false);
 
-            // if health below 50% summon baby dragons
-            if (percentHP <= 50 && percentHP > 0)
-            {
-                anim.SetBool("isRoaring", true);
+            //// if health below 50% summon baby dragons
+            //if (percentHP <= 50 && percentHP > 0)
+            //{
+            //    anim.SetBool("isRoaring", true);
 
-                // put code to summon baby dragons here
+            //    // put code to summon baby dragons here
 
-                if (effectAudio && audRoar.Length > 0)
-                {
-                    effectAudio.PlayOneShot(audRoar[Random.Range(0, audRoar.Length)], audRoarVol);
-                }
-                yield return new WaitForSeconds(3.333f);
-                anim.SetBool("isRoaring", false);
-                StartCoroutine(disableFlameDelay());
-            }
+            //    if (effectAudio && audRoar.Length > 0)
+            //    {
+            //        effectAudio.PlayOneShot(audRoar[Random.Range(0, audRoar.Length)], audRoarVol);
+            //    }
+            //    yield return new WaitForSeconds(3.333f);
+            //    anim.SetBool("isRoaring", false);
+            //    StartCoroutine(disableFlameDelay());
+            //}
 
         }
-    }
-
-    void summonDragons()
-    {
-        
     }
 
     IEnumerator disableFlameDelay()

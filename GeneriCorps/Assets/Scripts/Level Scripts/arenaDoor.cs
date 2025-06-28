@@ -14,6 +14,7 @@ public class arenaDoor : MonoBehaviour
     Vector3 forward;
 
     bool isOpen = false;
+    bool isInTrigger = false;
 
     float forwardDirection;
 
@@ -28,9 +29,8 @@ public class arenaDoor : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Interact"))
+        if (Input.GetButtonDown("Interact") && isInTrigger)
         {
-
             open(player);
             button.SetActive(false);
         }
@@ -105,6 +105,7 @@ public class arenaDoor : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            isInTrigger = true;
             button.SetActive(true);
             gameManager.instance.textPopUpDescription.text = text;
             gameManager.instance.textPopUp.SetActive(true);
@@ -116,6 +117,7 @@ public class arenaDoor : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            isInTrigger = false;
             button.SetActive(false);
             gameManager.instance.textPopUp.SetActive(false);
 
