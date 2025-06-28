@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class gameManager : MonoBehaviour
 {
@@ -100,6 +101,16 @@ public class gameManager : MonoBehaviour
         StartCoroutine(ShowDelayLossMenu());
     }
 
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
     public void updateGameGoal(int amount)
     {
         gameGoalCount += amount;
@@ -122,6 +133,21 @@ public class gameManager : MonoBehaviour
     {
         savedCheckpointPos = pos;
     }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        isPaused = false;
+        Time.timeScale = 1f;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
+        if (menuActive != null)
+        {
+            menuActive.SetActive(false);
+            menuActive = null;
+        }
+    }
+
 
     private IEnumerator ShowDelayLossMenu()
     {
