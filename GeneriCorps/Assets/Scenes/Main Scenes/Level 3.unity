@@ -41473,14 +41473,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Disappearing Platform
       objectReference: {fileID: 0}
-    - target: {fileID: 5191101881066272844, guid: 5eb7ef20407438c4b9deec5cf4e2f111, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7157872994996542188, guid: 5eb7ef20407438c4b9deec5cf4e2f111, type: 3}
-      propertyPath: disappearTime
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
