@@ -69,12 +69,14 @@ namespace Holistic3D.Inventory
                 canvasGroup.alpha = 0;
                 canvasGroup.interactable = false;
                 canvasGroup.blocksRaycasts = false;
+                isPanelVisible = false;
             }
             else
             {
                 canvasGroup.alpha = 1;
                 canvasGroup.interactable = true;
                 canvasGroup.blocksRaycasts = true;
+                isPanelVisible = true;
             }
         }
 

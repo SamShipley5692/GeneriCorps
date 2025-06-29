@@ -357,6 +357,35 @@ public class playercontroller : MonoBehaviour, IDamage, IPickup, IOpen, IMovemen
 
     public void DisableActions() => canAct = false;
     public void EnableActions() => canAct = true;
+
+    public weaponStats GetEquippedWeapon()
+    {
+        if (weaponInv.Count == 0)
+        {
+            return null;
+        }
+        return weaponInv[weaponInvPos];
+    }
+
+    public void RemoveEquippedWeapon()
+    {
+        if(weaponInv.Count == 0)
+        {
+            return;
+        }
+
+        weaponInv.RemoveAt(weaponInvPos);
+
+        if(weaponInv.Count == 0)
+        {
+            gunModel.GetComponent<MeshFilter>().sharedMesh = null;
+            gunModel.GetComponent<MeshRenderer>().sharedMaterial = null;
+            return;
+        }
+
+        weaponInvPos = Mathf.Clamp(weaponInvPos, 0, weaponInv.Count - 1);
+        changeWeapon();
+    }
 }
 //trying to restore checkpoint but having issues with gamemanager will check on this later on
 //public void RestoreToCheckpoint()

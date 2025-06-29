@@ -51,6 +51,11 @@ public class gameManager : MonoBehaviour
     {
         if (Input.GetButtonDown("Cancel"))
         {
+            if(inventoryPanelManager != null && inventoryPanelManager.IsPanelVisible())
+            {
+                return;
+            }
+
             if (menuActive == menuOptions)
             {
                 menuOptions.SetActive(false);

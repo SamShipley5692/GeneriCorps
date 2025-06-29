@@ -16,6 +16,9 @@ namespace Holistic3D.Inventory
         public speedItems speedItemDrop;
         public InvincibleItems invincibleItemsDrop;
         [SerializeField] InventoryPanelManager inventoryPanelManager;
+        [SerializeField] private Transform weaponHolder;
+
+        [SerializeField] private playercontroller playerController;
 
         private void Start()
         {
@@ -29,11 +32,30 @@ namespace Holistic3D.Inventory
         {
             if (dropAction.WasPressedThisFrame())
             {
-                DropItem(weaponDrop, 1);
-                DropItem(jumpItemDrop, 1);
-                DropItem(healthItemDrop, 1);
-                DropItem(speedItemDrop, 1);
-                DropItem(invincibleItemsDrop, 1);
+                if (this.HasItem(weaponDrop))
+                {
+                    DropItem(weaponDrop, 1);
+                }
+
+                if (this.HasItem(jumpItemDrop))
+                {
+                    DropItem(jumpItemDrop, 1);
+                }
+
+                if (this.HasItem(speedItemDrop))
+                {
+                    DropItem(speedItemDrop, 1);
+                }
+
+                if (this.HasItem(healthItemDrop))
+                {
+                    DropItem(healthItemDrop, 1);
+                }
+
+                if (this.HasItem(invincibleItemsDrop))
+                {
+                    DropItem(invincibleItemsDrop, 1);
+                }
             }
             else if(inventoryAction.WasPressedThisFrame())
             {
@@ -44,6 +66,12 @@ namespace Holistic3D.Inventory
 
         public void OpenCloseInventory()
         {
+
+            if(gameManager.instance != null && gameManager.instance.isPaused)
+            {
+                return;
+            }
+
             bool newState = !inventoryPanelManager.IsPanelVisible();
             inventoryPanelManager.SetPanelVisibility(newState);
             if (newState)
@@ -113,8 +141,16 @@ namespace Holistic3D.Inventory
             int couldntBeDropped = inventorySystem.RemoveItem(weapon, quantity);
             int numberDropped = quantity - couldntBeDropped;
 
+            if(numberDropped > 0)
             {
                 Instantiate(weapon.model, GetDropPosition(), Quaternion.identity);
+
+                weaponStats currentlyEquipped = playerController.GetEquippedWeapon();
+
+                if(currentlyEquipped != null && currentlyEquipped == weapon)
+                {
+                    playerController.RemoveEquippedWeapon();
+                }
             }
             
         }
@@ -170,6 +206,66 @@ namespace Holistic3D.Inventory
             
             float dropDistance = 4f;
             return playerPosition + forwardDirection * dropDistance;
+        }
+
+        public bool HasItem(weaponStats weapon)
+        {
+            foreach (inventorySlot slot in inventorySystem.slots)
+            {
+                if (slot._weaponStats == weapon && slot.Quantity > 0)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool HasItem(jumpItems item)
+        {
+            foreach (inventorySlot slot in inventorySystem.slots)
+            {
+                if (slot._jumpItems == item && slot.Quantity > 0)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool HasItem(speedItems item)
+        {
+            foreach (inventorySlot slot in inventorySystem.slots)
+            {
+                if (slot._speedItems == item && slot.Quantity > 0)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool HasItem(healthItems item)
+        {
+            foreach (inventorySlot slot in inventorySystem.slots)
+            {
+                if (slot._healthItems == item && slot.Quantity > 0)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool HasItem(InvincibleItems item)
+        {
+            foreach (inventorySlot slot in inventorySystem.slots)
+            {
+                if (slot._invincibleItems == item && slot.Quantity > 0)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

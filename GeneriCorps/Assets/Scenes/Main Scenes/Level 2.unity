@@ -4728,6 +4728,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04c854ce356720345a478db2f84103e2, type: 3}
+--- !u!4 &208110146 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4066680810867939556, guid: 5428795ee4a7e1e4a805678c4c7b7967, type: 3}
+  m_PrefabInstance: {fileID: 7112425809381226597}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &217864339
 GameObject:
   m_ObjectHideFlags: 0
@@ -93911,9 +93916,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7836558710301709978, guid: 5428795ee4a7e1e4a805678c4c7b7967, type: 3}
+      propertyPath: weaponHolder
+      value: 
+      objectReference: {fileID: 208110146}
+    - target: {fileID: 7836558710301709978, guid: 5428795ee4a7e1e4a805678c4c7b7967, type: 3}
       propertyPath: inventorySystem
       value: 
       objectReference: {fileID: 966912204}
+    - target: {fileID: 7836558710301709978, guid: 5428795ee4a7e1e4a805678c4c7b7967, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 7112425809381226605}
     - target: {fileID: 7836558710301709978, guid: 5428795ee4a7e1e4a805678c4c7b7967, type: 3}
       propertyPath: inventoryPanelManager
       value: 
@@ -93932,6 +93945,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 40b5b7f9a5e14ca4ab8c08cbdc475409, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7112425809381226605 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 996291585746901860, guid: 5428795ee4a7e1e4a805678c4c7b7967, type: 3}
+  m_PrefabInstance: {fileID: 7112425809381226597}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5b157da87194d04f8ad317712ec5569, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &7178402899062316818
