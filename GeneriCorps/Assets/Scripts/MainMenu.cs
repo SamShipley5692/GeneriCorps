@@ -8,10 +8,10 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
-    public void ShowCaseScene()
-    {
-        SceneManager.LoadScene(5);
-    }
+    //public void ShowCaseScene()
+    //{
+    //    SceneManager.LoadScene(5);        no longer being used
+    //}
 
     public void LevelSelect()
     {
