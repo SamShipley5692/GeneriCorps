@@ -20,7 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main Scenes/Level 4 - Boss.unity
     guid: 858fedd84dccc7645a414f2c25bdc237
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Showcase Level.unity
     guid: c100f8434345cf9468aa0ced9ae0f1af
   - enabled: 1

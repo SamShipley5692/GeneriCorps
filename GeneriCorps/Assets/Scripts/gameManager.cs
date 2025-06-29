@@ -162,18 +162,20 @@ public class gameManager : MonoBehaviour
 
     private IEnumerator ShowDelayLossMenu()
     {
-        statePause();
+        
         yield return new WaitForSecondsRealtime(3);
 
+        statePause();
         menuActive = menuLose;
         menuActive.SetActive(true);
     }
 
     private IEnumerator ShowDelayWinMenu()
     {
-        statePause();
-        yield return new WaitForSecondsRealtime(3);
+        
+        yield return new WaitForSecondsRealtime(5);
 
+        statePause();
         menuActive = menuWin;
         menuActive.SetActive(true);
     }
