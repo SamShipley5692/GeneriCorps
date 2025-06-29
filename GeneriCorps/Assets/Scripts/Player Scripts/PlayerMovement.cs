@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private Transform wallCheck;
     [SerializeField] private LayerMask wallLayer;
+    [SerializeField] private Rigidbody2D AddForce;
 
     private void Update()
     {
@@ -45,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
 
                 doubleJump = !doubleJump;
+                Rigidbody2D AddForce;
             }
         }
 
