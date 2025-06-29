@@ -1,4 +1,3 @@
-using Holistic3D.Inventory;
 using UnityEngine;
 
 public class dragonDmgTrigger : MonoBehaviour
@@ -16,7 +15,7 @@ public class dragonDmgTrigger : MonoBehaviour
         {
             //gameObject.GetComponentInParent<dragonBoss>().isInvulnerable = true;
             //this.gameObject.GetComponent<dragonBoss>().isInvulnerable = true; 
-            dragon.GetComponent<dragonBoss>().isInvulnerable = true;
+            //dragon.GetComponent<dragonBoss>().isInvulnerable = true;
         }
     }
 
@@ -26,7 +25,7 @@ public class dragonDmgTrigger : MonoBehaviour
         {
             //gameObject.GetComponentInParent<dragonBoss>().isInvulnerable = true;
             //this.gameObject.GetComponent<dragonBoss>().isInvulnerable = true; 
-            dragon.GetComponent<dragonBoss>().isInvulnerable = true;
+            //dragon.GetComponent<dragonBoss>().isInvulnerable = true;
         }
     }
 
@@ -35,7 +34,7 @@ public class dragonDmgTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             //gameObject.GetComponentInParent<dragonBoss>().isInvulnerable = false;
-            dragon.GetComponent<dragonBoss>().isInvulnerable = true;
+            //dragon.GetComponent<dragonBoss>().isInvulnerable = true;
 
             //this.gameObject.GetComponent<dragonBoss>().isInvulnerable = false;
         }
