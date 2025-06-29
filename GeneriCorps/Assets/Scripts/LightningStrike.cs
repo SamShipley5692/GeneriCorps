@@ -11,7 +11,8 @@ public class LightningStrike : MonoBehaviour
     [SerializeField] ParticleSystem lightningEffect;
 
 
-
+    public float coolDownTime = 4.0f;
+    float coolDown;
     private float timer;
 
     void OnEnable()
@@ -23,6 +24,11 @@ public class LightningStrike : MonoBehaviour
 
         timer = duration;
         UpdateLine();
+
+        if(coolDown >= 0)
+        {
+            coolDown -= Time.deltaTime;
+        }
 
 
         IDamage dmg = target.GetComponent<IDamage>();
