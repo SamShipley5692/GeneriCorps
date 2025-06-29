@@ -7,12 +7,12 @@ public class LevelExit : MonoBehaviour
     [SerializeField] GameObject button;
     [SerializeField] string text;
 
-    bool playerInTrigger;
+    bool playerInTrigger = false;
     bool hasBeenOpened = false;
 
     void Update()
     {
-        if (playerInTrigger && !hasBeenOpened)
+        if (playerInTrigger && !hasBeenOpened && gameManager.instance.getGameGoalCount() <= 0)
         {
             if (Input.GetButtonDown("Interact"))
             {
