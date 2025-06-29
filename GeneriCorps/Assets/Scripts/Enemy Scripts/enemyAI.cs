@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
+using Unity.VisualScripting;
 
 
 
@@ -34,6 +35,8 @@ public class enemyAI : MonoBehaviour, IDamage
 
     public bool canSeePlayer;
     private bool isInQueue = false;
+
+    int CollisonCOl;
 
     Color colorOrig;
 
@@ -186,4 +189,9 @@ public class enemyAI : MonoBehaviour, IDamage
         canSeePlayer = false;
         navAgent.SetDestination(transform.position); 
     }
+    //void OnCollisonEnter(CollisonCol)
+   // {
+        //If(Col.transform.tag == "Bullet")
+        //Destory (GameObject)
+    //}
 }
